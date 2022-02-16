@@ -21,10 +21,10 @@ public class Carrito {
     private Integer id;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "carrito_productos",
+    @JoinTable(name = "carrito_itemcarrito",
             joinColumns = @JoinColumn(name = "carrito_id"),
-            inverseJoinColumns = @JoinColumn(name = "productos_id"))
-    private List<Producto> productos;
+            inverseJoinColumns = @JoinColumn(name = "itemcarrito_id"))
+    private List<ItemCarrito> items;
     
     //Aca agrego a la entidad de usuario, porque el carrito como tal (existente con un id), empieza a existir al momento
     //que el usuario agrega un producto y lo guarda para comprarlo a futuro. Es el intermediario entre el producto y
@@ -38,9 +38,9 @@ public class Carrito {
     public Carrito() {
     }
 
-    public Carrito(Integer id, List<Producto> productos, Usuario usuario) {
+    public Carrito(Integer id, List<ItemCarrito> items, Usuario usuario) {
         this.id = id;
-        this.productos = productos;
+        this.items = items;
         this.usuario = usuario;
     }
 
@@ -52,12 +52,12 @@ public class Carrito {
         this.id = id;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
+    public List<ItemCarrito> getItems() {
+        return items;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setItems(List<ItemCarrito> items) {
+        this.items = items;
     }
 
     public Usuario getUsuario() {
