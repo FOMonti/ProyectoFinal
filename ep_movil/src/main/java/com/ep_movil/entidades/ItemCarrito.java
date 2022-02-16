@@ -13,8 +13,8 @@ public class ItemCarrito extends Producto {
     public ItemCarrito() {
     }
 
-    public ItemCarrito(Integer id, String nombre, String imagen, Double precio, Integer stock, List<Comentario> comentarios, List<Carrito> carrito) {
-        super(id, nombre, imagen, precio, stock, comentarios, carrito);
+    public ItemCarrito(Integer id, String nombre, String imagen, Double precio, Integer stock, String especificacion, List<Comentario> comentarios, List<Carrito> carrito) {
+        super(id, nombre, imagen, precio, stock, especificacion, comentarios, carrito);
     }
 
     public Integer getCantidad() {

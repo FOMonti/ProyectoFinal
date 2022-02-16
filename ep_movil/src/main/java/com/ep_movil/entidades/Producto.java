@@ -29,6 +29,8 @@ public class Producto {
 
     private Integer stock;
     
+    private String especificacion;
+    
     @OneToMany
     private List<Comentario> comentarios;
     
@@ -46,12 +48,13 @@ public class Producto {
     }
 
     public Producto(Integer id, String nombre, String imagen, Double precio, Integer stock, 
-            List<Comentario> comentarios, List<Carrito> carrito) {
+            String especificacion, List<Comentario> comentarios, List<Carrito> carrito) {
         this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;
         this.precio = precio;
         this.stock = stock;
+        this.especificacion = especificacion;
         this.comentarios = comentarios;
         this.carrito = carrito;
     }
@@ -110,6 +113,14 @@ public class Producto {
 
     public void setCarrito(List<Carrito> carrito) {
         this.carrito = carrito;
+    }
+
+    public String getEspecificacion() {
+        return especificacion;
+    }
+
+    public void setEspecificacion(String especificacion) {
+        this.especificacion = especificacion;
     }
     
 
