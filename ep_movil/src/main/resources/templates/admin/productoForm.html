@@ -3,40 +3,45 @@
 <html xmlns:th="https://thymeleaf.com.org"
       xmlns="http://www.w3.org/1999/xhtml">
 
-    <head th:replace="layout/layout::head" >
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8"/>
-    </head>
-    <body>
-        <nav></nav>
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class=" col-4">
-                    <form th:action="@{/admin/guardar}" th:object="${producto}" method="post" enctype="multipart/form-data">
+<head th:replace="layout/layout::head">
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<header th:replace="layout/navbar::navbar-l"></header>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class=" col-4">
+            <form th:action="@{/admin/guardar}" th:object="${producto}" method="post" enctype="multipart/form-data">
 
-                        <h1>Cargar producto</h1>
+                <h1>Cargar producto</h1>
 
-                        <div>
-                            <input type="text" th:field="*{nombre}" class="form-control" placeholder="Ingrese nombre"/>
-                        </div>
-<!--                        <div>
-                            <input type="file" name="file" class="form-control"/>
-                        </div>-->
-                        <div>
-                            <input type="number" step="any" th:field="*{precio}" class="form-control" placeholder="Ingrese precio"/>
-                        </div>
-                        <div>
-                            <input type="number" th:field="*{stock}" class="form-control" placeholder="Ingrese stock"/>
-                        </div>
-                        <div>
-                            <button type="submit" class="form-control btn btn-secondary">Guardar producto</button>
-                        </div>
-                    </form>
-
-                        <a th:href="@{/}">Regresar</a>
+                <div>
+                    <input type="text" th:field="*{nombre}" class="form-control" placeholder="Ingrese nombre"/>
                 </div>
-            </div>
+                <!--                        <div>
+                                            <input type="file" name="file" class="form-control"/>
+                                        </div>-->
+                <div>
+                    <input type="number" step="any" th:field="*{precio}" class="form-control"
+                           placeholder="Ingrese precio"/>
+                </div>
+                <div>
+                    <input type="number" th:field="*{stock}" class="form-control" placeholder="Ingrese stock"/>
+                </div>
+                <div>
+                    <input type="text" th:field="*{especificacion}" class="form-control"
+                           placeholder="Ingrese la especificación"/>
+                </div>
+                <div>
+                    <button type="submit" class="form-control btn btn-secondary">Guardar producto</button>
+                </div>
+                <div class="alert alert-success text-center" th:if="${mensaje}" th:text="${mensaje}"></div>
+            </form>
         </div>
-        <footer th:replace="layout/layout::footer"></footer>
-    </body>
+    </div>
+</div>
+
+<footer th:replace="layout/layout::footer"></footer>
+</body>
 </html>

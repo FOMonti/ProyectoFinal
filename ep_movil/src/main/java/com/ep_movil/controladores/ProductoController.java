@@ -2,7 +2,9 @@ package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Producto;
 import com.ep_movil.servicios.IProductoService;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,14 +30,12 @@ public class ProductoController {
 
     @PostMapping("/guardar")
     public String guardarProductos(/*@RequestParam(name = "file", required = false) MultipartFile portada,*/
-            Producto producto) { //RedirectAttributes redirect / Model model
-
+            Model model, Producto producto) { //RedirectAttributes redirect / Model model
         productoService.guardarProducto(producto);
-
-        return "redirect:/";
+        model.addAttribute("mensaje", "producto guardado con exito");
+        return "/admin/productoForm";
     }
-    
-    
+
 
 //    @GetMapping("/modificar{idProducto}")
 //    public String modificarProducto(Producto producto){
