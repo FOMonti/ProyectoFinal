@@ -13,9 +13,8 @@
     <div class="row justify-content-center">
         <div class=" col-4">
             <form th:action="@{/admin/guardar}" th:object="${producto}" method="post" enctype="multipart/form-data">
-
                 <h1>Cargar producto</h1>
-
+                <input type="hidden" name="id" th:field="*{id}"/>
                 <div>
                     <input type="text" th:field="*{nombre}" class="form-control" placeholder="Ingrese nombre"/>
                 </div>

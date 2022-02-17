@@ -9,18 +9,36 @@
 <body>
 <header th:replace="layout/navbar::navbar-l"></header>
 <h1>Tienda</h1>
-<div class="btn-group" role="group" aria-label="Basic outlined example">
-    <a th:href="@{/admin/productos-form}">
-        <button class="btn btn-outline-dark">Agregar</button>
-    </a>
-    <a th:href="@{/}">
-        <button class="btn btn-outline-dark">Modificar</button>
-    </a>
-    <a th:href="@{/}">
-        <button class="btn btn-outline-dark">Eliminar</button>
-    </a>
-</div>
+<a th:href="@{/admin/productos-form}">
+    <button class="btn btn-outline-dark" aria-label="Basic outlined example">Agregar</button>
+</a>
 <div th:if="${listaProductos!= null and !listaProductos.empty}">
+    <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="producto : ${listaProductos}">
+            <td th:text="${producto.nombre}">Muestra nombre</td>
+            <!--                    <td th:text="${producto.imagen}">Muestra imagen</td>-->
+            <td th:text="${producto.precio}">Muestra precio</td>
+            <td th:text="${producto.stock}">Muestra stock</td>
+            <td>
+                <a th:href="@{/admin/modificar/} + ${producto.id}">
+                    <button class="btn btn-outline-dark">Modificar</button>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/}">
+                    <button class="btn btn-outline-dark">Eliminar</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h1>-----</h1>
     <table border="1">
 
         <tr th:each="producto : ${listaProductos}">
