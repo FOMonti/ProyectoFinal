@@ -29,14 +29,18 @@
                             <input type="number" th:field="*{stock}" class="form-control" placeholder="Ingrese stock"/>
                         </div>
                         <div>
+                            <input type="text" th:field="*{especificacion}" class="form-control" placeholder="Ingrese la especificación"/>
+                        </div>
+                        <div>
                             <button type="submit" class="form-control btn btn-secondary">Guardar producto</button>
                         </div>
+                        <div class="alert alert-success text-center" th:if="${mensaje}" th:text="${mensaje}" ></div>
                     </form>
-
-                        <a th:href="@{/}">Regresar</a>
+                        <a th:href="@{/tienda}">Regresar</a>
                 </div>
             </div>
         </div>
+
         <footer th:replace="layout/layout::footer"></footer>
     </body>
 </html>
