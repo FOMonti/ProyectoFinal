@@ -11,6 +11,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "productos")
@@ -21,12 +23,15 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty
     private String nombre;
 
     private String imagen;
 
+    @Min(value = 0, message = "El precio mínimo es 0")
     private Double precio;
 
+    @Min(value = 0, message = "El stock mínimo es 0")
     private Integer stock;
     
     private String especificacion;

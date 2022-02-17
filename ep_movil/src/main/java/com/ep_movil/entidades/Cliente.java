@@ -9,6 +9,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 // Cliente es una persona que no se encuentra registrada en la pagina.
 @Entity
@@ -20,12 +22,16 @@ public class Cliente  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty
     private String nombre;
 
     private String apellido;
 
+    @NotEmpty
+    @Email
     private String email;
 
+    @NotEmpty
     @OneToMany
     private List<Comentario> comentario;
 
