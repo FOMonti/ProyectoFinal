@@ -31,7 +31,7 @@ public class Usuario extends Cliente  {
     
     @NotEmpty()
     @Size(min = 8)
-    //@Pattern(regexp =[a-zA-Z0-9])
+    @Pattern(regexp ="[a-zA-Z0-9]")
     private String password;
     
     @ManyToMany(fetch = FetchType.EAGER)

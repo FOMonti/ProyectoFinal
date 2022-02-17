@@ -2,12 +2,18 @@ package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Producto;
 import com.ep_movil.servicios.IProductoService;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import java.util.List;
+import java.util.UUID;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,16 +35,43 @@ public class ProductoController {
     }
 
     @PostMapping("/guardar")
-    public String guardarProductos(/*@RequestParam(name = "file", required = false) MultipartFile portada,*/
-            Model model, Producto producto) { //RedirectAttributes redirect / Model model
-        productoService.guardarProducto(producto);
-        model.addAttribute("mensaje", "producto guardado con exito");
+    public String guardarProductos(@RequestParam(name = "file", required = false) MultipartFile imagen,
+            RedirectAttributes redirect, @Valid Producto producto, Errors error) { //RedirectAttributes redirect / Model model
+
+        if (error.hasErrors()) {
+            return "admin/productoForm";
+        }
+
+        if (imagen.isEmpty()) {
+            String ruta = "C:\\ProyectoFinal";
+            String nombreUnico = UUID.randomUUID() + " " + imagen.getOriginalFilename();
+            try {
+                byte[] bytes = imagen.getBytes();
+                Path rutaAbsoluta = Paths.get(ruta + "//" + nombreUnico);
+                Files.write(rutaAbsoluta, bytes);
+                producto.setImagen(nombreUnico);
+
+                productoService.guardarProducto(producto);
+                redirect.addAttribute("productoGuardado", "Producto guardado con exito!");
+                redirect.addFlashAttribute("producto", imagen);
+
+            } catch (Exception e) {
+                e.getCause().getMessage();
+            }
+        }
         return "/admin/productoForm";
     }
 
+    @GetMapping("/modificar{idProducto}")
+    public String modificarProducto(Producto producto, Model model) {
+        productoService.encontrarProducto(producto);
+        model.addAttribute("producto", producto);
+        return "redirect:/";
+    }
 
-//    @GetMapping("/modificar{idProducto}")
-//    public String modificarProducto(Producto producto){
-//        productoService.encontrarProducto(producto);
-//        return "redirect:/";
+    @GetMapping("/eliminar")
+    public String eliminarProducto(Producto producto) {
+        productoService.eliminarProducto(producto);
+        return "redirect:/tienda";
+    }
 }

@@ -2,38 +2,38 @@
 
 <html xmlns:th="https://thymeleaf.com.org"
       xmlns="http://www.w3.org/1999/xhtml">
-<head th:replace="layout/layout::head">
-    <title>Tienda</title>
-    <meta charset="UTF-8"/>
-</head>
-<body>
-<header th:replace="layout/navbar::navbar-l"></header>
-<h1>Tienda</h1>
-<div class="btn-group" role="group" aria-label="Basic outlined example">
-    <a th:href="@{/admin/productos-form}">
-        <button class="btn btn-outline-dark">Agregar</button>
-    </a>
-    <a th:href="@{/}">
-        <button class="btn btn-outline-dark">Modificar</button>
-    </a>
-    <a th:href="@{/}">
-        <button class="btn btn-outline-dark">Eliminar</button>
-    </a>
-</div>
-<div th:if="${listaProductos!= null and !listaProductos.empty}">
-    <table border="1">
+    <head th:replace="layout/layout::head">
+        <title>Tienda</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:replace="layout/navbar::navbar-l"></header>
+        <h1>Tienda</h1>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <a th:href="@{/admin/productos-form}">
+                <button class="btn btn-outline-dark">Agregar</button>
+            </a>
+            <a th:href="@{/}">
+                <button class="btn btn-outline-dark">Modificar</button>
+            </a>
+            <a th:href="@{/}">
+                <button class="btn btn-outline-dark">Eliminar</button>
+            </a>
+        </div>
+        <div th:if="${listaProductos!= null and !listaProductos.empty}">
+            <table border="1">
 
-        <tr th:each="producto : ${listaProductos}">
-            <td th:text="${producto.nombre}">Muestra nombre</td>
-            <!--                    <td th:text="${producto.imagen}">Muestra imagen</td>-->
-            <td th:text="${producto.precio}">Muestra precio</td>
-            <td th:text="${producto.stock}">Muestra stock</td>
-        </tr>
+                <tr th:each="producto : ${listaProductos}">
+                    <td th:text="${producto.nombre}">Muestra nombre</td>
+                    <td th:text="${producto.precio}">Muestra precio</td>
+                    <td th:text="${producto.stock}">Muestra stock</td>
+                    <td th:text="${producto.imagen}" >Muestra imagen</td>
+                </tr>
 
-    </table>
-</div>
-<div th:if="${listaProductos == null or listaProductos.empty}">
-    No hay productos en la tienda
-</div>
-</body>
+            </table>
+        </div>
+        <div th:if="${listaProductos == null or listaProductos.empty}">
+            No hay productos en la tienda
+        </div>
+    </body>
 </html>
