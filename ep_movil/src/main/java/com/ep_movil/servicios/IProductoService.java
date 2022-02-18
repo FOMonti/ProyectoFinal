@@ -13,4 +13,6 @@ public interface IProductoService {
     public void eliminarProducto(Producto producto);
 
     public Producto encontrarProducto(Producto producto);
+    
+    public Producto buscarPorId(Integer id);
 }
