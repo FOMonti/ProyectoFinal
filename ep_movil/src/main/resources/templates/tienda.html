@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html xmlns:th="https://thymeleaf.com.org"
       xmlns="http://www.w3.org/1999/xhtml">
 <head th:replace="layout/layout::head">
@@ -16,7 +15,9 @@
     <table class="table table-dark table-hover">
         <thead>
         <tr>
-            <th></th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
         </tr>
         </thead>
         <tbody>
@@ -40,7 +41,6 @@
     </table>
     <h1>-----</h1>
     <table border="1">
-
         <tr th:each="producto : ${listaProductos}">
             <td th:text="${producto.nombre}">Muestra nombre</td>
             <!--                    <td th:text="${producto.imagen}">Muestra imagen</td>-->
@@ -51,7 +51,6 @@
     </table>
 </div>
 <div th:if="${listaProductos == null or listaProductos.empty}">
-    No hay productos en la tienda
 </div>
 </body>
 </html>
