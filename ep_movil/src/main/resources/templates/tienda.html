@@ -2,6 +2,7 @@
 
 <html xmlns:th="https://thymeleaf.com.org"
       xmlns="http://www.w3.org/1999/xhtml">
+<<<<<<< HEAD
     <head th:replace="layout/layout::head">
         <title>Tienda</title>
         <meta charset="UTF-8"/>
@@ -22,6 +23,46 @@
         </div>
         <div th:if="${listaProductos!= null and !listaProductos.empty}">
             <table border="1">
+=======
+<head th:replace="layout/layout::head">
+    <title>Tienda</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<header th:replace="layout/navbar::navbar-l"></header>
+<h1>Tienda</h1>
+<a th:href="@{/admin/productos-form}">
+    <button class="btn btn-outline-dark" aria-label="Basic outlined example">Agregar</button>
+</a>
+<div th:if="${listaProductos!= null and !listaProductos.empty}">
+    <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="producto : ${listaProductos}">
+            <td th:text="${producto.nombre}">Muestra nombre</td>
+            <!--                    <td th:text="${producto.imagen}">Muestra imagen</td>-->
+            <td th:text="${producto.precio}">Muestra precio</td>
+            <td th:text="${producto.stock}">Muestra stock</td>
+            <td>
+                <a th:href="@{/admin/modificar/} + ${producto.id}">
+                    <button class="btn btn-outline-dark">Modificar</button>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/}">
+                    <button class="btn btn-outline-dark">Eliminar</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h1>-----</h1>
+    <table border="1">
+>>>>>>> 9b71c700f068aecb9467764e1ccf8c6a087618d0
 
                 <tr th:each="producto : ${listaProductos}">
                     <td th:text="${producto.nombre}">Muestra nombre</td>
