@@ -26,8 +26,42 @@
         <tr th:each="producto : ${listaProductos}">
             <td th:text="${producto.nombre}">Muestra nombre</td>
             <!--                    <td th:text="${producto.imagen}">Muestra imagen</td>-->
-            <td th:text="${producto.precio}">Muestra precio</td>
+            <td th:text="${listaProductos.get(productoStat.index).precio}">Muestra precio</td>  <!--<!-- ${producto.precio} -->
             <td th:text="${producto.stock}">Muestra stock</td>
+                                 
+            <td>
+              <button  class="btn-dark"><a th:href="@{/admin/modificar}+'?id='+${producto.id}" class=" px-5 py-2 ">Modificar</a></button>
+            <!--  <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn-dark"><a th:href="@{/persona-form}+'?id='+${p.id}" >Editar</a></button> -->
+                               
+            </td>
+            
+                <td>
+                     <button  class="btn-dark"><a th:href="@{/admin/productoForm}+ ${producto.id}" class=" px-5 py-2 ">Eliminar</a></button>
+             <!-- <button  class="btn-dark"><a th:href="@{/admin/productoForm}+'?id='+${producto.id}" class=" px-5 py-2 ">Eliminar</a></button> -->
+            <!--  <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn-dark"><a th:href="@{/persona-form}+'?id='+${p.id}" >Editar</a></button> -->
+                               
+            </td>
+            
+            
+            <td th:text="${listaProductos.get(productoStat.index + 1).precio}">Muestra precio</td>  <!--<!-- ${producto.precio} -->
+            <td th:text="${listaProductos.get(productoStat.index + 1).stock}">Muestra stock</td>
+                                 
+            <td>
+              <button  class="btn-dark"><a th:href="@{/admin/modificar}+'?id='+${listaProductos.get(productoStat.index + 1).id}" class=" px-5 py-2 ">Modificar</a></button>
+            <!--  <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn-dark"><a th:href="@{/persona-form}+'?id='+${p.id}" >Editar</a></button> -->
+                               
+            </td>
+            
+                <td>
+                     <button  class="btn-dark"><a th:href="@{/admin/productoForm}+ ${listaProductos.get(productoStat.index + 1).id}" class=" px-5 py-2 ">Eliminar</a></button>
+             <!-- <button  class="btn-dark"><a th:href="@{/admin/productoForm}+'?id='+${producto.id}" class=" px-5 py-2 ">Eliminar</a></button> -->
+            <!--  <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn-dark"><a th:href="@{/persona-form}+'?id='+${p.id}" >Editar</a></button> -->
+                               
+            </td>
+            
+            
+            
+            
         </tr>
 
     </table>

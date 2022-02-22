@@ -35,6 +35,19 @@ public class ProductoController {
         model.addAttribute("mensaje", "producto guardado con exito");
         return "/admin/productoForm";
     }
+    
+    @GetMapping("/modificar")
+    public String modificar(Model model, Producto producto) {
+        if (producto.getId() != null)
+        {
+         model.addAttribute("producto", producto);   
+        }  
+        else
+        {  
+        model.addAttribute("producto", new Producto());
+        }
+        return "admin/productoForm";
+    }
 
 
 //    @GetMapping("/modificar{idProducto}")
