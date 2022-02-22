@@ -2,17 +2,22 @@
 package com.ep_movil.servicios;
 
 import com.ep_movil.entidades.Producto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 public interface IProductoService {
-    
-    public List<Producto>listarProductos();
-    
-    public void guardarProducto(Producto producto);
-    
-    public void eliminarProducto(Producto producto);
 
-    public Producto encontrarProducto(Producto producto);
-    
-    public Producto buscarPorId(Integer id);
+    Page<Producto> getAll(Pageable pageable);
+
+    List<Producto> listarProductos();
+
+    void guardarProducto(Producto producto);
+
+    void eliminarProducto(Producto producto);
+
+    Producto encontrarProducto(Producto producto);
+
+    Producto buscarPorId(Integer id);
 }
