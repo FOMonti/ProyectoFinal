@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.com.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/layout::head">
+    <title>Tienda</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<header th:replace="layout/navbar::navbar-l"></header>
+<h1>Tienda</h1>
+<h2>Productos</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-content-around flex-wrap">
+                <div class="card" th:each="producto: ${list}" style="width: 18rem;">
+                    <img class="card-img-top"
+                         th:src="@{'/images/'+ ${producto.imagen}}"
+                         alt="producto imagen" style="max-width: 25%"/>
+                    <div class=" card-body">
+                        <h5 class="card-title" th:text="${producto.nombre}"></h5>
+                        <h6 class="card-text" th:text="${producto.precio}"></h6>
+                        <p class="card-text" th:text="${producto.especificacion}"></p>
+                        <a href="#" class="btn btn-dark">Añadir a carrito</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <nav aria-label="Pagination">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${prev == 0 ? 'disable' : '' }">
+                        <a class="page-link" th:href="@{|/?page=${prev}|}"> Anterior</a>
+                    </li>
+                    <li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active' : ''}">
+                        <a class="page-link" th:href="@{|/?page=${page}|}" th:text="${page}"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${current == last ? 'disable' : '' }">
+                        <a class="page-link" th:href="@{|/?page=${next}|}"> Posterior</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>

@@ -2,11 +2,13 @@ package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Producto;
 import com.ep_movil.servicios.IProductoService;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +36,7 @@ public class ProductoController {
 
     @PostMapping("/guardar")
     public String guardarProductos(@RequestParam(name = "file", required = false) MultipartFile imagen,
-            @Valid Producto producto, Errors error, RedirectAttributes redirect) { //RedirectAttributes redirect / Model model
+                                   @Valid Producto producto, Errors error, RedirectAttributes redirect) { //RedirectAttributes redirect / Model model
 
         if (error.hasErrors()) {
             return "admin/productoForm";
@@ -58,12 +60,12 @@ public class ProductoController {
         productoService.guardarProducto(producto);
         redirect.addFlashAttribute("productoGuardado", "Producto guardado con éxito!");
 //        redirect.addFlashAttribute("productoModificado", "Producto modificado con éxito!");
-        return "redirect:/tienda";
+        return "redirect:/tienda/productos";
     }
 
     @GetMapping("/detalle/{id}")
     public String detalleProducto(@PathVariable("id") Integer id, Producto producto, Model model,
-            RedirectAttributes redirect) {
+                                  RedirectAttributes redirect) {
 
         producto = productoService.buscarPorId(id);
 
@@ -83,7 +85,7 @@ public class ProductoController {
     public String eliminarProducto(Producto producto, RedirectAttributes redirect) {
         productoService.eliminarProducto(producto);
         redirect.addFlashAttribute("productoEliminado", "Producto eliminado!");
-        return "redirect:/tienda";
+        return "redirect:/tienda/productos";
     }
 
 }
