@@ -1,26 +1,34 @@
-
 package com.ep_movil.servicios;
 
 import com.ep_movil.dao.IProductoDao;
 import com.ep_movil.entidades.Producto;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ProductoServiceImpl implements IProductoService{
+public class ProductoServiceImpl implements IProductoService {
 
     @Autowired
     private IProductoDao productoDao;
-    
-    @Transactional (readOnly = true)
+
+    @Override
+    public Page<Producto> getAll(Pageable pageable) {
+        return productoDao.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
     @Override
     public List<Producto> listarProductos() {
         return productoDao.findAll();
     }
 
-    @Transactional 
+    @Transactional
     @Override
     public void guardarProducto(Producto producto) {
         productoDao.save(producto);
@@ -32,10 +40,16 @@ public class ProductoServiceImpl implements IProductoService{
         productoDao.delete(producto);
     }
 
-    @Transactional (readOnly = true)
+    @Transactional(readOnly = true)
     @Override
     public Producto encontrarProducto(Producto producto) {
         return productoDao.findById(producto.getId()).orElse(null);
     }
-    
+
+    @Transactional(readOnly = true)
+    @Override
+    public Producto buscarPorId(Integer id) {
+        return productoDao.findById(id).orElse(null);
+    }
+
 }

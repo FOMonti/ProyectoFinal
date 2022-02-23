@@ -15,6 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 //Usuario es la persona registrada en la pagina.
@@ -22,8 +26,12 @@ import javax.persistence.Table;
 @Table(name="usuarios")
 public class Usuario extends Cliente  {
     
+    @NotEmpty
     private String username;
     
+    @NotEmpty()
+    @Size(min = 8)
+    @Pattern(regexp ="[a-zA-Z0-9]")
     private String password;
     
     @ManyToMany(fetch = FetchType.EAGER)
