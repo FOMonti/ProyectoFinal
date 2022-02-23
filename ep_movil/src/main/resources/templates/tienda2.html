@@ -73,14 +73,11 @@
             <div class="col-md-8">
                 <nav aria-label="Pagination">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item" th:classappend="${prev == 0 ?
-                            'disable' : '' }">
+                        <li class="page-item" th:classappend="${prev == 0 ? 'disable' : '' }">
                             <a class="page-link"
                                 th:href="@{|/?page=${prev}|}"> Anterior</a>
                         </li>
-                        <li class="page-item" th:each="page : ${pages}"
-                            th:classappend="${current == page ? 'active' :
-                            ''}">
+                        <li class="page-item" th:each="page : ${pages}" th:classappend="${current == page ? 'active' : ''}">
                             <a class="page-link"
                                 th:href="@{|/?page=${page}|}"
                                 th:text="${page}"></a>
