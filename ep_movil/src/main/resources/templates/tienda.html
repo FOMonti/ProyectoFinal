@@ -25,6 +25,7 @@
             <th>Stock</th>
             <th>Editar</th>
             <th>Eliminar</th>
+            <th>Detalle</th>
         </tr>
         </thead>
         <tbody>
@@ -48,6 +49,12 @@
                 <!--                            <a th:href="@{/}">-->
                 <a th:href="@{/admin/eliminar(id=${producto.id})}">
                     <button class="btn btn-outline-light">Eliminar</button>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/admin/detalle/} + ${producto.id}">
+                    <!--<a th:href="@{/admin/modificar(id=${producto.id})}"/>-->
+                    <button class="btn btn-outline-light">Detalle</button>
                 </a>
             </td>
         </tr>
