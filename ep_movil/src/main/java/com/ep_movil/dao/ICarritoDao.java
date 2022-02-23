@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ICarritoDao extends JpaRepository<Carrito, Integer> {
 
-    @Query("SELECT c FROM Carrito c WHERE c.userid == :query")
+    //@Query("SELECT c FROM Carrito c WHERE c.userid == :query")
     public Carrito findByUsuarioId(@Param("query") Integer query);
 }
