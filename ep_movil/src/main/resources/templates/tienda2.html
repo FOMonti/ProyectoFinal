@@ -1,29 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="https://thymeleaf.com.org"
-      xmlns="http://www.w3.org/1999/xhtml">
-<head th:replace="layout/layout::head">
-    <title>Tienda</title>
-    <meta charset="UTF-8"/>
-</head>
-<body>
-<header th:replace="layout/navbar::navbar-l"></header>
-<h1>Tienda</h1>
-<h2>Productos</h2>
-<div class="container">
-    <div class="d-flex align-content-around flex-wrap">
-        <div class="card" th:each="producto: ${list}" style="width: 18rem;">
-            <img class="card-img-top"
-                 th:src="@{'/images/'+ ${producto.imagen}}"
-                 alt="producto imagen" style="max-width: 25%"/>
-            <div class="card-body">
-                <h5 class="card-title" th:text="${producto.nombre}"></h5>
-                <h6 class="card-text" th:text="${producto.precio}"></h6>
-                <p class="card-text" th:text="${producto.especificacion}"></p>
-                <a href="#" class="btn btn-dark">Añadir a carrito</a>
-                <a th:href="@{/admin/detalle/} + ${producto.id}">
-                    <button class="btn btn-outline-dark">Detalle</button>
-                </a>
+    xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="layout/layout::head">
+        <title>Tienda</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <header th:replace="layout/navbar::navbar-l"></header>
+        <h1>Tienda</h1>
+        <h2>Productos</h2>
+        <div class="general">
+            <aside class="aside">
+                <div class="categories">
+                    <p>CATEGORÍAS</p>
+                    <ul>
+                        <li><a href="">Celulares</a></li>
+                        <li><a href="">Notebooks</a></li>
+                        <li><a href="">Placas de video</a></li>
+                        <li><a href="">Procesadores</a></li>
+                        <li><a href="">Motherboards</a></li>
+                    </ul>
+                </div>
+                <div class="order-by">
+                    <label for="filter">ORDENAR POR:</label>
+                    <select name="filter" id="filter">
+                        <option value="">Menor precio</option>
+                        <option value="">Mayor precio</option>
+                    </select>
+                </div>
+            </aside>
+
+            <!-- PRUEBAS - PRUEBAS - PRUEBAS -->
+            <div class="grid">
+                <div class="producto" th:each="producto: ${list}">
+                    <a class="imagen" href="">
+                        <img class="imagen-producto" th:src="@{'/images/'+
+                            ${producto.imagen}}"
+                            alt="producto imagen" />
+                    </a>
+                    <a class="datos" href="">
+                        <h5 th:text="${producto.nombre}"></h5>
+                        <!-- <p th:text="${producto.especificacion}"></p> -->
+                        <h6 class="price" th:text="'$' +
+                            ${producto.precio}"></h6>
+                        <p></p>
+                    </a>
+                    <a class="add-to-cart" href="#">Añadir a carrito</a>
+                </div>
             </div>
+
+
+
+            <!-- FUNCIONANDO - FUNCIONANDO - FUNCIONANDO  -->
+
+            <!-- <div class="grid">
+                <div class="producto" th:each="producto: ${list}">
+                    <img class="imagen-producto" th:src="@{'/images/'+
+                        ${producto.imagen}}"
+                        alt="producto imagen" />
+                    <div class="datos">
+                        <h5 th:text="${producto.nombre}"></h5>
+            <p th:text="${producto.especificacion}"></p>
+            <h6 class="price" th:text="'$' + ${producto.precio}"></h6>
+                        <p></p>
+                    </div>
+                    <a href="#">Añadir a carrito</a>
+                </div>
+            </div> -->
         </div>
     </div>
     <div class="row">
