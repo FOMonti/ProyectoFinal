@@ -39,12 +39,18 @@
                     </a>
                     <a class="datos" href="">
                         <h5 th:text="${producto.nombre}"></h5>
-                        <!-- <p th:text="${producto.especificacion}"></p> -->
                         <h6 class="price" th:text="'$' +
                             ${producto.precio}"></h6>
                         <p></p>
                     </a>
+                    <!-- En el botón de abajo, la idea sería agregar una especie de "IF role == user" se muestre ese botón -->
                     <a class="add-to-cart" href="#">Añadir a carrito</a>
+                    <!-- En caso de ser "role == admin" se mostraría el siguiente DIV -->
+                    <div class="admin-buttons">
+                        <a class="add" href="#"><img th:src="@{${'/images/cart.png'}}" alt="Agregar al carrito"></a>
+                        <a class="modify" href="#"><img th:src="@{${'/images/edit.png'}}" alt="Modificar"></a>
+                        <a class="delete" href="#"><img th:src="@{${'/images/delete.png'}}" alt="Eliminar"></a>
+                    </div>
                 </div>
             </div>
         </div>

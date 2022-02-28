@@ -126,9 +126,43 @@ html, body {
     margin-top: 10px;
 }
 
-.add-to-cart:hover {
-    color: #FFF;
+.admin-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
+
+
+.add, .modify, .delete {
+    width: 50px;
+    height: 50px;
+    /* background-color: rgb(238, 255, 0); */
+    display: flex;
+    padding: 4px;
+}
+
+.modify img {
+    width: 70%;
+    margin: auto;
+}
+
+.delete img {
+    width: 70%;
+    margin: auto;
+}
+/* .add, .modify, .delete {
+    border-radius: 4px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    padding: 5px;
+}
+
+.add:hover, .modify:hover, .delete:hover {
+    color:rgb(245, 245, 245);
+} */
 
 .price {
     text-align: center;
