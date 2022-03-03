@@ -18,7 +18,7 @@
                         <a class="nav-link active" aria-current="page" th:href="@{/}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/tienda/productos}">Tienda</a>
+                        <a class="nav-link active" aria-current="page" th:href="@{/tienda/productos/}">Tienda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Repará</a>
@@ -31,6 +31,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/usuario/carrito">Carrito</a>
+                    </li>
+                    <li class="nav-item" th:if="${usuario!=null or usuario.empty}">
+                        <p th:text="${usuario.nombre}"></p>
                     </li>
                 </ul>
                 <form class="d-flex ">

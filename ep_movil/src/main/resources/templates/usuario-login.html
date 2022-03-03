@@ -10,7 +10,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class=" col-4">
-            <form th:action="@{/usuario/registro}" th:object="${usuario}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/usuario/acceder}" th:object="${usuario}" method="post" enctype="multipart/form-data">
                 <h1>Iniciar Sesion</h1>
                 <div>
                     <input type="text" th:field="*{username}" class="form-control" placeholder="Ingrese un username"/>

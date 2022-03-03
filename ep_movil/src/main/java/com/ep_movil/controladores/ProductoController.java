@@ -1,6 +1,7 @@
 package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Producto;
+import com.ep_movil.entidades.Usuario;
 import com.ep_movil.servicios.IProductoService;
 
 import java.io.IOException;
@@ -69,7 +70,6 @@ public class ProductoController {
     @GetMapping("/detalle/{id}")
     public String detalleProducto(@PathVariable("id") Integer id, Producto producto, Model model,
                                   RedirectAttributes redirect) {
-
         producto = productoService.buscarPorId(id);
 
         model.addAttribute("titulo", "Detalle del producto: " + producto.getNombre());
@@ -78,8 +78,8 @@ public class ProductoController {
     }
 
     @GetMapping("/modificar/{id}")
-    public String modificarProducto(@PathVariable("id") Integer id, Producto producto, Model model) {
-        producto = productoService.buscarPorId(id); //para que aparezcan los datos cargados en el editar, hay que guardar el metodo en una variable
+    public String modificarProducto(@PathVariable("id") Integer id, Model model) {
+        Producto producto = productoService.buscarPorId(id); //para que aparezcan los datos cargados en el editar, hay que guardar el metodo en una variable
         model.addAttribute("producto", producto);
         return "admin/productoForm";
     }

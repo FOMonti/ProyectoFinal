@@ -1,5 +1,6 @@
 package com.ep_movil.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,6 +36,11 @@ public class Carrito {
     //cantidad de cada item pedido
 
     public Carrito() {
+    }
+
+    public Carrito(Usuario usuario) {
+        this.usuario = usuario;
+        this.items = new ArrayList<ItemCarrito>();
     }
 
     public Carrito(Integer id, List<ItemCarrito> items, Usuario usuario) {

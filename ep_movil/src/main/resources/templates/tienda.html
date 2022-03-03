@@ -26,6 +26,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
             <th>Detalle</th>
+            <th>Carrito</th>
         </tr>
         </thead>
         <tbody>
@@ -57,10 +58,17 @@
                     <button class="btn btn-outline-light">Detalle</button>
                 </a>
             </td>
+            <td>
+                <a th:href="@{/usuario/agregarCarrito(id=${producto.id})}">
+                    <!--<a th:href="@{/admin/modificar(id=${producto.id})}"/>-->
+                    <button class="btn btn-outline-light">AgregarCarrito</button>
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>
     <div th:if="${listaProductos == null or listaProductos.empty}">
     </div>
+</div>
 </body>
 </html>
