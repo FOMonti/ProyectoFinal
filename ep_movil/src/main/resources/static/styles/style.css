@@ -126,6 +126,10 @@ html, body {
     margin-top: 10px;
 }
 
+.add-to-cart:hover {
+    color: #FFF;
+}
+
 .admin-buttons {
     display: flex;
     justify-content: space-around;
