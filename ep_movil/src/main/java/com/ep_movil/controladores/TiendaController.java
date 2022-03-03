@@ -1,6 +1,8 @@
 package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Producto;
+import com.ep_movil.entidades.Usuario;
+import com.ep_movil.security.service.UsuarioService;
 import com.ep_movil.servicios.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,10 +17,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import javax.servlet.http.HttpSession;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @Controller
 @RequestMapping({"/tienda"})
 public class TiendaController {
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Autowired
     private IProductoService productoService;
@@ -48,12 +55,12 @@ public class TiendaController {
     }
 
     @GetMapping("/productos")
-    public String inicio(Model model, Producto producto) {
+    public String inicio(Model model, Producto producto, HttpSession session) {
 
         List<Producto> listaProductos = productoService.listarProductos();
-
+        Usuario user = (Usuario) session.getAttribute("user");
+        model.addAttribute("usuario", user);
         model.addAttribute("listaProductos", listaProductos);
-
         return "tienda";
     }
 }

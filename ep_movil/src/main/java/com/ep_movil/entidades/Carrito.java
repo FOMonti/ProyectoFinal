@@ -1,5 +1,4 @@
 package com.ep_movil.entidades;
-
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

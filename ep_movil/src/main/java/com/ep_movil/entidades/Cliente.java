@@ -20,7 +20,7 @@ public class Cliente  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotEmpty
     private String nombre;
@@ -31,14 +31,14 @@ public class Cliente  {
     @Email
     private String email;
 
-    @NotEmpty
+    //@NotEmpty
     @OneToMany
     private List<Comentario> comentario;
 
     public Cliente() {
     }
 
-    public Cliente(Integer id, String nombre, String apellido, String email, List<Comentario> comentario) {
+    public Cliente(Long id, String nombre, String apellido, String email, List<Comentario> comentario) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -46,11 +46,11 @@ public class Cliente  {
         this.comentario = comentario;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
