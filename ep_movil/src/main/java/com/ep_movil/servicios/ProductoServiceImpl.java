@@ -17,6 +17,7 @@ public class ProductoServiceImpl implements IProductoService {
     @Autowired
     private IProductoDao productoDao;
 
+    @Transactional(readOnly = true)
     @Override
     public Page<Producto> getAll(Pageable pageable) {
         return productoDao.findAll(pageable);

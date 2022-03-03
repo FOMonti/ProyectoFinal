@@ -18,13 +18,12 @@ public class Carrito {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "carrito_itemcarrito",
             joinColumns = @JoinColumn(name = "carrito_id"),
             inverseJoinColumns = @JoinColumn(name = "itemcarrito_id"))
     private List<ItemCarrito> items;
-    
     //Aca agrego a la entidad de usuario, porque el carrito como tal (existente con un id), empieza a existir al momento
     //que el usuario agrega un producto y lo guarda para comprarlo a futuro. Es el intermediario entre el producto y
     //usuario. Si observamos, en usuario no tenemos nada con el atributo producto y lo mismo a la inversa, en producto.
@@ -66,7 +65,7 @@ public class Carrito {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    
+
+
 }
 

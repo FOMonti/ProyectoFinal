@@ -2,7 +2,6 @@
 <html xmlns:th="https://thymeleaf.com.org"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    
     <head th:replace="layout/layout::head">
         <title>Tienda</title>
         <meta charset="UTF-8"/>
@@ -27,6 +26,7 @@
                         <th>Stock</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
+                        <th>Detalle</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,6 +52,12 @@
                                 <button class="btn btn-outline-light">Eliminar</button>
                             </a>
                         </td>
+                        <td>
+                            <a th:href="@{/admin/detalle/} + ${producto.id}">
+                                <!--<a th:href="@{/admin/modificar(id=${producto.id})}"/>-->
+                                <button class="btn btn-outline-light">Detalle</button>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -59,4 +65,5 @@
             </div>
         </div>
     </body>
+
 </html>
