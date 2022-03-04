@@ -36,18 +36,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         build.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder());
     }
     
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        //aca le voy a estar pasando las rutas de acceso público
-//        http.csrf().disable().authorizeRequests()
-//                .antMatchers("/",
-//                        "/usuario", "/usuario/registrar", "/usuario/login", "/usuario/logear", "/usuario/save",
-//                        "/css/*", "/images/*", 
-//                        "/tienda/tienda2").permitAll()
-//                .anyRequest().authenticated().and()
-//                .formLogin().loginProcessingUrl("/acceder").loginPage("/usuario/login").permitAll()
-//                .defaultSuccessUrl("/").failureUrl("/login?error=true")
-//                .usernameParameter("username").passwordParameter("password")
-//                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
-//    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        //aca le voy a estar pasando las rutas de acceso público
+        http.csrf().disable().authorizeRequests()
+                .antMatchers("/","/usuario/login","/usuario/acceder","/usuario/registrar","/usuario/save",
+                        "/tienda/productos",
+                        "/css/*", "/images/*").permitAll()
+                .anyRequest().authenticated().and()
+                .formLogin().loginProcessingUrl("/usuario/acceder").loginPage("/usuario/login").permitAll()
+                .defaultSuccessUrl("/").failureUrl("/login?error=true")
+                .usernameParameter("username").passwordParameter("password")
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
+    }
 }
