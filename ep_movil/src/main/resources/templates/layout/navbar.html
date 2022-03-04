@@ -32,8 +32,8 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/usuario/carrito">Carrito</a>
                     </li>
-                    <li class="nav-item" th:if="${usuario!=null or usuario.empty}">
-                        <p th:text="${usuario.nombre}"></p>
+                    <li class="nav-item" th:if="${usuario!=null}">
+                        <p th:text="${usuario.username}"></p>
                     </li>
                 </ul>
                 <form class="d-flex ">
@@ -41,7 +41,7 @@
                     <button class="btn btn-outline-dark" type="submit" style="margin-right:5px">Buscar</button>
                 </form>
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
-                    <a th:href="@{/usuario/logear}">
+                    <a th:href="@{/usuario/login}">
                         <button class="btn btn-outline-dark">Iniciar</button>
                     </a>
                     <a th:href="@{/usuario/registrar}">

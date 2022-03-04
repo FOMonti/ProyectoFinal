@@ -2,9 +2,8 @@ package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Producto;
 import com.ep_movil.entidades.Usuario;
+import com.ep_movil.security.service.UsuarioService;
 import com.ep_movil.servicios.IProductoService;
-import com.ep_movil.servicios.IUsuarioService;
-import com.ep_movil.servicios.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -26,10 +24,10 @@ import java.util.stream.IntStream;
 public class TiendaController {
 
     @Autowired
-    private IProductoService productoService;
+    private UsuarioService usuarioService;
 
     @Autowired
-    private UsuarioServiceImpl usuarioService;
+    private IProductoService productoService;
 
 
     @GetMapping("/tienda2")
@@ -47,7 +45,6 @@ public class TiendaController {
             List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
             model.addAttribute("pages", pages);
         }
-
         model.addAttribute("list", pageProducto.getContent()); //lista de productos a mostrar
         model.addAttribute("current", page + 1);
         model.addAttribute("next", page + 2);
@@ -58,13 +55,12 @@ public class TiendaController {
     }
 
     @GetMapping("/productos")
-    public String inicio(Model model, Producto producto, Usuario usuario, RedirectAttributes redirect, HttpSession session) {
-
+    public String inicio(Model model, Producto producto, HttpSession session) {
         List<Producto> listaProductos = productoService.listarProductos();
-        Integer id = (Integer) session.getAttribute("idusuario");
-        model.addAttribute("listaProductos", listaProductos);
+        Long id = (Long) session.getAttribute("id");
+        Usuario usuario = usuarioService.findById(id);
         model.addAttribute("usuario", usuario);
-        model.addAttribute("usuario", usuarioService.findById(id));
+        model.addAttribute("listaProductos", listaProductos);
         return "tienda";
     }
 

@@ -12,19 +12,21 @@
         <div class=" col-4">
             <form th:action="@{/usuario/acceder}" th:object="${usuario}" method="post" enctype="multipart/form-data">
                 <h1>Iniciar Sesion</h1>
+                <div class="alert alert-success text-center" th:if="${usuarioRegistrado != null}"
+                     th:text="${usuarioRegistrado}"></div>
+                <div class="alert alert-danger text-center" th:if="${param.error}">Credenciales incorrectas</div>
                 <div>
                     <input type="text" th:field="*{username}" class="form-control" placeholder="Ingrese un username"/>
                 </div>
-                <br>
+                <br/>
                 <div>
                     <input type="password" th:field="*{password}" class="form-control"
                            placeholder="Ingrese una contraseña"/>
                 </div>
-                <br>
+                <br/>
                 <div>
-                    <button type="submit" class="form-control btn btn-secondary">Registrarme</button>
+                    <button type="submit" class="form-control btn btn-secondary">Iniciar Sesion</button>
                 </div>
-                <!--                <div class="alert alert-success text-center" th:if="${mensaje}" th:text="${mensaje}"></div>-->
             </form>
         </div>
     </div>

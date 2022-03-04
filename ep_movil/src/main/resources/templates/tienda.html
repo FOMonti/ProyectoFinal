@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="https://thymeleaf.com.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout::head">
     <title>Tienda</title>
     <meta charset="UTF-8"/>
@@ -8,7 +9,7 @@
 <body>
 <header th:replace="layout/navbar::navbar-l"></header>
 <h1>Tienda</h1>
-<a th:href="@{/admin/productos-form}">
+<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/productos-form}">
     <button class="btn btn-outline-dark" aria-label="Basic outlined example">Agregar</button>
 </a>
 <div>
@@ -26,7 +27,6 @@
             <th>Editar</th>
             <th>Eliminar</th>
             <th>Detalle</th>
-            <th>Carrito</th>
         </tr>
         </thead>
         <tbody>
@@ -56,12 +56,6 @@
                 <a th:href="@{/admin/detalle/} + ${producto.id}">
                     <!--<a th:href="@{/admin/modificar(id=${producto.id})}"/>-->
                     <button class="btn btn-outline-light">Detalle</button>
-                </a>
-            </td>
-            <td>
-                <a th:href="@{/usuario/agregarCarrito(id=${producto.id})}">
-                    <!--<a th:href="@{/admin/modificar(id=${producto.id})}"/>-->
-                    <button class="btn btn-outline-light">AgregarCarrito</button>
                 </a>
             </td>
         </tr>

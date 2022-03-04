@@ -43,10 +43,10 @@ public class CarritoServiceImpl implements ICarritoService {
         return carritoDao.findById(carrito.getId()).orElse(null);
     }
 
-    @Override
-    public Carrito findByUsuarioId(Integer query) {
-        return carritoDao.findByUsuarioId(query);
-    }
+//    @Override
+//    public Carrito findByUsuarioId(Integer query) {
+//        return carritoDao.findByUsuarioId(query);
+//    }
 
 //    @Transactional
 //    public Carrito agregarCarrito(Producto producto, Usuario usuario /*Integer cantidad*/) {

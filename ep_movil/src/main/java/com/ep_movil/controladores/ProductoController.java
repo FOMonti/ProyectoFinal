@@ -1,19 +1,16 @@
 package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Producto;
-import com.ep_movil.entidades.Usuario;
 import com.ep_movil.servicios.IProductoService;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -27,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class ProductoController {
 
     @Autowired
@@ -78,8 +76,9 @@ public class ProductoController {
     }
 
     @GetMapping("/modificar/{id}")
-    public String modificarProducto(@PathVariable("id") Integer id, Model model) {
-        Producto producto = productoService.buscarPorId(id); //para que aparezcan los datos cargados en el editar, hay que guardar el metodo en una variable
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    public String modificarProducto(@PathVariable("id") Integer id, Producto producto, Model model) {
+        producto = productoService.buscarPorId(id); //para que aparezcan los datos cargados en el editar, hay que guardar el metodo en una variable
         model.addAttribute("producto", producto);
         return "admin/productoForm";
     }

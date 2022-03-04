@@ -20,8 +20,9 @@ public class LandingController {
     @GetMapping("/")
     public String alalanding(Model model, HttpSession session) {
         model.addAttribute("titulo", "Bienvendio EP-MOVIL");
-        Integer id = (Integer) session.getAttribute("idusuario");
-        model.addAttribute("usuario", usuarioService.findById(id));
+        Long id = (Long) session.getAttribute("id");
+        Usuario usuario = usuarioService.findById(id);
+        model.addAttribute("usuario", usuario);
         return "index";
     }
 }
