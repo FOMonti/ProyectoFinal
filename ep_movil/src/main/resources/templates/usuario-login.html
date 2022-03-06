@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="https://thymeleaf.com.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout::head">
     <title>TODO supply a title</title>
     <meta charset="UTF-8"/>
@@ -10,11 +11,15 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class=" col-4">
-            <form th:action="@{/usuario/acceder}" th:object="${usuario}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/usuario/acceder}" th:object="${usuario}" method="post">
                 <h1>Iniciar Sesion</h1>
+
                 <div class="alert alert-success text-center" th:if="${usuarioRegistrado != null}"
                      th:text="${usuarioRegistrado}"></div>
                 <div class="alert alert-danger text-center" th:if="${param.error}">Credenciales incorrectas</div>
+                <div class="alert alert-danger text-center" th:if="${param.error}" th:text="${accederFallido}">
+                    Credenciales fallidas en el acceder
+                </div>
                 <div>
                     <input type="text" th:field="*{username}" class="form-control" placeholder="Ingrese un username"/>
                 </div>

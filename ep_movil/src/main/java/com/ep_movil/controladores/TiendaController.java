@@ -57,9 +57,9 @@ public class TiendaController {
     @GetMapping("/productos")
     public String inicio(Model model, Producto producto, HttpSession session) {
         List<Producto> listaProductos = productoService.listarProductos();
-        Long id = (Long) session.getAttribute("id");
-        Usuario usuario = usuarioService.findById(id);
-        model.addAttribute("usuario", usuario);
+//        Long id = (Long) session.getAttribute("id");
+//        Usuario usuario = usuarioService.findById(id);
+//        model.addAttribute("usuario", usuario);
         model.addAttribute("listaProductos", listaProductos);
         return "tienda";
     }

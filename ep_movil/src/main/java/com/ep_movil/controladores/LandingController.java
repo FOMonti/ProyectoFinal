@@ -18,11 +18,17 @@ public class LandingController {
     private UsuarioServiceImpl usuarioService;
 
     @GetMapping("/")
-    public String alalanding(Model model, HttpSession session) {
-        model.addAttribute("titulo", "Bienvendio EP-MOVIL");
-        Long id = (Long) session.getAttribute("id");
-        Usuario usuario = usuarioService.findById(id);
-        model.addAttribute("usuario", usuario);
+    public String alalanding(Model model) {
+
         return "index";
     }
+
+//    public String alalanding(Model model, HttpSession session) {
+//        model.addAttribute("titulo", "Bienvendio EP-MOVIL");
+//        Long id = (Long) session.getAttribute("id");
+//        Usuario usuario = usuarioService.findById(id);
+//        model.addAttribute("usuario", usuario);
+//        return "index";
+//    }
+
 }

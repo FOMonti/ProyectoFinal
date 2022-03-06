@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head th:replace="layout::head">
+    <title>Tienda</title>
+    <meta charset="UTF-8"/>
 </head>
 <body>
 <header th:fragment="navbar-l">
@@ -18,7 +21,7 @@
                         <a class="nav-link active" aria-current="page" th:href="@{/}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/tienda/productos/}">Tienda</a>
+                        <a class="nav-link active" aria-current="page" th:href="@{/tienda/productos}">Tienda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Repará</a>
@@ -32,8 +35,8 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/usuario/carrito">Carrito</a>
                     </li>
-                    <li class="nav-item" th:if="${usuario!=null}">
-                        <p th:text="${usuario.username}"></p>
+                    <li th:if="${name != anonymusUser}">
+                        <b>Bienvenido: </b> <span sec:authentication="name">
                     </li>
                 </ul>
                 <form class="d-flex ">
