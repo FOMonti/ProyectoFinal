@@ -18,6 +18,10 @@ html, body {
     margin-right: 50px;
 }
 
+.title, .subtitle {
+    text-align: center;;
+}
+
 .categories p {
     font-weight: 550;
 }
