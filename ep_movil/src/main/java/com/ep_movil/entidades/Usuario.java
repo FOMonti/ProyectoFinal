@@ -1,25 +1,18 @@
 
 package com.ep_movil.entidades;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 
 //Usuario es la persona registrada en la pagina.
 @Entity
@@ -30,15 +23,16 @@ public class Usuario extends Cliente  {
     private String username;
     
     @NotEmpty()
-    @Size(min = 8)
-    @Pattern(regexp ="[a-zA-Z0-9]")
+    //@Size(min = 8, max=25)
+    //@Pattern(regexp="")//[a-zA-Z0-9]
+    //^(?=.*[0-9])(?=.*[az])(? =.*[AZ](? =.*[@#$%^&-+=()])(? =\\\\S+$).{8,25}$
     private String password;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "usuario_rol",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    private Set<Rol> roles= new HashSet();
+    private Set<Rol> roles= new HashSet<Rol>();
     
     // definir si esto va a ser OneToOne o OneToMany dependiendo de cómo se plantee el carrito. 
     // Mientras tanto puse OneToOne* Un usuario tiene un solo carrito. Existe en el usuario, lleno o vacio (si esta
@@ -52,7 +46,7 @@ public class Usuario extends Cliente  {
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nombre, String apellido, String email, List<Comentario> comentario) {
+    public Usuario(Long id, String nombre, String apellido, String email, List<Comentario> comentario) {
         super(id, nombre, apellido, email, comentario);
     }
 

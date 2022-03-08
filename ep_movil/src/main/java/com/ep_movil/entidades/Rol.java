@@ -1,7 +1,8 @@
 
 package com.ep_movil.entidades;
 
-import com.ep_movil.enums.Roles;
+import com.ep_movil.enums.RolNombre;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,7 +15,9 @@ import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "roles")
-public class Rol {
+public class Rol implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,12 +26,12 @@ public class Rol {
     @NonNull
     @Enumerated(EnumType.STRING)
     @Column(unique=true)
-    private Roles rolNombre;
+    private RolNombre rolNombre;
 
     public Rol() {
     }
 
-    public Rol(Long id, Roles rolNombre) {
+    public Rol(Long id, RolNombre rolNombre) {
         this.id = id;
         this.rolNombre = rolNombre;
     }
@@ -41,11 +44,11 @@ public class Rol {
         this.id = id;
     }
 
-    public Roles getRolNombre() {
+    public RolNombre getRolNombre() {
         return rolNombre;
     }
 
-    public void setRolNombre(Roles rolNombre) {
+    public void setRolNombre(RolNombre rolNombre) {
         this.rolNombre = rolNombre;
     }
     

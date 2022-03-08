@@ -11,7 +11,6 @@ public class LandingController {
 
     @GetMapping("/")
     public String alalanding(Model model) {
-        model.addAttribute("titulo", "Bienvendio EP-MOVIL");
         return "index";
     }
 }
