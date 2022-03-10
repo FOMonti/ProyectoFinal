@@ -28,7 +28,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
-@RequestMapping({"/usuario"})
 public class UsuarioController {
 
     private final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
@@ -76,28 +75,30 @@ public class UsuarioController {
 
         redirect.addFlashAttribute("usuarioRegistrado", "Se ha registrado satisfactoriamente. Inicie sesión");
 
-        return "redirect:/usuario/login";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
     public String toLogin(Model model) {
-        model.addAttribute("usuario", new Usuario());
+//        model.addAttribute("usuario", new Usuario());
         return "usuario-login";
     }
 
-    @PostMapping("/acceder")
-    public String acceder(Usuario usuario, HttpSession session, Principal usuarioLogeado, Model model, User use) {
-        
-        Optional<Usuario> user = usuarioService.findByUsername(usuarioLogeado.getName());
-       
-        if (user.isPresent()) {
-            session.setAttribute("idusuario", user.get().getId());
-        } else {
-            model.addAttribute("accederFallido", "Credenciales erróneas. Ingrese un usuario válido");
+    @PostMapping("/signin")
+    public String acceder(Usuario usuario, HttpSession session, RedirectAttributes redirect) {
+
+        Optional<Usuario> user = usuarioService.findByUsername(usuario.getUsername());
+
+        if (!user.isPresent()) {
+            redirect.addFlashAttribute("accederFallido", "Credenciales erróneas. Revise el nombre de usuario y/o contraseña ingresados.");
             logger.info("AVISO: Se intentó ingresar con un usuario que no se encuentra registrado.");
+            return "redirect:/login";
         }
         
-        log.info("usuario que hizo login: " + usuarioLogeado.getName());
+        session.setAttribute("idusuario", user.get().getId());
+        log.info("usuario que hizo login: " + usuario.getUsername());
+        redirect.addFlashAttribute("usuario", usuario);
+       
         return "redirect:/";
     }
 
@@ -120,7 +121,6 @@ public class UsuarioController {
 //     return "redirect:/";
 // }
 //*/
-
 //        model.addAttribute("carrito", productoService.findByUsuarioId(usuario.id));
 //        model.addAttribute("titulo", "Mostrando Carrito");
 //        model.addAttribute("usuario", usuario);

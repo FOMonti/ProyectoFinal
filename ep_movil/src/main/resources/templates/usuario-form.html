@@ -11,7 +11,7 @@
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class=" col-4">
-                    <form th:action="@{/usuario/save}" th:object="${usuario}" method="post">
+                    <form th:action="@{/save}" th:object="${usuario}" method="post">
                         <h1>Registro</h1>
 
                         <input type="text" th:field="*{nombre}" class="form-control"
@@ -40,7 +40,9 @@
                         <br/>
 
                         <button type="submit" class="form-control btn btn-secondary">Registrar</button>
-
+                        <br/>
+                        <br/>
+                        <div>¿Ya tenes una cuenta? <a th:href="@{/login}"> Ingresa acá</a></div>
                         <!--                <div class="alert alert-success text-center" th:if="${mensaje}" th:text="${mensaje}"></div>-->
                     </form>
                 </div>

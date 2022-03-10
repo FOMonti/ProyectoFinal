@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.servlet.http.HttpSession;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 @Controller
@@ -31,11 +32,10 @@ public class TiendaController {
     private IProductoService productoService;
 
     @GetMapping("/tienda2")
-    private String findAll(@RequestParam Map<String, Object> params, Model model) {
+    private String tienda2(@RequestParam Map<String, Object> params, Model model) {
 
         int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
-
-        PageRequest pageRequest = PageRequest.of(page, 5);//size : Cantidad de elementos por pagina
+        PageRequest pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "nombre"));//size : Cantidad de elementos por pagina
 
         Page<Producto> pageProducto = productoService.getAll(pageRequest);
 
@@ -55,7 +55,7 @@ public class TiendaController {
     }
 
     @GetMapping("/productos")
-    public String inicio(Model model, Producto producto, HttpSession session) {
+    public String dashboard(Model model, HttpSession session) {
 
         List<Producto> listaProductos = productoService.listarProductos();
         Usuario user = (Usuario) session.getAttribute("user");

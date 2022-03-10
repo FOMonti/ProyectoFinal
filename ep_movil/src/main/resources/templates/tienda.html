@@ -8,7 +8,30 @@
     </head>
     <body>
         <header th:replace="layout/navbar::navbar-l"></header>
-        <h1>Tienda</h1>
+        <br/>
+        <div>
+            <form class="d-flex ">
+                <h1>Tienda</h1>
+                <div><input class="form-control" type="search" placeholder="Search" aria-label="Search" style="margin-left:5px"/>
+                </div><div><button class="btn btn-outline-dark" type="submit" style="margin-left:10px">Buscar</button></div>
+            </form>
+        </div>
+
+        <div class="btn-group dropright">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropright
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" >Ordenar Alfabeticamente A - Z</a>
+                <a class="dropdown-item" >Ordenar Alfabeticamente Z - A</a>
+                <a class="dropdown-item" >Menor Precio</a>
+                <a class="dropdown-item" >Mayor Preco</a>
+            </div>
+        </div>
+<!--        href="/tienda/OxNA"
+        href="/tienda/OxND"
+        href="/tienda/Ox-P"
+        href="/tienda/Ox+P"-->
         <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/productos-form}">
             <button class="btn btn-outline-dark" aria-label="Basic outlined example">Agregar</button>
         </a>
@@ -17,7 +40,7 @@
             <div class="alert alert-success text-center" th:if="${productoModificado}" th:text="${productoModificado}"></div>
             <div class="alert alert-warning text-center" th:if="${productoEliminado}" th:text="${productoEliminado}"></div>
         </div>
-        <div th:if="${listaProductos!= null and !listaProductos.empty}">
+        <div th:if="${listaProductos != null and !listaProductos.empty}">
             <table class="table table-dark table-hover">
                 <thead>
                     <tr>
@@ -61,9 +84,28 @@
                     </tr>
                 </tbody>
             </table>
-            <div th:if="${listaProductos == null or listaProductos.empty}">
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <nav aria-label="Pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" th:if="${current != 1}">
+                                <a class="page-link" th:href="@{|/tienda/productos/?page=${prev}|}"> Anterior</a>
+                            </li>
+                            <li class="page-item" th:each="page : ${pages}" th:if="${current == page ? 'active' : ''}">
+                                <a class="page-link" th:href="@{|/tienda/productos/?page=${page}|}" th:text="${page}"></a>
+                            </li>
+                            <li class="page-item" th:if="${current != last}">
+                                <a class="page-link" th:href="@{|/tienda/productos/?page=${next}|}"> Posterior</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
+            
         </div>
+
     </body>
 
 </html>
