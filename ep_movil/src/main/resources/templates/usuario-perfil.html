@@ -7,13 +7,11 @@
     </head>
     <body>
         <header th:replace="layout/navbar::navbar-l"></header>
-        <h1 class="title">Tienda</h1>
-        <h2 class="subtitle">Productos</h2>
+        <h1 class="title">Usuario</h1>
         <div class="general">
             <aside class="aside">
-
                 <div class="categories">
-                    <p class="dropbtn">CATEGORÍAS</p>
+                    <p>CATEGORÍAS</p>
                     <ul>
                         <li><a href="">Celulares</a></li>
                         <li><a href="">Notebooks</a></li>
@@ -22,37 +20,13 @@
                         <li><a href="">Motherboards</a></li>
                     </ul>
                 </div>
-
-                <div class="dropdown">
-                    <button class="dropbtn">ORDENAR POR    ▼</button>
-                    <div class="dropdown-content">
-                        <a href="#">Menor precio</a>
-                        <a href="#">Mayor precio</a>
-                        <a href="#">Alfabéticamente A-Z</a>
-                        <a href="#">Alfabéticamente Z-A</a>
-                    </div>
+                <div class="order-by">
+                    <label for="filter">ORDENAR POR:</label>
+                    <select name="filter" id="filter">
+                        <option value="">Menor precio</option>
+                        <option value="">Mayor precio</option>
+                    </select>
                 </div>
-
-                <!-- <div class="order-by">
-
-                    <form id="sort_form1" name="sort_form1" method="get" action="#" class="sortForm square">
-                        <label for="filter">ORDENAR POR</label>
-                        <select name="sort" id="filter">
-                            <option value="price-asc">Menor precio</option>
-                            <option value="price-desc">Mayor precio</option>
-                        </select>
-                        <button type="submit">Ordenar</button>
-                    </form> -->
-
-
-                    <!-- <ul>
-                        <li><a class="sort-option" href="">Menor precio</a></li>
-                        <li><a class="sort-option" href="">Mayor precio</a></li>
-                        <li><a class="sort-option" href="">A → Z</a></li>
-                        <li><a class="sort-option" href="">Z → A</a></li>
-                    </ul> -->
-                <!-- </div> -->
-
             </aside>
 
             <div class="grid">

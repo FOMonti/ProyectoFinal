@@ -51,6 +51,11 @@ public class UsuarioController {
         return "redirect:/";
     }
 
+    @GetMapping("/cuenta")
+    public String cuenta(Model model) {
+        return "usuario-perfil";
+    }
+
     @GetMapping("/carrito")
     public String toCarrito(Model model, Usuario usuario) {
 /*  Si el usuario no esta logeado...?
