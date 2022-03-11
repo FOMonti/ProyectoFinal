@@ -4,9 +4,9 @@ html, body {
 }
 
 .general {
-    display: flex;
-    padding: 30px 100px;
-    background-color: rgb(245, 245, 245);
+    display: flex !important;
+    padding: 30px 100px !important;
+    background-color: rgb(245, 245, 245) !important;
 }
 
 .aside{
@@ -150,20 +150,6 @@ html, body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* esto está funcionando, pero no tiene el link general */
 
 /*
@@ -229,3 +215,30 @@ html, body {
     width: 40%;
     margin: 40px auto;
 }
+
+/*css brian prueba*/
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 70%;
+    box-shadow: 0px 0px 5px 0px #b3b3b3;
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color: #135264;}

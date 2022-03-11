@@ -28,10 +28,10 @@
                 <a class="dropdown-item" >Mayor Preco</a>
             </div>
         </div>
-<!--        href="/tienda/OxNA"
-        href="/tienda/OxND"
-        href="/tienda/Ox-P"
-        href="/tienda/Ox+P"-->
+        <!--        href="/tienda/OxNA"
+                href="/tienda/OxND"
+                href="/tienda/Ox-P"
+                href="/tienda/Ox+P"-->
         <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/productos-form}">
             <button class="btn btn-outline-dark" aria-label="Basic outlined example">Agregar</button>
         </a>
@@ -103,7 +103,17 @@
                     </nav>
                 </div>
             </div>
-            
+
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">ORDENAR POR    ▼</button>
+            <div class="dropdown-content">
+                <a href="#">Menor precio</a>
+                <a href="#">Mayor precio</a>
+                <a href="#">Alfabéticamente A-Z</a>
+                <a href="#">Alfabéticamente Z-A</a>
+            </div>
         </div>
 
     </body>
