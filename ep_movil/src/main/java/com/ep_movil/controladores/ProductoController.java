@@ -99,49 +99,15 @@ public class ProductoController {
 
     @GetMapping("/OxNA")
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
-    public String ordenarxNombreAsc(@RequestParam Map<String, Object> params, Model model) {
-
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
-        PageRequest pageRequest = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "nombre"));
-
-        Page<Producto> pageProducto = productoService.getAll(pageRequest);
-
-        int totalPage = pageProducto.getTotalPages();
-
-        if (totalPage > 0) {
-            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
-        }
-
-        model.addAttribute("list", pageProducto.getContent()); //lista de productos a mostrar
-        model.addAttribute("current", page + 1);
-        model.addAttribute("next", page + 2);
-        model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
+    public String ordenarxNombreZ_A(@RequestParam Map<String, Object> params, Model model) {
+        model = productoService.paginacionXNombreDESC(params, model, 10);
         return "tienda";
     }
 
     @GetMapping("/OxND")
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
-    public String ordenarxNombreDesc(@RequestParam Map<String, Object> params, Model model) {
-
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
-        PageRequest pageRequest = PageRequest.of(page, 10, Sort.by(Sort.Direction.ASC, "nombre"));
-
-        Page<Producto> pageProducto = productoService.getAll(pageRequest);
-
-        int totalPage = pageProducto.getTotalPages();
-
-        if (totalPage > 0) {
-            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
-        }
-
-        model.addAttribute("list", pageProducto.getContent()); //lista de productos a mostrar
-        model.addAttribute("current", page + 1);
-        model.addAttribute("next", page + 2);
-        model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
+    public String ordenarxNombreA_Z(@RequestParam Map<String, Object> params, Model model) {
+        model = productoService.paginacionXNombreASC(params, model, 10);
         return "tienda";
     }
 
@@ -149,47 +115,14 @@ public class ProductoController {
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMenorPrecio(@RequestParam Map<String, Object> params, Model model) {
 
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
-        PageRequest pageRequest = PageRequest.of(page, 10, Sort.by(Sort.Direction.ASC, "precio"));
-
-        Page<Producto> pageProducto = productoService.getAll(pageRequest);
-
-        int totalPage = pageProducto.getTotalPages();
-
-        if (totalPage > 0) {
-            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
-        }
-
-        model.addAttribute("list", pageProducto.getContent()); //lista de productos a mostrar
-        model.addAttribute("current", page + 1);
-        model.addAttribute("next", page + 2);
-        model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
+        model = productoService.paginacionXPrecioASC(params, model, 10);
         return "tienda";
     }
 
     @GetMapping("/Ox+P")
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMayorPrecio(@RequestParam Map<String, Object> params, Model model) {
-
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
-        PageRequest pageRequest = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "precio"));
-
-        Page<Producto> pageProducto = productoService.getAll(pageRequest);
-
-        int totalPage = pageProducto.getTotalPages();
-
-        if (totalPage > 0) {
-            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
-        }
-
-        model.addAttribute("list", pageProducto.getContent()); //lista de productos a mostrar
-        model.addAttribute("current", page + 1);
-        model.addAttribute("next", page + 2);
-        model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
+        model = productoService.paginacionXPrecioDESC(params, model, 10);
         return "tienda";
     }
 }

@@ -56,23 +56,7 @@ public class TiendaController {
 
     @GetMapping("/productos")
     public String dashboard(@RequestParam Map<String, Object> params, Model model) {
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
-        PageRequest pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "nombre"));//size : Cantidad de elementos por pagina
-
-        Page<Producto> pageProducto = productoService.getAll(pageRequest);
-
-        int totalPage = pageProducto.getTotalPages();
-
-        if (totalPage > 0) {
-            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
-        }
-
-        model.addAttribute("list", pageProducto.getContent()); //lista de productos a mostrar
-        model.addAttribute("current", page + 1);
-        model.addAttribute("next", page + 2);
-        model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
+        model = productoService.paginacionSinOrden(params, model, 10);
         return "tienda";
 
     }
