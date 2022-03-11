@@ -1,3 +1,8 @@
+:root {
+    --main-color: #135264;
+    --font-color: #000;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -23,7 +28,7 @@ html, body {
 }
 
 .categories p {
-    font-weight: 550;
+    font-weight: bold;
     margin-bottom: 0.5rem
 }
 
@@ -134,7 +139,7 @@ html, body {
 
 
 .add-to-cart {
-    background-color: #135264;
+    background-color: var(--main-color);
     color: #FFF;
     border-radius: 4px;
     text-decoration: none;
@@ -217,7 +222,7 @@ html, body {
 
 
 .dropbtn {
-    background-color: #135264;
+    background-color: var(--main-color);
     color: #FFF;
     border-radius: 4px;
     text-decoration: none;
