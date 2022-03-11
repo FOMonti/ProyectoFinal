@@ -1,10 +1,5 @@
 package com.ep_movil.controladores;
 
-import com.ep_movil.entidades.Carrito;
-import com.ep_movil.entidades.ItemCarrito;
-import com.ep_movil.entidades.Producto;
-import com.ep_movil.entidades.Usuario;
-import com.ep_movil.servicios.*;
 import com.ep_movil.entidades.Rol;
 import com.ep_movil.enums.RolNombre;
 import com.ep_movil.security.service.UsuarioService;
@@ -16,30 +11,22 @@ import java.util.Set;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.ep_movil.entidades.Usuario;
 import com.ep_movil.servicios.IProductoService;
-
-import java.security.Principal;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
-@RequestMapping({"/usuario"})
 public class UsuarioController {
 
     private final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
@@ -56,12 +43,6 @@ public class UsuarioController {
     @Autowired
     private IProductoService productoService;
 
-    @Autowired
-    private CarritoServiceImpl carritoService;
-
-    @Autowired
-    private IItemCarritoService iItemCarritoService;
-
     @GetMapping("/registrar")
     public String registrar(Model model) {
         model.addAttribute("usuario", new Usuario());
@@ -70,7 +51,6 @@ public class UsuarioController {
 
     @PostMapping("/save") // en este método guardamos usuarios con el rol de User
     public String saveUser(Usuario usuario, @Valid String username, Errors usernameError,
-
                            @Valid String password, Errors passwordError, RedirectAttributes redirect) {
 
         if (usernameError.hasErrors() || passwordError.hasErrors()) {
@@ -81,12 +61,12 @@ public class UsuarioController {
         usuario.setPassword(passwordEncoder.encode(password));
 
         Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
-        Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
+//        Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
 
         Set<Rol> roles = new HashSet<Rol>();
 
         roles.add(rolUser);
-        roles.add(rolAdmin); //complemento para crear admin
+//        roles.add(rolAdmin); //complemento para crear admin
 
         usuario.setRoles(roles);
 
@@ -94,52 +74,55 @@ public class UsuarioController {
 
         redirect.addFlashAttribute("usuarioRegistrado", "Se ha registrado satisfactoriamente. Inicie sesión");
 
-        return "redirect:/usuario/login";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
     public String toLogin(Model model) {
-        model.addAttribute("usuario", new Usuario());
+//        model.addAttribute("usuario", new Usuario());
         return "usuario-login";
     }
 
-    @PostMapping("/acceder")
-    public String acceder(Usuario usuario, HttpSession session, Principal usuarioLogeado, Model model, User use) {
+    @PostMapping("/signin")
+    public String acceder(Usuario usuario, HttpSession session, RedirectAttributes redirect) {
 
-        Optional<Usuario> user = usuarioService.findByUsername(usuarioLogeado.getName());
+        Optional<Usuario> user = usuarioService.findByUsername(usuario.getUsername());
 
-        if (user.isPresent()) {
-            session.setAttribute("idusuario", user.get().getId());
-        } else {
-            model.addAttribute("accederFallido", "Credenciales erróneas. Ingrese un usuario válido");
+        if (!user.isPresent()) {
+            redirect.addFlashAttribute("accederFallido", "Credenciales erróneas. Revise el nombre de usuario y/o contraseña ingresados.");
             logger.info("AVISO: Se intentó ingresar con un usuario que no se encuentra registrado.");
+            return "redirect:/login";
         }
 
-        log.info("usuario que hizo login: " + usuarioLogeado.getName());
+        session.setAttribute("idusuario", user.get().getId());
+        log.info("usuario que hizo login: " + usuario.getUsername());
+        redirect.addFlashAttribute("usuario", usuario);
+
         return "redirect:/";
     }
 
-    @GetMapping("/carrito")
-    public String toCarrito(Model model, Usuario usuario) {
-
-        model.addAttribute("list", productoService.listarProductos());
-        model.addAttribute("titulo", "Carrito");
-        model.addAttribute("usuario", usuario);
-        return "/user/carrito";
-    }
-
-    @GetMapping("/agregarCarrito")
-    public String agregarProducto(@PathVariable("idProducto") Integer idProducto, RedirectAttributes redirect, HttpSession session) {
-        Producto producto = productoService.buscarPorId(idProducto);
-        Usuario usuario = (Usuario) session.getAttribute("user");
-        ItemCarrito ic = new ItemCarrito(producto, 1);
-        Carrito carrito = usuario.getHistorialCarrito();
-        carrito.getItems().add(ic);
-        usuario.setHistorialCarrito(carrito);
-        usuarioService.guardarUsuario(usuario);
-        redirect.addFlashAttribute("productoEliminado", "Producto eliminado!");
-        redirect.addAttribute("usuario", usuario);
-        return "redirect:/tienda/productos";
-    }
+//    @GetMapping("/carrito")
+//    public String toCarrito(Model model, Usuario usuario) {
+//        /*  Si el usuario no esta logeado...?
+// if (usuario.equals(null)) {
+//     return "redirect:/";
+// }
+//         */
+//        model.addAttribute("list", productoService.listarProductos());
+//        model.addAttribute("titulo", "Carrito");
+//        model.addAttribute("usuario", usuario);
+//        return "/user/carrito";
+//    }
+//    @GetMapping("/carrito")
+//    public String toCarrito(Model model, Usuario usuario) {
+///*  Si el usuario no esta logeado...?
+// if (usuario.equals(null)) {
+//     return "redirect:/";
+// }
+//*/
+//        model.addAttribute("carrito", productoService.findByUsuarioId(usuario.id));
+//        model.addAttribute("titulo", "Mostrando Carrito");
+//        model.addAttribute("usuario", usuario);
+//        return "/user/carrito";
+//    }
 }
-

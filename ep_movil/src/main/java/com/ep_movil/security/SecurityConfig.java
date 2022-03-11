@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -40,11 +39,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //aca le voy a estar pasando las rutas de acceso público
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/", "/usuario/login", "/usuario/acceder", "/usuario/registrar", "/usuario/save",
-                        "/tienda/productos",
-                        "/css/*", "/images/*").permitAll()
-                .anyRequest().authenticated().and()
-                .formLogin().loginProcessingUrl("/usuario/acceder").loginPage("/usuario/login").permitAll()
+                .antMatchers("/", "/registrar", "/acceder", "/save", "/login", "/signin",
+                        "/tienda/productos/**", "/tienda/tienda2/**").permitAll()
+                .antMatchers("/css/**", "/js/**", "/images/*", "/styles/*", "/templates/*", "/estilos/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().loginProcessingUrl("/signin").loginPage("/login").permitAll()
                 .defaultSuccessUrl("/").failureUrl("/login?error=true")
                 .usernameParameter("username").passwordParameter("password")
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
