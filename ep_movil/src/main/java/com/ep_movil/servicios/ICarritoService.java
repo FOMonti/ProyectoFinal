@@ -15,6 +15,6 @@ public interface ICarritoService {
 
     public Carrito encontrarCliente(Carrito carrito);
 
-    public Carrito findByUsuarioId(Integer query);
+//    public Carrito findByUsuarioId(Integer query);
 
 }
