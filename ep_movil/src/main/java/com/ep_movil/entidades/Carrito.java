@@ -12,7 +12,7 @@ public class Carrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "carrito_itemcarrito",
 //            joinColumns = @JoinColumn(name = "carrito_id"),
 //            inverseJoinColumns = @JoinColumn(name = "itemcarrito_id"))

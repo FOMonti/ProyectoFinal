@@ -50,6 +50,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
             <th>Detalle</th>
+            <th>Carrito</th>
         </tr>
         </thead>
         <tbody>
@@ -79,6 +80,11 @@
                 <a th:href="@{/admin/detalle/} + ${producto.id}">
                     <!--<a th:href="@{/admin/modificar(id=${producto.id})}"/>-->
                     <button class="btn btn-outline-light">Detalle</button>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/tienda/agregarACarrito/} + ${producto.id}">
+                    <button class="btn btn-outline-light">Agregar a Carrito</button>
                 </a>
             </td>
         </tr>

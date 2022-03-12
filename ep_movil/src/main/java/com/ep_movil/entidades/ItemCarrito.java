@@ -10,7 +10,7 @@ public class ItemCarrito {
     private Integer id;
 
     private Integer cantidad;
-    
+
     @OneToOne
     private Producto producto;
 
@@ -26,9 +26,10 @@ public class ItemCarrito {
 
     }
 
-    public ItemCarrito(Producto producto, Integer cantidad) {
+    public ItemCarrito(Producto producto, Integer cantidad, Carrito carrito) {
         this.producto = producto;
         this.cantidad = cantidad;
+        this.carrito = carrito;
     }
 
     public Integer getCantidad() {
