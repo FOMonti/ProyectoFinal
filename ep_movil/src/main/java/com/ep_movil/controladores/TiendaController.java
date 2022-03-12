@@ -31,33 +31,44 @@ public class TiendaController {
     @Autowired
     private IProductoService productoService;
 
-    @GetMapping("/tienda2")
-    private String tienda2(@RequestParam Map<String, Object> params, Model model) {
-
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
-        PageRequest pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "nombre"));//size : Cantidad de elementos por pagina
-
-        Page<Producto> pageProducto = productoService.getAll(pageRequest);
-
-        int totalPage = pageProducto.getTotalPages();
-
-        if (totalPage > 0) {
-            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
-        }
-
-        model.addAttribute("list", pageProducto.getContent()); //lista de productos a mostrar
-        model.addAttribute("current", page + 1);
-        model.addAttribute("next", page + 2);
-        model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
-        return "tienda2";
-    }
-
     @GetMapping("/productos")
     public String dashboard(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionSinOrden(params, model, 10);
         return "tienda";
-
     }
+
+    @GetMapping("/tienda2")
+    private String tienda2(@RequestParam Map<String, Object> params, Model model) {
+        model = productoService.paginacionSinOrden(params, model, 6);
+        return "tienda2";
+    }
+
+    @GetMapping("/OxNA")
+    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
+    public String ordenarxNombreZ_A(@RequestParam Map<String, Object> params, Model model) {
+        model = productoService.paginacionXNombreDESC(params, model, 6);
+        return "tienda2";
+    }
+
+    @GetMapping("/OxND")
+    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
+    public String ordenarxNombreA_Z(@RequestParam Map<String, Object> params, Model model) {
+        model = productoService.paginacionXNombreASC(params, model, 6);
+        return "tienda2";
+    }
+
+    @GetMapping("/Ox-P")
+    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
+    public String ordenarxMenorPrecio(@RequestParam Map<String, Object> params, Model model) {
+        model = productoService.paginacionXPrecioASC(params, model, 6);
+        return "tienda2";
+    }
+
+    @GetMapping("/Ox+P")
+    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
+    public String ordenarxMayorPrecio(@RequestParam Map<String, Object> params, Model model) {
+        model = productoService.paginacionXPrecioDESC(params, model, 6);
+        return "tienda2";
+    }
+
 }

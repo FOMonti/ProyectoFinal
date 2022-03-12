@@ -2,7 +2,9 @@ package com.ep_movil.servicios;
 
 import com.ep_movil.dao.IItemCarritoDao;
 import com.ep_movil.entidades.ItemCarrito;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,10 +33,15 @@ public class ItemCarritoServiceImpl implements IItemCarritoService {
         itemCarritoDao.delete(itemCarrito);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public ItemCarrito encontrarCliente(ItemCarrito itemCarrito) {
-        return itemCarritoDao.findById(itemCarrito.getId()).orElse(null);
+        return null;
     }
+
+//    @Transactional(readOnly = true)
+//    @Override
+//    public ItemCarrito encontrarCliente(ItemCarrito itemCarrito) {
+//        return itemCarritoDao.findById(itemCarrito.getId()).orElse(null);
+//    }
 
 }
