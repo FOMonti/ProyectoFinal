@@ -7,8 +7,9 @@
     </head>
     <body>
         <header th:fragment="navbar-l">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
+                    <img th:src="@{${'/images/icono1.ico'}}" class="icono" width="50" />
                     <a class="navbar-brand" href="#">EP-MOVIL</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -41,14 +42,14 @@
                         </ul>
                         <form class="d-flex ">
                             <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-dark" type="submit" style="margin-right:5px">Buscar</button>
+                                <button class="btn btn-outline-light" type="submit" style="margin-right:5px">Buscar</button>
                         </form>
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                             <a th:href="@{/usuario/login}">
-                                <button class="btn btn-outline-dark">Iniciar</button>
+                                <button class="btn btn-outline-light">Iniciar</button>
                             </a>
                             <a th:href="@{/usuario/registrar}">
-                                <button class="btn btn-outline-dark">Crear</button>
+                                <button class="btn btn-outline-light">Crear</button>
                             </a>
                         </div>
                     </div>
