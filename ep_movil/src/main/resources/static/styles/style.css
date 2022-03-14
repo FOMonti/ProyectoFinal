@@ -137,6 +137,14 @@ html, body {
     color: #000;
 }
 
+.cart-logo {
+    width: 6%;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
 
 .add-to-cart {
     background-color: var(--main-color);
