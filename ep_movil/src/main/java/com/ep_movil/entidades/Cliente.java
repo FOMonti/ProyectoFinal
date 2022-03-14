@@ -16,29 +16,29 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "clientes")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Cliente  {
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotEmpty
     private String nombre;
 
     private String apellido;
 
+
+    @OneToMany
+    private List<Comentario> comentario;
+
     @NotEmpty
     @Email
     private String email;
 
-    @NotEmpty
-    @OneToMany
-    private List<Comentario> comentario;
-
     public Cliente() {
     }
 
-    public Cliente(Integer id, String nombre, String apellido, String email, List<Comentario> comentario) {
+    public Cliente(Long id, String nombre, String apellido, String email, List<Comentario> comentario) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -46,11 +46,11 @@ public class Cliente  {
         this.comentario = comentario;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -86,7 +86,5 @@ public class Cliente  {
         this.comentario = comentario;
     }
 
-    
 
-    
 }

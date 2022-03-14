@@ -1,40 +1,44 @@
-
-package com.ep_movil.servicios;
+package com.ep_movil.security.service;
 
 import com.ep_movil.dao.IUsuarioDao;
 import com.ep_movil.entidades.Usuario;
-
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UsuarioServiceImpl {
+public class UsuarioService {
 
     @Autowired
     private IUsuarioDao usuarioDao;
 
-    @Transactional(readOnly = true)
     public List<Usuario> listarUsuarios() {
         return usuarioDao.findAll();
     }
 
-    @Transactional
     public void guardarUsuario(Usuario usuario) {
         usuarioDao.save(usuario);
     }
 
-    @Transactional
     public void eliminarUsuario(Usuario usuario) {
         usuarioDao.delete(usuario);
     }
 
-    @Transactional(readOnly = true)
-    public Usuario encontrarUsuario(Usuario usuario) {
-        return usuarioDao.findById(usuario.getId()).orElse(null);
+    public Optional<Usuario> getByUsername(String username) {
+        return usuarioDao.findByUsername(username);
+    }
+
+    public Optional<Usuario> getUsuarioById(Long id) {
+        return usuarioDao.findById(id);
+    }
+
+    public boolean existsById(Long id) {
+        return usuarioDao.existsById(id);
+    }
+
+    public boolean existsByUserName(String username) {
+        return usuarioDao.existsByUsername(username);
     }
 
     public Optional<Usuario> findByUsername(String username) {
@@ -42,6 +46,6 @@ public class UsuarioServiceImpl {
     }
 
     public Usuario findById(Long id) {
-        return usuarioDao.getById(id);
+        return usuarioDao.findById(id).orElse(null);
     }
 }
