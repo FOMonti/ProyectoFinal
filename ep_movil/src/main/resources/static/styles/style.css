@@ -285,6 +285,39 @@ html, body {
     background-color: #135264;
 } */
 
+
+
+
+
+
+
+
+
+
+
+.twitter-icon,
+.facebook-icon,
+.instagram-icon {
+    width: 45px;
+    filter: saturate(0) brightness(0.6);
+    transition: 200ms;
+}
+
+.twitter-icon:hover,
+.facebook-icon:hover,
+.instagram-icon:hover {
+    filter: saturate(0.8);
+}
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 1250px) {
     .grid {
         grid-template-columns: repeat(2, 2fr);
