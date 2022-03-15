@@ -34,7 +34,8 @@ public class ClienteServiceImpl implements IClienteService {
     @Transactional (readOnly = true)
     @Override
     public Cliente encontrarCliente(Cliente cliente) {
-        return clienteDao.findById(cliente.getId()).orElse(null);
+        return clienteDao.findById(Math.toIntExact(cliente.getId())).orElse(null);/*para convertir el long del 
+        cliente.getId() uso el Math.toIntExact(), ya que el findById() me pide un int*/
     }
 
 }

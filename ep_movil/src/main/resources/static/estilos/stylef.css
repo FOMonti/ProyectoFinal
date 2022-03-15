@@ -9,9 +9,9 @@ html, body {
 }
 
 .general {
-    display: flex;
-    padding: 30px 100px;
-    background-color: rgb(245, 245, 245);
+    display: flex !important;
+    padding: 30px 100px !important;
+    background-color: rgb(245, 245, 245) !important;
 }
 
 .aside{

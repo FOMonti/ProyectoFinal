@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IProductoDao extends JpaRepository<Producto,Integer> {
-  
+      
 }

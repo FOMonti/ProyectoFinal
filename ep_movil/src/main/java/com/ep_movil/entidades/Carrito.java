@@ -1,5 +1,6 @@
 package com.ep_movil.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,18 +30,19 @@ public class Carrito {
     //que el usuario agrega un producto y lo guarda para comprarlo a futuro. Es el intermediario entre el producto y
     //usuario. Si observamos, en usuario no tenemos nada con el atributo producto y lo mismo a la inversa, en producto.
     //Para que exista el carro, se tienen que relacionar el producto con el usuario.
-    @OneToOne
-    private Usuario usuario;
 
     //cantidad de cada item pedido
 
     public Carrito() {
     }
 
+    public Carrito(Usuario usuario) {
+        this.items = new ArrayList<ItemCarrito>();
+    }
+
     public Carrito(Integer id, List<ItemCarrito> items, Usuario usuario) {
         this.id = id;
         this.items = items;
-        this.usuario = usuario;
     }
 
     public Integer getId() {
@@ -57,14 +59,6 @@ public class Carrito {
 
     public void setItems(List<ItemCarrito> items) {
         this.items = items;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
 
