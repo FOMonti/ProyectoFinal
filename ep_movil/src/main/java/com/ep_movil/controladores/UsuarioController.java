@@ -101,28 +101,16 @@ public class UsuarioController {
         return "redirect:/";
     }
 
-//    @GetMapping("/carrito")
-//    public String toCarrito(Model model, Usuario usuario) {
-//        /*  Si el usuario no esta logeado...?
-// if (usuario.equals(null)) {
-//     return "redirect:/";
-// }
-//         */
-//        model.addAttribute("list", productoService.listarProductos());
-//        model.addAttribute("titulo", "Carrito");
-//        model.addAttribute("usuario", usuario);
-//        return "/user/carrito";
-//    }
-//    @GetMapping("/carrito")
-//    public String toCarrito(Model model, Usuario usuario) {
-///*  Si el usuario no esta logeado...?
-// if (usuario.equals(null)) {
-//     return "redirect:/";
-// }
-//*/
-//        model.addAttribute("carrito", productoService.findByUsuarioId(usuario.id));
-//        model.addAttribute("titulo", "Mostrando Carrito");
-//        model.addAttribute("usuario", usuario);
-//        return "/user/carrito";
-//    }
+    @GetMapping("/carrito")
+    public String toCarrito(Model model, Usuario usuario) {
+/*  Si el usuario no esta logeado...?
+ if (usuario.equals(null)) {
+     return "redirect:/";
+ }
+*/
+        model.addAttribute("list", productoService.listarProductos());
+        model.addAttribute("titulo", "Carrito");
+        model.addAttribute("usuario", usuario);
+        return "/user/carrito";
+    }
 }
