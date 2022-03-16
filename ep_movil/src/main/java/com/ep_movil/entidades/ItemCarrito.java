@@ -17,6 +17,11 @@ public class ItemCarrito extends Producto {
         super(id, nombre, imagen, precio, stock, especificacion, comentarios, carrito);
     }
 
+    public ItemCarrito(Producto producto, Integer cantidad) {
+        super(producto.getId(), producto.getNombre(), producto.getImagen(), producto.getPrecio(), producto.getStock(), producto.getEspecificacion(), producto.getComentarios(), producto.getCarrito());
+        this.cantidad = cantidad;
+    }
+
     public Integer getCantidad() {
         return cantidad;
     }
@@ -25,6 +30,5 @@ public class ItemCarrito extends Producto {
         this.cantidad = cantidad;
     }
 
-    
-    
+
 }

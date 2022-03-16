@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "clientes")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Cliente  {
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +27,13 @@ public class Cliente  {
 
     private String apellido;
 
+
+    @OneToMany
+    private List<Comentario> comentario;
+
     @NotEmpty
     @Email
     private String email;
-
-    //@NotEmpty
-    @OneToMany
-    private List<Comentario> comentario;
 
     public Cliente() {
     }
@@ -86,7 +86,5 @@ public class Cliente  {
         this.comentario = comentario;
     }
 
-    
 
-    
 }

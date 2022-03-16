@@ -6,6 +6,9 @@ import com.ep_movil.entidades.Carrito;
 
 import java.util.List;
 
+import com.ep_movil.entidades.ItemCarrito;
+import com.ep_movil.entidades.Producto;
+import com.ep_movil.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,9 +43,16 @@ public class CarritoServiceImpl implements ICarritoService {
         return carritoDao.findById(carrito.getId()).orElse(null);
     }
 
-    @Override
-    public Carrito findByUsuarioId(Integer query) {
-        return carritoDao.findByUsuarioId(query);
-    }
+//    @Override
+//    public Carrito findByUsuarioId(Integer query) {
+//        return carritoDao.findByUsuarioId(query);
+//    }
 
+//    @Transactional
+//    public Carrito agregarCarrito(Producto producto, Usuario usuario /*Integer cantidad*/) {
+//        Carrito carrito = usuario.getHistorialCarrito();
+//        carrito.getItems().add(new ItemCarrito(producto, 1));
+//        usuario.setHistorialCarrito(carrito);
+//        return carritoDao.save(carrito);
+//    }
 }

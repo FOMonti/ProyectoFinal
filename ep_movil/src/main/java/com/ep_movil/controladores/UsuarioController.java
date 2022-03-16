@@ -7,7 +7,6 @@ import com.ep_movil.servicios.RolService;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import com.ep_movil.entidades.Usuario;
 import com.ep_movil.servicios.IProductoService;
@@ -18,6 +17,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,57 +34,57 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @Slf4j
 public class UsuarioController {
-    
+
     private final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
-    
+
     @Autowired
     private UsuarioService usuarioService;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
+
     @Autowired
     private RolService rolService;
-    
+
     @Autowired
     private IProductoService productoService;
-    
+
     @Autowired
     private JavaMailSender mailSender;
-    
+
     @GetMapping("/registrar")
     public String registrar(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "usuario-form";
     }
-    
+
     @PostMapping("/save") // en este método guardamos usuarios con el rol de User
     public String saveUser(Usuario usuario, @Valid String username, Errors usernameError,
             @Valid String password, Errors passwordError, RedirectAttributes redirect) throws AddressException, MessagingException {
-        
+
         if (usernameError.hasErrors() || passwordError.hasErrors()) {
             return "usuario-form";
         }
-        
+
         usuario.setUsername(username);
         usuario.setPassword(passwordEncoder.encode(password));
-        
+
         Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
 //        Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
 
         Set<Rol> roles = new HashSet<Rol>();
-        
+
         roles.add(rolUser);
 //        roles.add(rolAdmin); //complemento para crear admin
 
         usuario.setRoles(roles);
-        
+
         usuarioService.guardarUsuario(usuario);
 
         Properties props = System.getProperties();
         Session session = Session.getDefaultInstance(props);
         MimeMessage email = new MimeMessage(session);
-        
+
         try {
             email.setRecipients(Message.RecipientType.TO, usuario.getEmail());
         } catch (MessagingException ex) {
@@ -100,31 +100,34 @@ public class UsuarioController {
             java.util.logging.Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
         //email.setFileName("/bannerprueba.jpg");
-        
+
         mailSender.send(email);
-        
+
         redirect.addFlashAttribute("usuarioRegistrado", "Se ha registrado satisfactoriamente. Inicie sesión");
-        
+
         return "redirect:/login";
     }
-    
+
     @GetMapping("/login")
-    public String toLogin(Model model) {
+    public String toLogin(Model model
+    ) {
 //        model.addAttribute("usuario", new Usuario());
         return "usuario-login";
     }
-    
+
     @PostMapping("/signin")
-    public String acceder(Usuario usuario, HttpSession session, RedirectAttributes redirect) {
-        
+    public String acceder(Usuario usuario, HttpSession session,
+             RedirectAttributes redirect
+    ) {
+
         Optional<Usuario> user = usuarioService.findByUsername(usuario.getUsername());
-        
+
         if (!user.isPresent()) {
             redirect.addFlashAttribute("accederFallido", "Credenciales erróneas. Revise el nombre de usuario y/o contraseña ingresados.");
             logger.info("AVISO: Se intentó ingresar con un usuario que no se encuentra registrado.");
             return "redirect:/login";
         }
-        
+
         session.setAttribute("idusuario", user.get().getId());
         log.info("usuario que hizo login: " + usuario.getUsername());
         redirect.addFlashAttribute("usuario", usuario);
@@ -132,28 +135,17 @@ public class UsuarioController {
         return "redirect:/";
     }
 
-//    @GetMapping("/carrito")
-//    public String toCarrito(Model model, Usuario usuario) {
-//        /*  Si el usuario no esta logeado...?
-// if (usuario.equals(null)) {
-//     return "redirect:/";
-// }
-//         */
-//        model.addAttribute("list", productoService.listarProductos());
-//        model.addAttribute("titulo", "Carrito");
-//        model.addAttribute("usuario", usuario);
-//        return "/user/carrito";
-//    }
-//    @GetMapping("/carrito")
-//    public String toCarrito(Model model, Usuario usuario) {
-///*  Si el usuario no esta logeado...?
-// if (usuario.equals(null)) {
-//     return "redirect:/";
-// }
-//*/
-//        model.addAttribute("carrito", productoService.findByUsuarioId(usuario.id));
-//        model.addAttribute("titulo", "Mostrando Carrito");
-//        model.addAttribute("usuario", usuario);
-//        return "/user/carrito";
-//    }
+    @GetMapping("/carrito")
+    public String toCarrito(Model model, Usuario usuario
+    ) {
+        /*  Si el usuario no esta logeado...?
+ if (usuario.equals(null)) {
+     return "redirect:/";
+ }
+         */
+        model.addAttribute("list", productoService.listarProductos());
+        model.addAttribute("titulo", "Carrito");
+        model.addAttribute("usuario", usuario);
+        return "/user/carrito";
+    }
 }

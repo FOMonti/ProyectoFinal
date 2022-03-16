@@ -2,6 +2,7 @@ package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Producto;
 import com.ep_movil.servicios.IProductoService;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,7 +45,7 @@ public class ProductoController {
 
     @PostMapping("/guardar")
     public String guardarProductos(@RequestParam(name = "file", required = false) MultipartFile imagen,
-            @Valid Producto producto, Errors error, RedirectAttributes redirect) { //RedirectAttributes redirect / Model model
+                                   @Valid Producto producto, Errors error, RedirectAttributes redirect) { //RedirectAttributes redirect / Model model
 
         if (error.hasErrors()) {
             return "admin/productoForm";
@@ -72,8 +74,7 @@ public class ProductoController {
 
     @GetMapping("/detalle/{id}")
     public String detalleProducto(@PathVariable("id") Integer id, Producto producto, Model model,
-            RedirectAttributes redirect) {
-
+                                  RedirectAttributes redirect) {
         producto = productoService.buscarPorId(id);
 
         model.addAttribute("titulo", "Detalle del producto: " + producto.getNombre());
@@ -98,96 +99,30 @@ public class ProductoController {
 
     @GetMapping("/OxNA")
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
-    public String ordenarxNombreAsc(@RequestParam Map<String, Object> params, Model model) {
-
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
-        PageRequest pageRequest = PageRequest.of(page, 10,Sort.by(Sort.Direction.ASC, "nombre"));
-
-        Page<Producto> pageProducto = productoService.getAll(pageRequest);
-
-        int totalPage = pageProducto.getTotalPages();
-
-        if (totalPage > 0) {
-            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
-        }
-
-        model.addAttribute("list", pageProducto.getContent()); //lista de productos a mostrar
-        model.addAttribute("current", page + 1);
-        model.addAttribute("next", page + 2);
-        model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
+    public String ordenarxNombreZ_A(@RequestParam Map<String, Object> params, Model model) {
+        model = productoService.paginacionXNombreDESC(params, model, 10);
         return "tienda";
     }
+
     @GetMapping("/OxND")
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
-    public String ordenarxNombreDesc(@RequestParam Map<String, Object> params, Model model) {
-
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
-        PageRequest pageRequest = PageRequest.of(page, 10,Sort.by(Sort.Direction.DESC, "nombre"));
-
-        Page<Producto> pageProducto = productoService.getAll(pageRequest);
-
-        int totalPage = pageProducto.getTotalPages();
-
-        if (totalPage > 0) {
-            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
-        }
-
-        model.addAttribute("list", pageProducto.getContent()); //lista de productos a mostrar
-        model.addAttribute("current", page + 1);
-        model.addAttribute("next", page + 2);
-        model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
+    public String ordenarxNombreA_Z(@RequestParam Map<String, Object> params, Model model) {
+        model = productoService.paginacionXNombreASC(params, model, 10);
         return "tienda";
     }
-    
+
     @GetMapping("/Ox-P")
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMenorPrecio(@RequestParam Map<String, Object> params, Model model) {
 
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
-        PageRequest pageRequest = PageRequest.of(page, 10,Sort.by(Sort.Direction.DESC, "precio"));
-
-        Page<Producto> pageProducto = productoService.getAll(pageRequest);
-
-        int totalPage = pageProducto.getTotalPages();
-
-        if (totalPage > 0) {
-            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
-        }
-
-        model.addAttribute("list", pageProducto.getContent()); //lista de productos a mostrar
-        model.addAttribute("current", page + 1);
-        model.addAttribute("next", page + 2);
-        model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
+        model = productoService.paginacionXPrecioASC(params, model, 10);
         return "tienda";
     }
-    
+
     @GetMapping("/Ox+P")
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMayorPrecio(@RequestParam Map<String, Object> params, Model model) {
-
-        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
-        PageRequest pageRequest = PageRequest.of(page, 10,Sort.by(Sort.Direction.ASC, "precio"));
-
-        Page<Producto> pageProducto = productoService.getAll(pageRequest);
-
-        int totalPage = pageProducto.getTotalPages();
-
-        if (totalPage > 0) {
-            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
-        }
-
-        model.addAttribute("listaProductos", pageProducto.getContent()); //lista de productos a mostrar
-        model.addAttribute("current", page + 1);
-        model.addAttribute("next", page + 2);
-        model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
+        model = productoService.paginacionXPrecioDESC(params, model, 10);
         return "tienda";
     }
 }
