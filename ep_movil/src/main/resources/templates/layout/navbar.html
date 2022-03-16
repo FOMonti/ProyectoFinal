@@ -39,7 +39,6 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/usuario/carrito">Carrito</a>
                             </li>
-
                             <li class="nav-item" aria-current="page" sec:authorize="isAuthenticated()">
                                 <a class="nav-link active"><b th:inline="text">Bienvenido [[${#httpServletRequest.remoteUser}]]! </b>
                                 </a>
@@ -51,7 +50,7 @@
                             <button class="btn btn-outline-light" type="submit" style="margin-right:5px">Buscar</button>
                         </form>
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
-                            
+
                             <!--Cerrar Sesion-->
                             <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
                                 <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
