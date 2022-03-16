@@ -14,34 +14,34 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
-@EnableWebSecurity 
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    
+
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
-    
+
     @Bean
     AccessDeniedHandler accessDeniedHandler() {
         return new CustomAccessDeniedHandler();
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Override
     protected void configure(AuthenticationManagerBuilder build) throws Exception {
         build.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder());
     }
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //aca le voy a estar pasando las rutas de acceso público
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/","/registrar", "/acceder", "/save", "/login", "/signin",
+                .antMatchers("/", "/registrar", "/acceder", "/save", "/login", "/signin",
                         "/tienda/productos/**", "/tienda/tienda2/**").permitAll()
-                .antMatchers("/css/**", "/js/**", "/images/*", "/styles/*", "/templates/*","/estilos/**").permitAll()
+                .antMatchers("/css/**", "/js/**", "/images/*", "/styles/*", "/templates/*", "/estilos/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginProcessingUrl("/signin").loginPage("/login").permitAll()

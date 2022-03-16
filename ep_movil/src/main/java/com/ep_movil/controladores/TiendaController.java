@@ -7,19 +7,19 @@ import com.ep_movil.servicios.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import javax.servlet.http.HttpSession;
-import org.springframework.data.domain.Sort;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 
 @Controller
 @RequestMapping({"/tienda"})
@@ -55,12 +55,9 @@ public class TiendaController {
     }
 
     @GetMapping("/productos")
-    public String dashboard(Model model, HttpSession session) {
-
-        List<Producto> listaProductos = productoService.listarProductos();
-        Usuario user = (Usuario) session.getAttribute("user");
-        model.addAttribute("usuario", user);
-        model.addAttribute("listaProductos", listaProductos);
+    public String dashboard(@RequestParam Map<String, Object> params, Model model) {
+        model = productoService.paginacionSinOrden(params, model, 10);
         return "tienda";
+
     }
 }
