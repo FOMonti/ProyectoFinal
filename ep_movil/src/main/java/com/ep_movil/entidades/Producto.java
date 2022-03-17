@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "productos")
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)
 public class Producto {
 
     @Id
@@ -31,7 +31,7 @@ public class Producto {
     @NotNull
     @Min(value = 0)
     private Double precio;
-    
+
     @NotNull
     @Min(value = 0)
     private Integer stock;
@@ -46,14 +46,12 @@ public class Producto {
     //va a estar es que el carrito concretado, pasa a ser venta y eso va a reflejarse en el stock. Pero, mientras haya
     // stock, si hay 10 de x producto, pueden estar en 1000 carritos en simultaneo, de 1000 usuarios hasta que los
     //primeros 10 decidan hacer la compra
-    @ManyToMany
-    private List<Carrito> carrito;
 
     public Producto() {
     }
 
     public Producto(Integer id, String nombre, String imagen, Double precio, Integer stock,
-            String especificacion, List<Comentario> comentarios, List<Carrito> carrito) {
+                    String especificacion, List<Comentario> comentarios) {
         this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;
@@ -61,7 +59,7 @@ public class Producto {
         this.stock = stock;
         this.especificacion = especificacion;
         this.comentarios = comentarios;
-        this.carrito = carrito;
+//        this.carrito = carrito;
     }
 
     public Integer getId() {
@@ -112,13 +110,13 @@ public class Producto {
         this.comentarios = comentarios;
     }
 
-    public List<Carrito> getCarrito() {
-        return carrito;
-    }
-
-    public void setCarrito(List<Carrito> carrito) {
-        this.carrito = carrito;
-    }
+//    public List<Carrito> getCarrito() {
+//        return carrito;
+//    }
+//
+//    public void setCarrito(List<Carrito> carrito) {
+//        this.carrito = carrito;
+//    }
 
     public String getEspecificacion() {
         return especificacion;

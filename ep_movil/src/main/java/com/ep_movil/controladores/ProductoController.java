@@ -114,7 +114,6 @@ public class ProductoController {
     @GetMapping("/Ox-P")
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMenorPrecio(@RequestParam Map<String, Object> params, Model model) {
-
         model = productoService.paginacionXPrecioASC(params, model, 10);
         return "tienda";
     }
@@ -125,4 +124,5 @@ public class ProductoController {
         model = productoService.paginacionXPrecioDESC(params, model, 10);
         return "tienda";
     }
+
 }

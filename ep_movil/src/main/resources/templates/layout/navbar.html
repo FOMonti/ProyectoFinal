@@ -48,31 +48,38 @@
                         </a>
                     </li>
 
-                </ul>
-                <form class="d-flex ">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search"/>
-                    <button class="btn btn-outline-light" type="submit" style="margin-right:5px">Buscar</button>
-                </form>
-                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            <li class="nav-item" aria-current="page" sec:authorize="isAuthenticated()">
+                                <a class="nav-link active"><b th:inline="text">Bienvenido
+                                        [[${#httpServletRequest.remoteUser}]]! </b>
+                                </a>
+                            </li>
 
-                    <!--Cerrar Sesion-->
-                    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                        <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
-                    </form>
+                        </ul>
+                        <form class="d-flex ">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search"/>
+                            <button class="btn btn-outline-light" type="submit" style="margin-right:5px">Buscar</button>
+                        </form>
+                        <div class="btn-group" role="group" aria-label="Basic outlined example">
 
-                    <a th:href="@{/login}" sec:authorize="!isAuthenticated()">
-                        <button class="btn btn-outline-light">Iniciar</button>
-                    </a>
 
-                    <a th:href="@{/registrar}" sec:authorize="!isAuthenticated()">
-                        <button class="btn btn-outline-light">Registrar</button>
-                    </a>
+                            <!--Cerrar Sesion-->
+                            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                                <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
+                            </form>
+
+                            <a th:href="@{/login}" sec:authorize="!isAuthenticated()">
+                                <button class="btn btn-outline-light">Iniciar</button>
+                            </a>
+
+                            <a th:href="@{/registrar}" sec:authorize="!isAuthenticated()">
+                                <button class="btn btn-outline-light">Registrar</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </nav>
-</header>
+            </nav>
+        </header>
 
-<footer th:replace="layout::footer"></footer>
-</body>
+        <footer th:replace="layout::footer"></footer>
+    </body>
 </html>
