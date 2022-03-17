@@ -3,17 +3,26 @@ package com.ep_movil.controladores;
 import com.ep_movil.entidades.Carrito;
 import com.ep_movil.entidades.Usuario;
 import com.ep_movil.servicios.ICarritoService;
+import com.ep_movil.servicios.IItemCarritoService;
+import com.ep_movil.servicios.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.util.WebUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.security.Principal;
+import java.util.Enumeration;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequestMapping({"/carrito"})
@@ -22,30 +31,26 @@ public class CarritoController {
     @Autowired
     private ICarritoService carritoService;
 
+    @Autowired
+    private UsuarioServiceImpl usuarioService;
+
+    @Autowired
+    private IItemCarritoService itemCarritoService;
 
     @GetMapping("/productosCarrito")
-    public String toCarrito(@RequestParam Map<String, Object> params, Model model, HttpSession session) {
-        Usuario usuario = (Usuario) session.getAttribute("user");
+    public String toCarrito(@RequestParam Map<String, Object> params, Model model,
+                            Principal principal) {
+        Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
+        if (!ou.isPresent()) {
+            return "redirect:/";
+        }
+        Usuario usuario = ou.get();
         Carrito carrito = usuario.getHistorialCarrito();
         model.addAttribute("titulo", "Carrito");
         model.addAttribute("carrito", carrito);
+        model.addAttribute("items", itemCarritoService.listarItemCarrito(carrito));
         model.addAttribute("usuario", usuario);
-        return "/user/carrito2";
-    }
-
-    @GetMapping("/productosGuardados")
-    public String toCarritoo(Model model, HttpSession session) {
-/*  Si el usuario no esta logeado...?
- if (usuario.equals(null)) {
-     return "redirect:/";
- }
-*/
-        Usuario usuario = (Usuario) session.getAttribute("user");
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("carrito", usuario.getHistorialCarrito());
-        model.addAttribute("titulo", "Mostrando Carrito");
-        model.addAttribute("usuario", usuario);
-        return "/user/carrito";
+        return "usuarioo/carrito2";
     }
 }
 

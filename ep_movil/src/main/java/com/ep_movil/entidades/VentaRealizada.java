@@ -1,4 +1,3 @@
-
 package com.ep_movil.entidades;
 
 import java.util.Date;

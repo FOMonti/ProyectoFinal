@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Service
 public class UsuarioServiceImpl {
 
@@ -44,4 +47,13 @@ public class UsuarioServiceImpl {
     public Usuario findById(Long id) {
         return usuarioDao.getById(id);
     }
+
+//    public String getSessionId(HttpServletRequest httpRequest) {
+//        String sessionId = null;
+//        HttpSession session = httpRequest.getSession(createSession);
+//        if (session != null) {
+//            sessionId = session.getId();
+//        }
+//        return sessionId;
+//    }
 }

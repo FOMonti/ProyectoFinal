@@ -40,5 +40,19 @@ public class ItemCarrito {
         this.cantidad = cantidad;
     }
 
+    public Carrito getCarrito() {
+        return carrito;
+    }
 
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
 }
