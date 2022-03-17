@@ -40,8 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //aca le voy a estar pasando las rutas de acceso público
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/", "/registrar", "/acceder", "/save", "/login", "/signin",
-                        "/tienda/productos/**", "/tienda/tienda2/**").permitAll()
-                .antMatchers("/css/**", "/js/**", "/images/*", "/styles/*", "/templates/*", "/estilos/**").permitAll()
+                        "/tienda/productos/**", "/tienda/tienda2/**", "/about").permitAll()
+                .antMatchers("/css/**", "/js/**", "/images/*", "/styles/*", "/templates/*", "/estilos/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginProcessingUrl("/signin").loginPage("/login").permitAll()

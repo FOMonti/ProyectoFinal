@@ -43,6 +43,11 @@ public class UsuarioController {
     @Autowired
     private IProductoService productoService;
 
+    @GetMapping("/perfil")
+    public String perfil(Model model) {
+        return "usuario-perfil";
+    }
+    
     @GetMapping("/registrar")
     public String registrar(Model model) {
         model.addAttribute("usuario", new Usuario());
