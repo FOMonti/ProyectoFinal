@@ -119,6 +119,7 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    max-height: 60%;
 }
 
 .datos {
