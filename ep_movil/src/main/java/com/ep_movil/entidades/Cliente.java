@@ -27,7 +27,6 @@ public class Cliente {
 
     private String apellido;
 
-
     @OneToMany
     private List<Comentario> comentario;
 
