@@ -17,4 +17,5 @@ public interface IItemCarritoService {
 
     public ItemCarrito encontrarCliente(ItemCarrito itemCarrito);
 
+    public ItemCarrito getById (Integer id);
 }

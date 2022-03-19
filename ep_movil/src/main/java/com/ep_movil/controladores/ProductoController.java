@@ -64,12 +64,14 @@ public class ProductoController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            producto.setImagen("PorductoSinIMG.jpg");
         }
 
         productoService.guardarProducto(producto);
         redirect.addFlashAttribute("productoGuardado", "Producto guardado con éxito!");
 //        redirect.addFlashAttribute("productoModificado", "Producto modificado con éxito!");
-        return "redirect:/tienda/productos";
+        return "redirect:/";
     }
 
     @GetMapping("/detalle/{id}")
