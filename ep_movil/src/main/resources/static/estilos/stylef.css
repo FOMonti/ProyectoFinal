@@ -24,7 +24,7 @@ html, body {
 }
 
 .title, .subtitle {
-    text-align: center;;
+    text-align: center;
 }
 
 .categories p {
@@ -119,7 +119,7 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    max-height: 60%;
+    
 }
 
 .datos {
