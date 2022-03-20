@@ -2,7 +2,6 @@ package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Producto;
 import com.ep_movil.servicios.IProductoService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,7 +11,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -64,12 +62,14 @@ public class ProductoController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            producto.setImagen("PorductoSinIMG.jpg");
         }
 
         productoService.guardarProducto(producto);
         redirect.addFlashAttribute("productoGuardado", "Producto guardado con éxito!");
 //        redirect.addFlashAttribute("productoModificado", "Producto modificado con éxito!");
-        return "redirect:/tienda/productos";
+        return "redirect:/";
     }
 
     @GetMapping("/detalle/{id}")
@@ -114,7 +114,6 @@ public class ProductoController {
     @GetMapping("/Ox-P")
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMenorPrecio(@RequestParam Map<String, Object> params, Model model) {
-
         model = productoService.paginacionXPrecioASC(params, model, 10);
         return "tienda";
     }
@@ -125,4 +124,5 @@ public class ProductoController {
         model = productoService.paginacionXPrecioDESC(params, model, 10);
         return "tienda";
     }
+
 }

@@ -1,5 +1,6 @@
 package com.ep_movil.controladores;
 
+import com.ep_movil.entidades.Carrito;
 import com.ep_movil.entidades.Rol;
 import com.ep_movil.enums.RolNombre;
 import com.ep_movil.security.service.UsuarioService;
@@ -10,7 +11,6 @@ import java.util.Set;
 import javax.validation.Valid;
 import com.ep_movil.entidades.Usuario;
 import com.ep_movil.servicios.IProductoService;
-import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import javax.activation.DataHandler;
@@ -19,12 +19,8 @@ import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
-import javax.mail.Transport;
 import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +33,7 @@ import org.springframework.validation.Errors;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -69,15 +63,9 @@ public class UsuarioController {
         return "usuario-form";
     }
 
-    @Value("${spring.mail.username}")
-    private String apemail;
-
-    @Value("${spring.mail.password}")
-    private String appass;
-
     @PostMapping("/save") // en este método guardamos usuarios con el rol de User
-    public String saveUser(Usuario usuario, @Valid String username, Errors usernameError,
-            @Valid String password, Errors passwordError, RedirectAttributes redirect) throws AddressException, MessagingException, IOException {
+    public String saveUser(Usuario usuario, @Valid String username, Errors usernameError,@Valid String password, 
+            Errors passwordError, RedirectAttributes redirect) throws AddressException, MessagingException {
 
         if (usernameError.hasErrors() || passwordError.hasErrors()) {
             return "usuario-form";
@@ -87,14 +75,18 @@ public class UsuarioController {
         usuario.setPassword(passwordEncoder.encode(password));
 
         Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
-//        Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
+        //Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
 
         Set<Rol> roles = new HashSet<Rol>();
 
         roles.add(rolUser);
-//        roles.add(rolAdmin); //complemento para crear admin
+        //roles.add(rolAdmin); //complemento para crear admin
 
         usuario.setRoles(roles);
+
+        Carrito historialCarrito = new Carrito(usuario);
+
+        usuario.setHistorialCarrito(historialCarrito);
 
         usuarioService.guardarUsuario(usuario);
 
@@ -125,8 +117,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/login")
-    public String toLogin(Model model
-    ) {
+    public String toLogin(Model model) {
 //        model.addAttribute("usuario", new Usuario());
         return "usuario-login";
     }
@@ -161,4 +152,24 @@ public class UsuarioController {
         model.addAttribute("usuario", usuario);
         return "/user/carrito";
     }
+
+//    @PostMapping("/signin")
+//    public String acceder(Usuario usuario, HttpSession session,
+//                          RedirectAttributes redirect
+//    ) {
+//
+//        Optional<Usuario> user = usuarioService.findByUsername(usuario.getUsername());
+//
+//        if (!user.isPresent()) {
+//            redirect.addFlashAttribute("accederFallido", "Credenciales erróneas. Revise el nombre de usuario y/o contraseña ingresados.");
+//            logger.info("AVISO: Se intentó ingresar con un usuario que no se encuentra registrado.");
+//            return "redirect:/login";
+//        }
+//
+//        session.setAttribute("idusuario", usuario.getId());
+//        log.info("usuario que hizo login: " + usuario.getUsername());
+//        redirect.addFlashAttribute("usuario", usuario);
+//
+//        return "redirect:/";
+//    }
 }

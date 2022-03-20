@@ -1,25 +1,36 @@
 package com.ep_movil.entidades;
 
-import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "itemcarrito")
-public class ItemCarrito extends Producto {
+public class ItemCarrito {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private Integer cantidad;
 
+    @OneToOne
+    private Producto producto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "carrito_id", nullable = false)
+    private Carrito carrito;
+
     public ItemCarrito() {
+
     }
 
-    public ItemCarrito(Integer id, String nombre, String imagen, Double precio, Integer stock, String especificacion, List<Comentario> comentarios, List<Carrito> carrito) {
-        super(id, nombre, imagen, precio, stock, especificacion, comentarios, carrito);
+    public ItemCarrito(Integer id) {
+        this.id = id;
+
     }
 
-    public ItemCarrito(Producto producto, Integer cantidad) {
-        super(producto.getId(), producto.getNombre(), producto.getImagen(), producto.getPrecio(), producto.getStock(), producto.getEspecificacion(), producto.getComentarios(), producto.getCarrito());
+    public ItemCarrito(Producto producto, Integer cantidad, Carrito carrito) {
+        this.producto = producto;
         this.cantidad = cantidad;
+        this.carrito = carrito;
     }
 
     public Integer getCantidad() {
@@ -30,5 +41,23 @@ public class ItemCarrito extends Producto {
         this.cantidad = cantidad;
     }
 
+    public Carrito getCarrito() {
+        return carrito;
+    }
 
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 }

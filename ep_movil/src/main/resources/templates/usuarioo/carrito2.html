@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.com.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout/layout::head">
+    <title>Tienda</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<header th:replace="layout/navbar::navbar-l"></header>
+<h1>Carrito</h1>
+<div th:each="item: ${items} " class="row justify-content-center">
+    <div class="card mt-5 " style="max-width: 900px;">
+        <div class="row g">
+            <div class="col-md-4 align-content">
+                <img class="img-fluid"
+                     th:src="@{'/images/'+ ${item.producto.imagen}}"
+                     alt="producto imagen"/>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${item.producto.nombre}"></h4>
+                    <div class="d-flex flex-row-reverse bd-highlight">
+                        <h3 class="card-text p-2 bd-highlight" th:text="'$'  + ${item.producto.precio}"></h3>
+                    </div>
+                    <div class="d-flex flex-row-reverse bd-highlight">
+                        <h3 class="card-text p-2 bd-highlight" th:text="${item.cantidad}"></h3>
+                    </div>
+                    <div class="d-flex flex-row-reverse bd-highlight">
+                        <a th:href="@{/carrito/quitarItem/} + ${item.id}">
+                            <button class="btn btn-outline-dark">Eliminar</button>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Footer-->
+<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>
