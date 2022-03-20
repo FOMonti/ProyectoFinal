@@ -40,6 +40,11 @@ public class ItemCarritoServiceImpl implements IItemCarritoService {
     }
 
     @Override
+    public ItemCarrito getById(Integer id) {
+        return itemCarritoDao.getById(id);
+    }
+
+    @Override
     public List<ItemCarrito> listarItemCarrito(Carrito carrito) {
         return itemCarritoDao.itemsCarrito(carrito);
     }

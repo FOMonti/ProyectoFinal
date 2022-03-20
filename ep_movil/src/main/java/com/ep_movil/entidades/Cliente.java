@@ -1,14 +1,7 @@
 package com.ep_movil.entidades;
 
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -27,10 +20,6 @@ public class Cliente {
 
     private String apellido;
 
-
-    @OneToMany
-    private List<Comentario> comentario;
-
     @NotEmpty
     @Email
     private String email;
@@ -38,12 +27,11 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Long id, String nombre, String apellido, String email, List<Comentario> comentario) {
+    public Cliente(Long id, String nombre, String apellido, String email) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.comentario = comentario;
     }
 
     public Long getId() {
@@ -76,14 +64,6 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Comentario> getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(List<Comentario> comentario) {
-        this.comentario = comentario;
     }
 
 

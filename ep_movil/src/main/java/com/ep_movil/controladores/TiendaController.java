@@ -9,14 +9,17 @@ import com.ep_movil.servicios.ICarritoService;
 import com.ep_movil.servicios.IProductoService;
 import com.ep_movil.servicios.ItemCarritoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -50,25 +53,6 @@ public class TiendaController {
         return "tienda2";
     }
 
-    @GetMapping("/agregarACarrito/{id}")
-    private String agregarACarrito(@PathVariable("id") Integer id, HttpSession session) {
-        Producto producto = productoService.buscarPorId(id);
-        //Long id1 = (Long) session.getAttribute("idusuario");
-        Long num = Long.valueOf(2);
-        Optional<Usuario> optionalUsuariosuario = usuarioService.getUsuarioById(num);
-        if (optionalUsuariosuario.isPresent()) {
-            Usuario usuario = optionalUsuariosuario.get();
-            Carrito carrito = usuario.getHistorialCarrito();
-            ItemCarrito itemCarrito = new ItemCarrito(producto, 1, carrito);
-            itemCarritoService.guardarItemCarrito(itemCarrito);
-            List<ItemCarrito> items = carrito.getItems();
-            items.add(itemCarrito);
-            carrito.setItems(items);
-            carritoService.guardarCarrito(carrito);
-        }
-        return "redirect:/tienda/productos";
-    }
-
     @GetMapping("/OxNA")
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxNombreZ_A(@RequestParam Map<String, Object> params, Model model) {
@@ -97,4 +81,41 @@ public class TiendaController {
         return "tienda2";
     }
 
+    @GetMapping("/modificar/{id}")
+    public String modificarProducto(@PathVariable("id") Integer id, Producto producto, Model model) {
+        producto = productoService.buscarPorId(id); //para que aparezcan los datos cargados en el editar, hay que guardar el metodo en una variable
+        model.addAttribute("producto", producto);
+        return "admin/productoForm";
+    }
+
+    @GetMapping("/eliminar")
+    public String eliminarProducto(Producto producto, RedirectAttributes redirect) {
+        productoService.eliminarProducto(producto);
+        redirect.addFlashAttribute("productoEliminado", "Producto eliminado!");
+        return "redirect:/tienda/tienda2";
+    }
+
+    @GetMapping("/detalle/{id}")
+    public String detalleProducto(@PathVariable("id") Integer id, Producto producto, Model model,
+                                  RedirectAttributes redirect) {
+        producto = productoService.buscarPorId(id);
+
+        model.addAttribute("titulo", "Detalle del producto: " + producto.getNombre());
+        model.addAttribute("producto", producto);
+        return "admin/detalleProducto";
+    }
+
+    @GetMapping("/agregarACarrito/{id}")
+    private String agregarACarrito(@PathVariable("id") Integer id,
+                                   Principal principal) {
+        Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
+        Producto producto = productoService.buscarPorId(id);
+        if (ou.isPresent()) {
+            Usuario usuario = ou.get();
+            Carrito carrito = usuario.getHistorialCarrito();
+            ItemCarrito itemCarrito = new ItemCarrito(producto, 1, carrito);
+            itemCarritoService.guardarItemCarrito(itemCarrito);
+        }
+        return "redirect:/tienda/tienda2";
+    }
 }

@@ -39,7 +39,7 @@ public class Usuario extends Cliente {
     //vacio, podemos hacer un boton que envíe a la tienda). Cualquier cosa, vemos el ejemplo de MercadoLibre.
     //Como acá tenemos que se relaciona con usuario, en carrito, tambien tengo que poner el atributo del carrito
     @OneToOne(cascade = CascadeType.ALL)
-    private Carrito historialCarrito;
+    private Carrito historialCarrito;//usuario compra === new carrito ===set
 
     //saqué el atributo comentarios porque lo hereda del cliente.
 
@@ -47,7 +47,7 @@ public class Usuario extends Cliente {
     }
 
     public Usuario(Long id, String nombre, String apellido, String email, List<Comentario> comentario) {
-        super(id, nombre, apellido, email, comentario);
+        super(id, nombre, apellido, email);
     }
 
     public String getUsername() {

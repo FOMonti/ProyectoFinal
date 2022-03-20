@@ -15,4 +15,6 @@ public interface IItemCarritoDao extends JpaRepository<ItemCarrito, Integer> {
 
     @Query("SELECT i FROM ItemCarrito i WHERE i.carrito = ?1")
     public List<ItemCarrito> itemsCarrito(Carrito carrito);
+
+    public ItemCarrito getById(Integer id);
 }

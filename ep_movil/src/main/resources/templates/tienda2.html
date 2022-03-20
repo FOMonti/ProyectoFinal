@@ -100,63 +100,54 @@
         </ul> -->
                 <!-- </div> -->
 
-            </aside>
-            <div class="grid">
-                <div class="producto" th:each="producto: ${list}">
-                    <a class="imagen" href="">
-                        <img class="imagen-producto" th:src="@{'/images/'+
-                            ${producto.imagen}}"
-                            alt="producto imagen" />
-                    </a>
-                    <a class="datos" href="">
-                        <h5 th:text="${producto.nombre}"></h5>
-                        <h6 class="price" th:text="'$' +
+    </aside>
+
+    <div class="grid">
+        <div class="producto" th:each="producto: ${list}">
+            <a class="imagen" th:href="@{/admin/detalle/} + ${producto.id}">
+                <img class="imagen-producto" th:src="@{'/images/'+
+                             ${producto.imagen}}"
+                     alt="producto imagen"/>
+            </a>
+            <a class="datos" th:href="@{/tienda/detalle/} + ${producto.id}">
+                <h5 th:text="${producto.nombre}"></h5>
+            </a>
+            <h6 class="price" th:text="'$' +
                             ${producto.precio}"></h6>
-                        <p></p>
-                    </a>
-                    <!-- En el botón de abajo, la idea sería agregar una especie de "IF role == user" se muestre ese botón -->
-                    <a class="add-to-cart" href="#">Añadir a carrito</a>
-                    <!-- En caso de ser "role == admin" se mostraría el siguiente DIV -->
-                    <div class="admin-buttons">
-                        <!-- <a class="add" href="#"><img th:src="@{${'/images/cart.png'}}" alt="Agregar al carrito"></a>  -->
-                        <a class="modify" href="#"><img
-                                th:src="@{${'/images/edit.png'}}"
-                                alt="Modificar"></a>
-                        <a class="delete" href="#"><img
-                                th:src="@{${'/images/delete.png'}}"
-                                alt="Eliminar"></a>
-                    </div>
-                </div>
+            <!-- En el botón de abajo, la idea sería agregar una especie de "IF role == user" se muestre ese botón -->
+            <a class="add-to-cart" th:href="@{/tienda/agregarACarrito/} + ${producto.id}">Añadir a carrito</a>
+            <!-- En caso de ser "role == admin" se mostraría el siguiente DIV -->
+            <div class="admin-buttons">
+                <!-- <a class="add" href="#"><img th:src="@{${'/images/cart.png'}}" alt="Agregar al carrito"></a>  -->
+                <a class="modify" th:href="@{/tienda/modificar/} + ${producto.id}"><img
+                        th:src="@{${'/images/edit.png'}}"
+                        alt="Modificar"></a>
+                <a class="delete" th:href="@{/tienda/eliminar(id=${producto.id})}"><img
+                        th:src="@{${'/images/delete.png'}}" alt="Eliminar"></a>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <nav aria-label="Pagination">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item" th:if="${current != 1}">
-                            <a class="page-link"
-                                th:href="@{|/tienda/tienda2/?page=${prev}|}">
-                                Anterior</a>
-                        </li>
-                        <li class="page-item" th:each="page : ${pages}"
-                            th:if="${current == page ? '!active' : ''}">
-                            <a class="page-link"
-                                th:href="@{|/tienda/tienda2/?page=${page}|}"
-                                th:text="${page}"></a>
-                        </li>
-                        <li class="page-item" th:if="${current != last}">
-                            <a class="page-link"
-                                th:href="@{|/tienda/tienda2/?page=${next}|}">
-                                Posterior</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <footer th:replace="layout/layout::footer"></footer>
-    </body>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <nav aria-label="Pagination">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:if="${current != 1}">
+                    <a class="page-link" th:href="@{|/tienda/tienda2/?page=${prev}|}"> Anterior</a>
+                </li>
+                <li class="page-item" th:each="page : ${pages}" th:if="${current == page ? '!active' : ''}">
+                    <a class="page-link" th:href="@{|/tienda/tienda2/?page=${page}|}" th:text="${page}"></a>
+                </li>
+                <li class="page-item" th:if="${current != last}">
+                    <a class="page-link" th:href="@{|/tienda/tienda2/?page=${next}|}"> Posterior</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<a href="javascript:history.back()"> Volver Atrás</a>
+<footer th:replace="layout/layout::footer"></footer>
+</body>
 </html>
 
 <!--<li class="page-item" th:each="page : ${pages}" th:if="${current == page ? 'active' : ''}">

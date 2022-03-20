@@ -14,7 +14,8 @@ public class ItemCarrito {
     @OneToOne
     private Producto producto;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "carrito_id", nullable = false)
     private Carrito carrito;
 
     public ItemCarrito() {
@@ -54,5 +55,9 @@ public class ItemCarrito {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }
