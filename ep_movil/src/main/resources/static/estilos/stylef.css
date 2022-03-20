@@ -312,6 +312,7 @@ html, body {
 .banner-container {
     display: flex;
     background-color: rgb(245, 245, 245);
+    width: 100%;
 }
 
 .banner-tienda {
@@ -322,6 +323,11 @@ html, body {
 
 
 
+#categories2 {
+    display: none;
+}
+
+
 
 
 
@@ -330,10 +336,59 @@ html, body {
     .grid {
         grid-template-columns: repeat(2, 2fr);
     }
+    .general {
+        display: flex;
+        flex-direction: column;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .aside {
+        margin: 0 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dropdown {
+        width: 100%;
+        text-align: center;
+    }
+
+    .grid {
+        margin-left: 0;
+    }
+
+    .categories {
+        display: none;
+    }
+
+    #categories2 {
+        display: block;
+    }
 }
 
 @media (max-width: 900px) {
     .grid {
         grid-template-columns: 100%;
+    }
+
+
+    .general {
+        display: flex;
+        flex-direction: column;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .grid {
+        margin-left: 0;;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
     }
 }
