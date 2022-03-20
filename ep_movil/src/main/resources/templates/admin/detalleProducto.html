@@ -24,6 +24,9 @@
                 <li class="list-group-item" th:text="'ESPECIFICACION DEL PRODUCTO: ' + ${producto.especificacion}"></li>
             </ul>
             <a href="javascript:history.back()"> Volver Atrás</a>
+            <a th:href="@{'/comentario/cargar/' + ${producto.id}}">
+                <button class="btn btn-outline-dark">Comentar</button>
+            </a>
         </div>
     </div>
 </div>

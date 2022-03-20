@@ -2,30 +2,23 @@
 package com.ep_movil.entidades;
 
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "comentarios")
 public class Comentario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-    private String comentario;
-    
-    @ManyToOne
+
+    private String texto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Producto producto;
-    
-    @ManyToOne
-    private Cliente cliente;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Usuario usuario;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaDelComentario;
@@ -33,11 +26,18 @@ public class Comentario {
     public Comentario() {
     }
 
-    public Comentario(Integer id, String comentario, Producto producto, Cliente cliente, Date fechaDelComentario) {
-        this.id = id;
-        this.comentario = comentario;
+    public Comentario(String comentario, Producto producto, Usuario usuario, Date fechaDelComentario) {
+        this.texto = comentario;
         this.producto = producto;
-        this.cliente = cliente;
+        this.usuario = usuario;
+        this.fechaDelComentario = fechaDelComentario;
+    }
+
+    public Comentario(Integer id, String comentario, Producto producto, Usuario usuario, Date fechaDelComentario) {
+        this.id = id;
+        this.texto = comentario;
+        this.producto = producto;
+        this.usuario = usuario;
         this.fechaDelComentario = fechaDelComentario;
     }
 
@@ -49,12 +49,12 @@ public class Comentario {
         this.id = id;
     }
 
-    public String getComentario() {
-        return comentario;
+    public String getTexto() {
+        return texto;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public void setTexto(String texto) {
+        this.texto = texto;
     }
 
     public Producto getProducto() {
@@ -65,12 +65,12 @@ public class Comentario {
         this.producto = producto;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Usuario getCliente() {
+        return usuario;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente(Usuario cliente) {
+        this.usuario = cliente;
     }
 
     public Date getFechaDelComentario() {
@@ -80,6 +80,6 @@ public class Comentario {
     public void setFechaDelComentario(Date fechaDelComentario) {
         this.fechaDelComentario = fechaDelComentario;
     }
-    
-    
+
+
 }

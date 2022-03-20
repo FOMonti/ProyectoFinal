@@ -47,7 +47,7 @@ public class Usuario extends Cliente {
     }
 
     public Usuario(Long id, String nombre, String apellido, String email, List<Comentario> comentario) {
-        super(id, nombre, apellido, email, comentario);
+        super(id, nombre, apellido, email);
     }
 
     public String getUsername() {
