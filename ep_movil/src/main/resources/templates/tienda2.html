@@ -31,26 +31,6 @@
                         <li><a href="">Motherboards</a></li>
                     </ul>
                 </div>
-                <!-- 
-        <div class="dropdown" id="categories2">
-            <button class="dropbtn">CATEGORIAS▼</button>
-            <div class="dropdown-content">
-                <a href="/tienda/Ox-P">Menor precio</a>
-                <a href="/tienda/Ox+P">Mayor precio</a>
-                <a href="/tienda/OxND">Alfabéticamente A-Z</a>
-                <a href="/tienda/OxNA">Alfabéticamente Z-A</a>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <button class="dropbtn">ORDENAR POR    ▼</button>
-            <div class="dropdown-content">
-                <a href="/tienda/Ox-P">Menor precio</a>
-                <a href="/tienda/Ox+P">Mayor precio</a>
-                <a href="/tienda/OxND">Alfabéticamente A-Z</a>
-                <a href="/tienda/OxNA">Alfabéticamente Z-A</a>
-            </div>
-        </div> -->
                 <div class="dropdown" id="categories2">
                     <button class="btn btn-secondary dropdown-toggle"
                         type="button" id="dropdownMenuButton1"
@@ -73,81 +53,81 @@
                     </button>
                     <ul class="dropdown-menu"
                         aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="/tienda/Ox-P">Menor precio</a></li>
-                        <li><a class="dropdown-item" href="/tienda/Ox+P">Mayor precio</a></li>
+                        <li><a class="dropdown-item" href="/tienda/Ox-P">Menor
+                                precio</a></li>
+                        <li><a class="dropdown-item" href="/tienda/Ox+P">Mayor
+                                precio</a></li>
                         <li><a class="dropdown-item" href="/tienda/OxND">Alfabéticamente
                                 A-Z</a></li>
                         <li><a class="dropdown-item" href="/tienda/OxNA">Alfabéticamente
                                 Z-A</a></li>
                     </ul>
                 </div>
+            </aside>
 
-                <!-- <div class="order-by">
+            <div class="grid">
+                <div class="producto" th:each="producto: ${list}">
+                    <a class="imagen" th:href="@{/admin/detalle/} +
+                        ${producto.id}">
+                        <img class="imagen-producto" th:src="@{'/images/'+
+                            ${producto.imagen}}"
+                            alt="producto imagen" />
+                    </a>
+                    <a class="datos" th:href="@{/tienda/detalle/} +
+                        ${producto.id}">
+                        <h5 th:text="${producto.nombre}"></h5>
+                    </a>
+                    <h6 class="price" th:text="'$' +
+                        ${producto.precio}"></h6>
+                    <!-- En el botón de abajo, la idea sería agregar una especie de "IF role == user" se muestre ese botón -->
+                    <a class="add-to-cart" th:href="@{/tienda/agregarACarrito/}
+                        + ${producto.id}">Añadir a carrito</a>
+                    <!-- En caso de ser "role == admin" se mostraría el siguiente DIV -->
+                    <div class="admin-buttons">
+                        <!-- <a class="add" href="#"><img th:src="@{${'/images/cart.png'}}" alt="Agregar al carrito"></a>  -->
+                        <a class="modify" th:href="@{/tienda/modificar/} +
+                            ${producto.id}"><img
+                                th:src="@{${'/images/edit.png'}}"
+                                alt="Modificar"></a>
+                        <a class="delete"
+                            th:href="@{/tienda/eliminar(id=${producto.id})}"><img
+                                th:src="@{${'/images/delete.png'}}"
+                                alt="Eliminar"></a>
+                    </div>
+                </div>
 
-            <form id="sort_form1" name="sort_form1" method="get" action="#" class="sortForm square">
-                <label for="filter">ORDENAR POR</label>
-                <select name="sort" id="filter">
-                    <option value="price-asc">Menor precio</option>
-                    <option value="price-desc">Mayor precio</option>
-                </select>
-                <button type="submit">Ordenar</button>
-            </form> -->
-                <!-- <ul>
-                <li><a class="sort-option" href="">Menor precio</a></li>
-            <li><a class="sort-option" href="">Mayor precio</a></li>
-            <li><a class="sort-option" href="">A → Z</a></li>
-            <li><a class="sort-option" href="">Z → A</a></li>
-        </ul> -->
-                <!-- </div> -->
-
-    </aside>
-
-    <div class="grid">
-        <div class="producto" th:each="producto: ${list}">
-            <a class="imagen" th:href="@{/admin/detalle/} + ${producto.id}">
-                <img class="imagen-producto" th:src="@{'/images/'+
-                             ${producto.imagen}}"
-                     alt="producto imagen"/>
-            </a>
-            <a class="datos" th:href="@{/tienda/detalle/} + ${producto.id}">
-                <h5 th:text="${producto.nombre}"></h5>
-            </a>
-            <h6 class="price" th:text="'$' +
-                            ${producto.precio}"></h6>
-            <!-- En el botón de abajo, la idea sería agregar una especie de "IF role == user" se muestre ese botón -->
-            <a class="add-to-cart" th:href="@{/tienda/agregarACarrito/} + ${producto.id}">Añadir a carrito</a>
-            <!-- En caso de ser "role == admin" se mostraría el siguiente DIV -->
-            <div class="admin-buttons">
-                <!-- <a class="add" href="#"><img th:src="@{${'/images/cart.png'}}" alt="Agregar al carrito"></a>  -->
-                <a class="modify" th:href="@{/tienda/modificar/} + ${producto.id}"><img
-                        th:src="@{${'/images/edit.png'}}"
-                        alt="Modificar"></a>
-                <a class="delete" th:href="@{/tienda/eliminar(id=${producto.id})}"><img
-                        th:src="@{${'/images/delete.png'}}" alt="Eliminar"></a>
             </div>
         </div>
-
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <nav aria-label="Pagination">
-            <ul class="pagination justify-content-center">
-                <li class="page-item" th:if="${current != 1}">
-                    <a class="page-link" th:href="@{|/tienda/tienda2/?page=${prev}|}"> Anterior</a>
-                </li>
-                <li class="page-item" th:each="page : ${pages}" th:if="${current == page ? '!active' : ''}">
-                    <a class="page-link" th:href="@{|/tienda/tienda2/?page=${page}|}" th:text="${page}"></a>
-                </li>
-                <li class="page-item" th:if="${current != last}">
-                    <a class="page-link" th:href="@{|/tienda/tienda2/?page=${next}|}"> Posterior</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</div>
-<a href="javascript:history.back()"> Volver Atrás</a>
-<footer th:replace="layout/layout::footer"></footer>
-</body>
+        
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <nav aria-label="Pagination">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:if="${current != 1}">
+                            <a class="page-link"
+                                th:href="@{|/tienda/tienda2/?page=${prev}|}">
+                                Anterior</a>
+                        </li>
+                        <li class="page-item" th:each="page : ${pages}"
+                            th:if="${current == page ? '!active' : ''}">
+                            <a class="page-link"
+                                th:href="@{|/tienda/tienda2/?page=${page}|}"
+                                th:text="${page}"></a>
+                        </li>
+                        <li class="page-item" th:if="${current !=
+                            last}">
+                            <a class="page-link"
+                                th:href="@{|/tienda/tienda2/?page=${next}|}">
+                                Posterior</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <a href="javascript:history.back()"> Volver Atrás</a>
+        <footer th:replace="layout/layout::footer"></footer>
+    </body>
 </html>
 
 <!--<li class="page-item" th:each="page : ${pages}" th:if="${current == page ? 'active' : ''}">

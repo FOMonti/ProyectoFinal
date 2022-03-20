@@ -85,12 +85,12 @@ public class UsuarioController {
         usuario.setPassword(passwordEncoder.encode(password));
 
         Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
-        //Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
+        Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
 
         Set<Rol> roles = new HashSet<Rol>();
 
         roles.add(rolUser);
-        //roles.add(rolAdmin); //complemento para crear admin
+        roles.add(rolAdmin); //complemento para crear admin
 
         usuario.setRoles(roles);
 
