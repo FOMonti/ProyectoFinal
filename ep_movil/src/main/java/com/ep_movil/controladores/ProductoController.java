@@ -1,6 +1,9 @@
 package com.ep_movil.controladores;
 
+import com.ep_movil.dao.IComentarioDao;
+import com.ep_movil.entidades.Comentario;
 import com.ep_movil.entidades.Producto;
+import com.ep_movil.servicios.IComentarioService;
 import com.ep_movil.servicios.IProductoService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,7 +36,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ProductoController {
 
     @Autowired
-    public IProductoService productoService;
+    private IProductoService productoService;
+
+    @Autowired
+    private IComentarioService comentarioService;
 
     @GetMapping("/productos-form")
     public String productoForm(Model model) {
@@ -73,10 +79,13 @@ public class ProductoController {
     }
 
     @GetMapping("/detalle/{id}")
-    public String detalleProducto(@PathVariable("id") Integer id, Producto producto, Model model,
+    public String detalleProducto(@PathVariable("id") Integer id, Model model,
                                   RedirectAttributes redirect) {
-        producto = productoService.buscarPorId(id);
 
+        Producto producto = productoService.buscarPorId(id);
+        List<Comentario> comentarios = comentarioService.listarComentarios(producto);
+
+        model.addAttribute("comentarios", comentarios);
         model.addAttribute("titulo", "Detalle del producto: " + producto.getNombre());
         model.addAttribute("producto", producto);
         return "admin/detalleProducto";

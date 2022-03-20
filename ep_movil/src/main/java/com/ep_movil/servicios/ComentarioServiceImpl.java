@@ -3,7 +3,10 @@ package com.ep_movil.servicios;
 
 import com.ep_movil.dao.IComentarioDao;
 import com.ep_movil.entidades.Comentario;
+
 import java.util.List;
+
+import com.ep_movil.entidades.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,11 +16,11 @@ public class ComentarioServiceImpl implements IComentarioService {
 
     @Autowired
     private IComentarioDao comentarioDao;
-    
-    @Transactional (readOnly = true)
+
+    @Transactional(readOnly = true)
     @Override
-    public List<Comentario> listarComentarios() {
-        return comentarioDao.findAll();
+    public List<Comentario> listarComentarios(Producto producto) {
+        return comentarioDao.listarComentarios(producto);
     }
 
     @Transactional
@@ -26,16 +29,16 @@ public class ComentarioServiceImpl implements IComentarioService {
         comentarioDao.save(comentario);
     }
 
-    @Transactional 
+    @Transactional
     @Override
     public void eliminarComentario(Comentario comentario) {
         comentarioDao.delete(comentario);
     }
 
-    @Transactional (readOnly = true)
+    @Transactional(readOnly = true)
     @Override
     public Comentario encontrarComentario(Comentario comentario) {
         return comentarioDao.findById(comentario.getId()).orElse(null);
     }
-    
+
 }

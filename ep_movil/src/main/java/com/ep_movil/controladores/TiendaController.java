@@ -106,7 +106,7 @@ public class TiendaController {
     }
 
     @GetMapping("/agregarACarrito/{id}")
-    private String agregarACarrito(@PathVariable("id") Integer id, HttpSession session,
+    private String agregarACarrito(@PathVariable("id") Integer id,
                                    Principal principal) {
         Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
         Producto producto = productoService.buscarPorId(id);
