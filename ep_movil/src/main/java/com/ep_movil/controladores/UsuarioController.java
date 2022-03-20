@@ -57,6 +57,11 @@ public class UsuarioController {
     @Autowired
     private JavaMailSender mailSender;
     
+    @GetMapping("/repara")
+    public String repara(Model model) {
+        return "repara";
+    }
+    
     @GetMapping("/perfil")
     public String perfil(Model model) {
         return "usuario-perfil";
