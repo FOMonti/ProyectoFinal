@@ -9,9 +9,9 @@ html, body {
 }
 
 .general {
-    display: flex !important;
-    padding: 30px 100px !important;
-    background-color: rgb(245, 245, 245) !important;
+    display: flex;
+    padding: 30px 100px;
+    background-color: rgb(245, 245, 245);
 }
 
 .aside{
@@ -79,6 +79,7 @@ html, body {
 
 .grid {
     width: 80%;
+    margin-top: 20px;
     margin-left: auto;
     display: grid;
     grid-template-columns: repeat(3, 3fr);
@@ -229,7 +230,7 @@ html, body {
 
 
 
-.dropbtn {
+/* .dropbtn {
     background-color: var(--main-color);
     color: #FFF;
     border-radius: 4px;
@@ -241,13 +242,11 @@ html, body {
     width: 70%;
   }
   
-  /* The container <div> - needed to position the dropdown content */
   .dropdown {
     position: relative;
     display: inline-block;
   }
   
-  /* Dropdown Content (Hidden by Default) */
   .dropdown-content {
     display: none;
     position: absolute;
@@ -257,7 +256,6 @@ html, body {
     z-index: 1;
   }
   
-  /* Links inside the dropdown */
   .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -265,17 +263,39 @@ html, body {
     display: block;
   }
   
-  /* Change color of dropdown links on hover */
   .dropdown-content a:hover {background-color: #ddd;}
   
-  /* Show the dropdown menu on hover */
   .dropdown:hover .dropdown-content {display: block;}
   
-  /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color: #135264;}
+*/
+
+
+.dropdown-toggle {
+    min-width: 200px;
+    background-color: var(--main-color);
+    margin: 4px 0;
+}
+
+.dropdown-toggle:focus {
+    box-shadow: none;
+    background-color: var(--main-color);
+}
+
+.dropdown-toggle:hover {
+    background-color: var(--main-color);
+}
 
 
 
+.dropdown-item {
+    width: 200px;
+}
+
+.dropdown-item:active {
+    color: inherit;
+    background-color: inherit;
+}
 
 
 
@@ -335,6 +355,7 @@ html, body {
 @media (max-width: 1250px) {
     .grid {
         grid-template-columns: repeat(2, 2fr);
+        gap: 30px;
     }
     .general {
         display: flex;
@@ -342,6 +363,11 @@ html, body {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding: 20px;
+    }
+
+    .imagen-producto {
+        width: 50%;
     }
 
     .aside {
@@ -351,6 +377,7 @@ html, body {
         align-items: center;
     }
 
+    
     .dropdown {
         width: 100%;
         text-align: center;
@@ -370,11 +397,25 @@ html, body {
 }
 
 @media (max-width: 900px) {
-    .grid {
-        grid-template-columns: 100%;
+    .dropdown-toggle {
+        min-width: 300px;
+        min-height: 50px;
+        background-color: var(--main-color);
+        margin: 2px 0;
     }
 
+    .dropdown-item {
+        width: 300px;
+    }
 
+    .producto {
+        grid-template-columns: minmax(400px, 400px);
+    }
+
+    .imagen-producto {
+        width: 45%;
+    }
+    
     .general {
         display: flex;
         flex-direction: column;
