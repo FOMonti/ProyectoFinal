@@ -50,7 +50,7 @@ public class ComentarioController {
 
         Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
         if (ou.isPresent()) {
-            comentario.setCliente(ou.get());
+            comentario.setUsuario(ou.get());
             comentario.setFechaDelComentario(new Date());
             comentarioService.guardarComentario(comentario);
         }

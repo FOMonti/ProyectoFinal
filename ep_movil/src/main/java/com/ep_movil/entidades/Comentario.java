@@ -17,7 +17,7 @@ public class Comentario {
     @ManyToOne(fetch = FetchType.LAZY)
     private Producto producto;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Usuario usuario;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -65,11 +65,11 @@ public class Comentario {
         this.producto = producto;
     }
 
-    public Usuario getCliente() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setCliente(Usuario cliente) {
+    public void setUsuario(Usuario cliente) {
         this.usuario = cliente;
     }
 
