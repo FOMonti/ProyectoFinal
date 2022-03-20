@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -27,6 +24,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping({"/tienda"})
+@SessionAttributes("itemCarrito")
 public class TiendaController {
 
     @Autowired
@@ -50,6 +48,8 @@ public class TiendaController {
     @GetMapping("/tienda2")
     private String tienda2(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionSinOrden(params, model, 6);
+        ItemCarrito itemCarrito = new ItemCarrito();
+        model.addAttribute("itemCarrito", itemCarrito);
         return "tienda2";
     }
 
@@ -105,15 +105,30 @@ public class TiendaController {
         return "admin/detalleProducto";
     }
 
-    @GetMapping("/agregarACarrito/{id}")
-    private String agregarACarrito(@PathVariable("id") Integer id,
+    @GetMapping("/agregarACarrito")
+    private String agregarACarrito(@RequestParam(name = "cantidad") Integer cantidad,
+                                   @RequestParam(name = "idProducto") Integer id,
                                    Principal principal) {
         Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
         Producto producto = productoService.buscarPorId(id);
         if (ou.isPresent()) {
             Usuario usuario = ou.get();
             Carrito carrito = usuario.getHistorialCarrito();
-            ItemCarrito itemCarrito = new ItemCarrito(producto, 1, carrito);
+            List<ItemCarrito> items = itemCarritoService.listarItemCarrito(carrito);
+            for (ItemCarrito ic : items) {
+                if (ic.getProducto().equals(producto)) {
+                    Integer cant = ic.getCantidad() + cantidad;
+                    if (cant > producto.getStock()) {
+                        //Agregar alerga, no hay stock
+                        return "redirect:/tienda/tienda2";
+                    } else {
+                        ic.setCantidad(cant);
+                        itemCarritoService.guardarItemCarrito(ic);
+                        return "redirect:/tienda/tienda2";
+                    }
+                }
+            }
+            ItemCarrito itemCarrito = new ItemCarrito(cantidad, producto, carrito);
             itemCarritoService.guardarItemCarrito(itemCarrito);
         }
         return "redirect:/tienda/tienda2";
