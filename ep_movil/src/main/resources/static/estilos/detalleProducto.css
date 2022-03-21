@@ -1,0 +1,17 @@
+.detalle-card {
+    display: flex;
+}
+
+.detalle-card ul {
+    width: 100%;
+    margin-left: 50px;
+}
+
+.container {
+    width: 70%;
+}
+
+.imagen-producto {
+    width: 20%;
+    height: 20%;
+}

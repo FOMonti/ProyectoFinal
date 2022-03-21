@@ -147,13 +147,28 @@ html, body {
     width: 50%;
     text-align: center;
     justify-self: center;
-    align-self: flex-end;
     margin-bottom: 20px;
     margin-top: 10px;
 }
 
 .add-to-cart:hover {
     color: #FFF;
+}
+
+.quantity {
+    text-align: center;
+    padding-left: 2px;
+    border-radius: 5px;
+    width: 40px;
+    border: 1px solid;
+}
+
+.quantity-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .admin-buttons {
