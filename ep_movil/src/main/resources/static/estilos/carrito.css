@@ -1,0 +1,58 @@
+.contenedor-tarjetas {
+    display: grid;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.tarjeta-general {
+    display: block;
+}
+
+.tarjeta-carrito {
+    display: flex;
+    align-items: center;
+    height: 250px;
+}
+
+.card-title {
+    height: 80px;
+    width: 90%;
+}
+
+.detalle-container {
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+}
+
+.detalles-producto-carrito {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.cantidad-div {
+    display: flex;
+    align-items: center;
+}
+
+.cantidad-div h5 {
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+.item-cantidad {
+    margin-left: 6px;
+}
+
+.eliminar-div {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: baseline;
+}
+
+.imagen-producto {
+    width: 75%;
+    margin-left: 20px;
+}
