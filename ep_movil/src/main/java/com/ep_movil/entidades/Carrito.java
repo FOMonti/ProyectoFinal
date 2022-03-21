@@ -2,16 +2,7 @@ package com.ep_movil.entidades;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "carrito")
@@ -21,10 +12,10 @@ public class Carrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "carrito_itemcarrito",
-            joinColumns = @JoinColumn(name = "carrito_id"),
-            inverseJoinColumns = @JoinColumn(name = "itemcarrito_id"))
+    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "carrito_itemcarrito",
+//            joinColumns = @JoinColumn(name = "carrito_id"),
+//            inverseJoinColumns = @JoinColumn(name = "itemcarrito_id"))
     private List<ItemCarrito> items;
     //Aca agrego a la entidad de usuario, porque el carrito como tal (existente con un id), empieza a existir al momento
     //que el usuario agrega un producto y lo guarda para comprarlo a futuro. Es el intermediario entre el producto y
@@ -33,11 +24,20 @@ public class Carrito {
 
     //cantidad de cada item pedido
 
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
     public Carrito() {
     }
 
     public Carrito(Usuario usuario) {
         this.items = new ArrayList<ItemCarrito>();
+        this.usuario = usuario;
     }
 
     public Carrito(Integer id, List<ItemCarrito> items, Usuario usuario) {

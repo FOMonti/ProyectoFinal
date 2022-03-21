@@ -20,23 +20,18 @@
         </div>
     </form>
 </div>
-
-<div class="btn-group dropright">
-    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-        Dropright
-    </button>
-    <div class="dropdown-menu">
-        <a class="dropdown-item">Ordenar Alfabeticamente A - Z</a>
-        <a class="dropdown-item">Ordenar Alfabeticamente Z - A</a>
-        <a class="dropdown-item">Menor Precio</a>
-        <a class="dropdown-item">Mayor Preco</a>
-    </div>
+<!--Dropdown-->
+<div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+       aria-expanded="false">ORDENAR POR ▼</a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a href="/admin/Ox-P">Menor precio</a>
+        <li><a href="/admin/Ox+P">Mayor precio</a>
+        <li><a href="/admin/OxND">Alfabéticamente A-Z</a>
+        <li><a href="/admin/OxNA">Alfabéticamente Z-A</a>
+    </ul>
 </div>
-<!--        href="/tienda/OxNA"
-        href="/tienda/OxND"
-        href="/tienda/Ox-P"
-        href="/tienda/Ox+P"-->
+
 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/productos-form}">
     <button class="btn btn-outline-dark" aria-label="Basic outlined example">Agregar</button>
 </a>
@@ -55,6 +50,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
             <th>Detalle</th>
+            <th>Carrito</th>
         </tr>
         </thead>
         <tbody>
@@ -86,6 +82,11 @@
                     <button class="btn btn-outline-light">Detalle</button>
                 </a>
             </td>
+            <td>
+                <a th:href="@{/tienda/agregarACarrito/} + ${producto.id}">
+                    <button class="btn btn-outline-light">Agregar a Carrito</button>
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -108,19 +109,7 @@
             </nav>
         </div>
     </div>
-
 </div>
-
-<div class="dropdown">
-    <button class="dropbtn">ORDENAR POR ▼</button>
-    <div class="dropdown-content">
-        <a href="/admin/Ox-P">Menor precio</a>
-        <a href="/admin/Ox+P">Mayor precio</a>
-        <a href="/admin/OxND">Alfabéticamente A-Z</a>
-        <a href="/admin/OxNA">Alfabéticamente Z-A</a>
-    </div>
-</div>
-
+<footer th:replace="layout/layout::footer"></footer>
 </body>
-
 </html>

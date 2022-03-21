@@ -1,18 +1,24 @@
 package com.ep_movil.controladores;
 
+import com.ep_movil.entidades.Carrito;
 import com.ep_movil.entidades.Rol;
 import com.ep_movil.enums.RolNombre;
 import com.ep_movil.security.service.UsuarioService;
 import com.ep_movil.servicios.RolService;
-
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import com.ep_movil.entidades.Usuario;
 import com.ep_movil.servicios.IProductoService;
+import java.util.Properties;
+import java.util.logging.Level;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +29,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -43,6 +50,9 @@ public class UsuarioController {
     @Autowired
     private IProductoService productoService;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
     @GetMapping("/registrar")
     public String registrar(Model model) {
         model.addAttribute("usuario", new Usuario());
@@ -51,7 +61,7 @@ public class UsuarioController {
 
     @PostMapping("/save") // en este método guardamos usuarios con el rol de User
     public String saveUser(Usuario usuario, @Valid String username, Errors usernameError,
-                           @Valid String password, Errors passwordError, RedirectAttributes redirect) {
+            @Valid String password, Errors passwordError, RedirectAttributes redirect) throws AddressException, MessagingException {
 
         if (usernameError.hasErrors() || passwordError.hasErrors()) {
             return "usuario-form";
@@ -61,16 +71,42 @@ public class UsuarioController {
         usuario.setPassword(passwordEncoder.encode(password));
 
         Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
-//        Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
+        //Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
 
         Set<Rol> roles = new HashSet<Rol>();
 
         roles.add(rolUser);
-//        roles.add(rolAdmin); //complemento para crear admin
+        //roles.add(rolAdmin); //complemento para crear admin
 
         usuario.setRoles(roles);
 
+        Carrito historialCarrito = new Carrito(usuario);
+
+        usuario.setHistorialCarrito(historialCarrito);
+
         usuarioService.guardarUsuario(usuario);
+
+        Properties props = System.getProperties();
+        Session session = Session.getDefaultInstance(props);
+        MimeMessage email = new MimeMessage(session);
+
+        try {
+            email.setRecipients(Message.RecipientType.TO, usuario.getEmail());
+        } catch (MessagingException ex) {
+            java.util.logging.Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        email.setSubject("El equipo de EP-Movil le da la bienvenida!!");
+        try {
+            email.setText("Hola " + usuario.getNombre() + "! \nEP-Movil te da la bienvenida!! "
+                    + "\n A partir de ahora podrás disfrutar de la totalidad de nuestra tienda on-line, mantenerte"
+                    + " actualizado de nuestros productos y acceder a los beneficios que tenemos para vos!!"
+                    + "\nNo olvides seguirnos en nuestras redes!! \nGracias por elegirnos!! \nTe saluda, el equipo de EP-Movil");
+        } catch (MessagingException ex) {
+            java.util.logging.Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //email.setFileName("/bannerprueba.jpg");
+
+        mailSender.send(email);
 
         redirect.addFlashAttribute("usuarioRegistrado", "Se ha registrado satisfactoriamente. Inicie sesión");
 
@@ -78,13 +114,16 @@ public class UsuarioController {
     }
 
     @GetMapping("/login")
-    public String toLogin(Model model) {
+    public String toLogin(Model model
+    ) {
 //        model.addAttribute("usuario", new Usuario());
         return "usuario-login";
     }
 
     @PostMapping("/signin")
-    public String acceder(Usuario usuario, HttpSession session, RedirectAttributes redirect) {
+    public String acceder(Usuario usuario, HttpSession session,
+             RedirectAttributes redirect
+    ) {
 
         Optional<Usuario> user = usuarioService.findByUsername(usuario.getUsername());
 
@@ -97,32 +136,21 @@ public class UsuarioController {
         session.setAttribute("idusuario", user.get().getId());
         log.info("usuario que hizo login: " + usuario.getUsername());
         redirect.addFlashAttribute("usuario", usuario);
-
+        
         return "redirect:/";
     }
 
-//    @GetMapping("/carrito")
-//    public String toCarrito(Model model, Usuario usuario) {
-//        /*  Si el usuario no esta logeado...?
-// if (usuario.equals(null)) {
-//     return "redirect:/";
-// }
-//         */
-//        model.addAttribute("list", productoService.listarProductos());
-//        model.addAttribute("titulo", "Carrito");
-//        model.addAttribute("usuario", usuario);
-//        return "/user/carrito";
-//    }
-//    @GetMapping("/carrito")
-//    public String toCarrito(Model model, Usuario usuario) {
-///*  Si el usuario no esta logeado...?
-// if (usuario.equals(null)) {
-//     return "redirect:/";
-// }
-//*/
-//        model.addAttribute("carrito", productoService.findByUsuarioId(usuario.id));
-//        model.addAttribute("titulo", "Mostrando Carrito");
-//        model.addAttribute("usuario", usuario);
-//        return "/user/carrito";
-//    }
+    @GetMapping("/carrito")
+    public String toCarrito(Model model, Usuario usuario
+    ) {
+        /*  Si el usuario no esta logeado...?
+ if (usuario.equals(null)) {
+     return "redirect:/";
+ }
+         */
+        model.addAttribute("list", productoService.listarProductos());
+        model.addAttribute("titulo", "Carrito");
+        model.addAttribute("usuario", usuario);
+        return "/user/carrito";
+    }
 }

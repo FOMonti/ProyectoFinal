@@ -32,7 +32,7 @@ public class UsuarioServiceImpl {
         usuarioDao.delete(usuario);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Usuario encontrarUsuario(Usuario usuario) {
         return usuarioDao.findById(usuario.getId()).orElse(null);
     }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="layout::head">
         <title>Tienda</title>
         <meta charset="UTF-8"/>
@@ -10,8 +10,8 @@
         <header th:fragment="navbar-l">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <img th:src="@{${'/images/icono1.ico'}}" class="icono" width="50" />
-                    <a class="navbar-brand" href="#">EP-MOVIL</a>
+                    <img th:src="@{${'/images/icono1.jpg'}}" class="icon" height="80" alt="icon"/>
+                    <a class="navbar-brand" th:href="@{/}">EP-MOVIL</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,10 @@
                                 <a class="nav-link active" aria-current="page" th:href="@{/}">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" th:href="@{/tienda/productos}">Tienda</a>
+                                <a class="nav-link active" aria-current="page" th:href="@{/tienda/tienda2}">Tienda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" th:href="@{/tienda/productos}">Dashboard</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/">Repará</a>
@@ -34,21 +37,24 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/">Contacto</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/usuario/carrito">Carrito</a>
-                            </li>
+                            <!--                           <li class="nav-item">
+                                                            <a class="nav-link active" aria-current="page" href="/usuario/carrito">
+                                                                <img class="cart-logo" th:src="@{${'/iconos/cart.png'}}"/>
+                                                            </a>
+                                                        </li>-->
+
                             <li class="nav-item" aria-current="page" sec:authorize="isAuthenticated()">
-                                <a class="nav-link active"><b th:inline="text">Bienvenido [[${#httpServletRequest.remoteUser}]]! </b>
+                                <a class="nav-link active"><b th:inline="text">Bienvenido
+                                        [[${#httpServletRequest.remoteUser}]]! </b>
                                 </a>
                             </li>
 
                         </ul>
                         <form class="d-flex ">
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-light" type="submit" style="margin-right:5px">Buscar</button>
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search"/>
+                            <button class="btn btn-outline-light" type="submit" style="margin-right:5px">Buscar</button>
                         </form>
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
-
                             <!--Cerrar Sesion-->
                             <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
                                 <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
