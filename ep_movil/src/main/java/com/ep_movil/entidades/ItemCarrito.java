@@ -27,7 +27,7 @@ public class ItemCarrito {
 
     }
 
-    public ItemCarrito(Producto producto, Integer cantidad, Carrito carrito) {
+    public ItemCarrito(Integer cantidad, Producto producto, Carrito carrito) {
         this.producto = producto;
         this.cantidad = cantidad;
         this.carrito = carrito;
