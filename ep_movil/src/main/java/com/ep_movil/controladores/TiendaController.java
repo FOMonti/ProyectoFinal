@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -27,6 +24,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping({"/tienda"})
+@SessionAttributes("itemCarrito")
 public class TiendaController {
 
     @Autowired
@@ -44,40 +42,44 @@ public class TiendaController {
     @GetMapping("/productos")
     public String dashboard(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionSinOrden(params, model, 10);
+        model.addAttribute("ruta", "/tienda/productos");
         return "tienda";
     }
 
     @GetMapping("/tienda2")
     private String tienda2(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionSinOrden(params, model, 6);
+        ItemCarrito itemCarrito = new ItemCarrito();
+        model.addAttribute("itemCarrito", itemCarrito);
+        model.addAttribute("ruta", "/tienda/tienda2");
         return "tienda2";
     }
 
     @GetMapping("/OxNA")
-    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxNombreZ_A(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXNombreDESC(params, model, 6);
+        model.addAttribute("ruta", "/tienda/OxNA");
         return "tienda2";
     }
 
     @GetMapping("/OxND")
-    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxNombreA_Z(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXNombreASC(params, model, 6);
+        model.addAttribute("ruta", "/tienda/OxND");
         return "tienda2";
     }
 
     @GetMapping("/Ox-P")
-    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMenorPrecio(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXPrecioASC(params, model, 6);
+        model.addAttribute("ruta", "/tienda/Ox-P");
         return "tienda2";
     }
 
     @GetMapping("/Ox+P")
-    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMayorPrecio(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXPrecioDESC(params, model, 6);
+        model.addAttribute("ruta", "/tienda/Ox+P");
         return "tienda2";
     }
 
@@ -105,17 +107,37 @@ public class TiendaController {
         return "admin/detalleProducto";
     }
 
-    @GetMapping("/agregarACarrito/{id}")
-    private String agregarACarrito(@PathVariable("id") Integer id,
+    @PostMapping("/agregarACarrito")
+    private String agregarACarrito(@RequestParam(name = "cantidad") Integer cantidad,
+                                   @RequestParam(name = "idProducto") Integer id,
                                    Principal principal) {
         Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
         Producto producto = productoService.buscarPorId(id);
         if (ou.isPresent()) {
             Usuario usuario = ou.get();
             Carrito carrito = usuario.getHistorialCarrito();
-            ItemCarrito itemCarrito = new ItemCarrito(producto, 1, carrito);
+            List<ItemCarrito> items = itemCarritoService.listarItemCarrito(carrito);
+            for (ItemCarrito ic : items) {
+                if (ic.getProducto().equals(producto)) {
+                    Integer cant = ic.getCantidad() + cantidad;
+                    if (cant > producto.getStock()) {
+                        //Agregar alerga, no hay stock
+                        return "redirect:/tienda/tienda2";
+                    } else {
+                        ic.setCantidad(cant);
+                        itemCarritoService.guardarItemCarrito(ic);
+                        carrito.setPrecio(carrito.getPrecio() + (producto.getPrecio() * cantidad));
+                        carritoService.guardarCarrito(carrito);
+                        return "redirect:/tienda/tienda2";
+                    }
+                }
+            }
+            ItemCarrito itemCarrito = new ItemCarrito(cantidad, producto, carrito);
             itemCarritoService.guardarItemCarrito(itemCarrito);
+            carrito.setPrecio(carrito.getPrecio() + (producto.getPrecio() * cantidad));
+            carritoService.guardarCarrito(carrito);
         }
         return "redirect:/tienda/tienda2";
     }
+
 }

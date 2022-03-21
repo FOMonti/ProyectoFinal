@@ -83,9 +83,18 @@
                     <h6 class="price" th:text="'$' +
                         ${producto.precio}"></h6>
                     <!-- En el botón de abajo, la idea sería agregar una especie de "IF role == user" se muestre ese botón -->
-                    <a class="add-to-cart" th:href="@{/tienda/agregarACarrito/}
-                        + ${producto.id}">Añadir a carrito</a>
+                    <!-- <a class="add-to-cart" th:href="@{/tienda/agregarACarrito/}
+                        + ${producto.id}">Añadir a carrito</a> -->
                     <!-- En caso de ser "role == admin" se mostraría el siguiente DIV -->
+                    <form th:action="@{/tienda/agregarACarrito}" method="post">
+
+                        <input type="number" value="1" name="cantidad" min="1" max="${producto.id}">
+        
+                        <input type="hidden" th:value="${producto.id}" name="idProducto"/>
+        
+                        <button type="submit" class="btn btn-outline-success">Enviar</button>
+        
+                    </form>
                     <div class="admin-buttons">
                         <!-- <a class="add" href="#"><img th:src="@{${'/images/cart.png'}}" alt="Agregar al carrito"></a>  -->
                         <a class="modify" th:href="@{/tienda/modificar/} +
@@ -101,6 +110,7 @@
 
             </div>
         </div>
+<<<<<<< HEAD
         
         <div class="row">
             <div class="col-md-2"></div>
