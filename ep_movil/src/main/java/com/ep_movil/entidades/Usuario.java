@@ -22,6 +22,8 @@ public class Usuario extends Cliente {
     @NotEmpty
     private String username;
 
+    private String imagen;
+
     @NotEmpty()
     //@Size(min = 8, max=25)
     //@Pattern(regexp="")//[a-zA-Z0-9]
@@ -82,5 +84,11 @@ public class Usuario extends Cliente {
         this.historialCarrito = historialCarrito;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
 
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 }

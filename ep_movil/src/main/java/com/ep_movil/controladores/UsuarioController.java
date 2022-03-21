@@ -1,20 +1,20 @@
 package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Carrito;
+import com.ep_movil.entidades.Comentario;
 import com.ep_movil.entidades.Rol;
 import com.ep_movil.enums.RolNombre;
 import com.ep_movil.security.service.UsuarioService;
+import com.ep_movil.servicios.IComentarioService;
 import com.ep_movil.servicios.RolService;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.security.Principal;
+import java.util.*;
 import javax.validation.Valid;
 
 import com.ep_movil.entidades.Usuario;
 import com.ep_movil.servicios.IProductoService;
 
-import java.util.Properties;
 import java.util.logging.Level;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -34,10 +34,12 @@ import org.springframework.validation.Errors;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
+@SessionAttributes("comentarios")
 public class UsuarioController {
 
     private final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
@@ -56,6 +58,9 @@ public class UsuarioController {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private IComentarioService comentarioService;
 
     @GetMapping("/registrar")
     public String registrar(Model model) {
@@ -88,6 +93,8 @@ public class UsuarioController {
 
         usuario.setHistorialCarrito(historialCarrito);
 
+        usuario.setImagen("usuarioSinIMG.jpg");
+
         usuarioService.guardarUsuario(usuario);
 
         Properties props = System.getProperties();
@@ -118,12 +125,30 @@ public class UsuarioController {
     }
 
     @GetMapping("/login")
-    public String toLogin(Model model
-    ) {
-//        model.addAttribute("usuario", new Usuario());
+    public String toLogin(Model model) {
         return "usuario-login";
     }
 
+    @GetMapping("/perfil")
+    public String toPerfil(Model model, Principal principal, RedirectAttributes redirectAttributes) {
+        Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
+        if (!ou.isPresent()) return "redirect:/";
+        Usuario usuario = ou.get();
+        model.addAttribute("usuario", usuario);
+        return "usuarioo/perfil";
+    }
+
+    @GetMapping("/comentarios")
+    public String verComentarios(Model model, Principal principal) {
+        //redirectAttributes.getAttribute()
+        Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
+        if (!ou.isPresent()) return "redirect:/";
+        Usuario usuario = ou.get();
+        List<Comentario> comentarios = comentarioService.listarComentariosUsuario(usuario);
+        model.addAttribute("comentarios", comentarios);
+        model.addAttribute("usuario", usuario);
+        return "usuarioo/perfil";
+    }
 //    @PostMapping("/signin")
 //    public String acceder(Usuario usuario, HttpSession session,
 //                          RedirectAttributes redirect

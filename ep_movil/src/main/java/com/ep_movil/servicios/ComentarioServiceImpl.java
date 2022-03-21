@@ -7,6 +7,7 @@ import com.ep_movil.entidades.Comentario;
 import java.util.List;
 
 import com.ep_movil.entidades.Producto;
+import com.ep_movil.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +40,11 @@ public class ComentarioServiceImpl implements IComentarioService {
     @Override
     public Comentario encontrarComentario(Comentario comentario) {
         return comentarioDao.findById(comentario.getId()).orElse(null);
+    }
+
+    @Override
+    public List<Comentario> listarComentariosUsuario(Usuario usuario) {
+        return comentarioDao.listarComentariosUsuario(usuario);
     }
 
 }

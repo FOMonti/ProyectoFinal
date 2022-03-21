@@ -44,8 +44,9 @@
                                                 </li>-->
 
                     <li class="nav-item" aria-current="page" sec:authorize="isAuthenticated()">
-                        <a class="nav-link active"><b th:inline="text">
-                            [[${#httpServletRequest.remoteUser}]]! </b>
+                        <a class="nav-link active" th:href="@{/perfil}">
+                            <b th:inline="text">
+                                [[${#httpServletRequest.remoteUser}]]! </b>
                         </a>
                     </li>
                 </ul>
