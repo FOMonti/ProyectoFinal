@@ -1,0 +1,45 @@
+.navbar-brand {
+    margin-left: 10px;
+}
+
+.items-derecha {
+    display: flex;
+    align-items: center;
+}
+
+.boton-derecha {
+    margin: 0 5px;
+}
+
+.cart-logo {
+    width: 26px;
+    margin: 0 5px;
+}
+
+.cart-link {
+    margin: 0 20px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 50px;
+}
+
+.cart-link p {
+    background-color: rgb(230, 47, 47);
+    border-radius: 10%;
+    min-width: 30px;
+    height: 22px;
+    margin: auto;
+    text-align: center;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    padding: 0 5px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}

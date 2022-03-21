@@ -11,7 +11,10 @@
 <header th:fragment="navbar-l">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/}">EP-MOVIL</a>
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{${'/images/epmovil-icono.png'}}" style="width: 50px;" alt="">
+                EP-MOVIL
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -31,12 +34,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" th:href="@{/about}">Conocenos</a>
                     </li>
-                    <!--                            <li class="nav-item">
-                                                    <a class="nav-link active" aria-current="page" href="/usuario/carrito">
-                                                        <img class="cart-logo" th:src="@{${'/iconos/cart.png'}}"/>
-                                                    </a>
-                                                </li>-->
-
                     <li class="nav-item" aria-current="page" sec:authorize="isAuthenticated()">
                         <a class="nav-link active"><b th:inline="text">
                             [[${#httpServletRequest.remoteUser}]]! </b>
@@ -44,20 +41,33 @@
                     </li>
                 </ul>
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
+                    <div class="items-derecha">
 
 
-                    <!--Cerrar Sesion-->
-                    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                        <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
-                    </form>
+                        <!-- IMPORTANTE -->
+                        <!-- IMPORTANTE -->
+                        <!-- IMPORTANTE -->
+                        <!-- LOGO CARRITO -->
+                        <a class="cart-link" th:href="@{/carrito/productosCarrito}">
+                            <img class="cart-logo" th:src="@{${'/images/cart2.png'}}" alt="">
+                            <!-- En este párrafo debería ir la cantidad de items del carrito hasta ese momento -->
+                            <p>7</p>
+                        </a>
+                        <!-- LOGO CARRITO -->
 
-                    <a th:href="@{/login}" sec:authorize="!isAuthenticated()">
-                        <button class="btn btn-outline-light">Iniciar</button>
-                    </a>
-
-                    <a th:href="@{/registrar}" sec:authorize="!isAuthenticated()">
-                        <button class="btn btn-outline-light">Registrar</button>
-                    </a>
+                        <!--Cerrar Sesion-->
+                        <form class="boton-derecha" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                            <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
+                        </form>
+    
+                        <a class="boton-derecha" th:href="@{/login}" sec:authorize="!isAuthenticated()">
+                            <button class="btn btn-outline-light">Iniciar</button>
+                        </a>
+    
+                        <a class="boton-derecha" th:href="@{/registrar}" sec:authorize="!isAuthenticated()">
+                            <button class="btn btn-outline-light">Registrar</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
