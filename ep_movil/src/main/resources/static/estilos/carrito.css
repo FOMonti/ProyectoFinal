@@ -1,11 +1,83 @@
+html {
+    background-color: rgb(245, 245, 245);
+}
+
+.empty-cart-msg {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.general {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(245, 245, 245);
+    width: 100%;
+}
+
+.total-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.tarjeta-total {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    position: sticky;
+    top: 20px;
+}
+
+.tarjeta-carrito-total {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+    background-color: #e0e0e0;
+}
+
+.buy-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.finalizar-compra {
+    color: #FFF;
+    font-weight: bold;
+    background-color: rgb(35, 114, 61);
+    width: 220px;
+    height: 45px;
+    margin: 5px 0;
+}
+
+.continuar-comprando {
+    font-weight: bold;
+    background-color: #f0f0f0;
+    color: #000;
+    width: 220px;
+    height: 45px;
+    margin: 5px 0;
+}
+
 .contenedor-tarjetas {
     display: grid;
     justify-content: center;
     margin-bottom: 30px;
 }
 
+.titulo {
+    text-align: center;
+}
+
 .tarjeta-general {
     display: block;
+    width: 700px;
 }
 
 .tarjeta-carrito {
@@ -14,9 +86,13 @@
     height: 250px;
 }
 
+.tarjeta-carrito h4 {
+    font-size: 1.2rem;
+}
+
 .card-title {
     height: 80px;
-    width: 90%;
+    width: 100%;
 }
 
 .detalle-container {
@@ -29,6 +105,11 @@
     display: flex;
     flex-direction: column;
     align-items: start;
+}
+
+.detalles-producto-carrito a {
+    text-decoration: none;
+    color: #000;
 }
 
 .cantidad-div {

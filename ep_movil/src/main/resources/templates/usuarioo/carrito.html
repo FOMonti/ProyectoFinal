@@ -17,50 +17,77 @@
 
 <body>
 <header th:replace="layout/navbar::navbar-l"></header>
-<h1>Carrito</h1>
-<div class="contenedor-tarjetas">
-    <div th:each="item: ${items}"class="tarjeta-general">
-        <div class="card mt-3"style="max-width: 900px;">
-
-            <div class="tarjeta-carrito">
-                <div class="col-md-4 align-content">
-                    <img class="imagen-producto"
-                        th:src="@{'/images/'+ ${item.producto.imagen}}"
-                        alt="producto imagen" />
-                </div>
-                <div class="detalle-container">
-                    <div class="detalles-producto-carrito">
-                        <h4 class="card-title"
-                            th:text="${item.producto.nombre}"></h4>
-                        <div class="d-flex flex-row-reverse
-                            bd-highlight">
-                            <h3 class="card-text bd-highlight"
-                                th:text="'$' + ${item.producto.precio}"></h3>
-                        </div>
-                        <div class="cantidad-div">
-                            <h5 class="">Cantidad:</h5>
-                            <h5 class="item-cantidad" th:text="${item.cantidad}"></h5>
-                        </div>
-                        <div class="eliminar-div">
-                            <a th:href="@{/carrito/quitarItem/} +
-                                ${item.id}">
-                                <button class="eliminar-btn btn btn-outline-dark">Eliminar</button>
+<h1 class="titulo">Mi carrito</h1>
+<div class="general">
+    <div class="contenedor-tarjetas">
+        <div th:each="item: ${items}"class="tarjeta-general">
+            <div class="card mt-3"style="max-width: 900px;">
+                
+                <div class="tarjeta-carrito">
+                    <div class="col-md-4 align-content">
+                        <a th:href="@{'/admin/detalle/'} + ${item.producto.id}">
+                            <img class="imagen-producto"
+                                th:src="@{'/images/'+ ${item.producto.imagen}}"
+                                alt="producto imagen" />
+                        </a>
+                    </div>
+                    <div class="detalle-container">
+                        <div class="detalles-producto-carrito">
+                            <a th:href="@{'/admin/detalle/'} + ${item.producto.id}">
+                                <h4 class="card-title"
+                                    th:text="${item.producto.nombre}"></h4>
                             </a>
+                            <div class="d-flex flex-row-reverse
+                                bd-highlight">
+                                <h3 class="card-text bd-highlight"
+                                    th:text="'$' + ${item.producto.precio}"></h3>
+                            </div>
+                            <div class="cantidad-div">
+                                <h5 class="">Cantidad:</h5>
+                                <h5 class="item-cantidad" th:text="${item.cantidad}"></h5>
+                            </div>
+                            <div class="eliminar-div">
+                                <a th:href="@{/carrito/quitarItem/} +
+                                    ${item.id}">
+                                    <button class="eliminar-btn btn btn-outline-dark">Eliminar</button>
+                                </a>
+                            </div>
+    
                         </div>
-
                     </div>
                 </div>
+                
             </div>
-            
+        </div>
+    </div>
+    <div class="empty-cart-msg" th:if="${items.size == 0}">
+        <h2>¡No hay nada por aquí!</h2>
+        <a th:href="@{/tienda/tienda2}">
+            <button class="continuar-comprando btn btn-outline-dark">Continuar comprando</button>
+        </a>
+    </div>
+    <div th:if="${items.size > 0}">
+        <div class="tarjeta-total">
+            <div class="card mt-3">
+                <div class="tarjeta-carrito-total">
+                    <div class="total-container">
+                        <p class="total-price-text">Total</p>
+                        <p class="total-price-number" th:text="'$'  + ${carrito.precio}"></p>
+                    </div>
+                    <div class="buy-buttons">
+                        <a th:href="@{/carrito/comprar}">
+                            <button class="finalizar-compra btn btn-outline-dark">Finalizar compra</button>
+                        </a>
+                        <a th:href="@{/tienda/tienda2}">
+                            <button class="continuar-comprando btn btn-outline-dark">Continuar comprando</button>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
         </div>
     </div>
 </div>
-<div class="d-flex flex-row-reverse bd-highlight">
-    <h3 class="card-text p-2 bd-highlight" th:text="'$'  + ${carrito.precio}"></h3>
-</div>
-<a th:href="@{/carrito/comprar}">
-    <button class="btn btn-outline-dark">Comprar</button>
-</a>
 <!--Footer-->
 <footer th:replace="layout/layout::footer"></footer>
 </body>
