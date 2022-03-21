@@ -11,6 +11,23 @@
     margin: 0 5px;
 }
 
+.cart {
+    margin-right: 10px;
+}
+
+#cart-button {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+#cart-button:focus {
+    box-shadow: none;
+}
+
+#cart-button:active {
+    background-color: #cfcfcf;
+}
+
 .cart-logo {
     width: 26px;
     margin: 0 5px;
