@@ -42,6 +42,7 @@ public class TiendaController {
     @GetMapping("/productos")
     public String dashboard(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionSinOrden(params, model, 10);
+        model.addAttribute("ruta", "/tienda/productos");
         return "tienda";
     }
 
@@ -50,34 +51,35 @@ public class TiendaController {
         model = productoService.paginacionSinOrden(params, model, 6);
         ItemCarrito itemCarrito = new ItemCarrito();
         model.addAttribute("itemCarrito", itemCarrito);
+        model.addAttribute("ruta", "/tienda/tienda2");
         return "tienda2";
     }
 
     @GetMapping("/OxNA")
-    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxNombreZ_A(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXNombreDESC(params, model, 6);
+        model.addAttribute("ruta", "/tienda/OxNA");
         return "tienda2";
     }
 
     @GetMapping("/OxND")
-    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxNombreA_Z(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXNombreASC(params, model, 6);
+        model.addAttribute("ruta", "/tienda/OxND");
         return "tienda2";
     }
 
     @GetMapping("/Ox-P")
-    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMenorPrecio(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXPrecioASC(params, model, 6);
+        model.addAttribute("ruta", "/tienda/Ox-P");
         return "tienda2";
     }
 
     @GetMapping("/Ox+P")
-    //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMayorPrecio(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXPrecioDESC(params, model, 6);
+        model.addAttribute("ruta", "/tienda/Ox+P");
         return "tienda2";
     }
 
@@ -105,7 +107,7 @@ public class TiendaController {
         return "admin/detalleProducto";
     }
 
-    @GetMapping("/agregarACarrito")
+    @PostMapping("/agregarACarrito")
     private String agregarACarrito(@RequestParam(name = "cantidad") Integer cantidad,
                                    @RequestParam(name = "idProducto") Integer id,
                                    Principal principal) {
@@ -124,13 +126,18 @@ public class TiendaController {
                     } else {
                         ic.setCantidad(cant);
                         itemCarritoService.guardarItemCarrito(ic);
+                        carrito.setPrecio(carrito.getPrecio() + (producto.getPrecio() * cantidad));
+                        carritoService.guardarCarrito(carrito);
                         return "redirect:/tienda/tienda2";
                     }
                 }
             }
             ItemCarrito itemCarrito = new ItemCarrito(cantidad, producto, carrito);
             itemCarritoService.guardarItemCarrito(itemCarrito);
+            carrito.setPrecio(carrito.getPrecio() + (producto.getPrecio() * cantidad));
+            carritoService.guardarCarrito(carrito);
         }
         return "redirect:/tienda/tienda2";
     }
+
 }

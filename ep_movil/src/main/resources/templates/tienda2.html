@@ -72,9 +72,9 @@
             </a>
             <h6 class="price" th:text="'$' +
                             ${producto.precio}"></h6>
-            <form th:action="@{/tienda/agregarACarrito}">
+            <form th:action="@{/tienda/agregarACarrito}" method="post">
 
-                <input type="number" value="1" placeholder="1" name="cantidad" min="1" max="${producto.stock}">
+                <input type="number" name="cantidad" min="1" max="${producto.id}">
 
                 <input type="hidden" th:value="${producto.id}" name="idProducto"/>
 
@@ -100,14 +100,14 @@
         <nav aria-label="Pagination">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:if="${current != 1}">
-                    <a class="page-link" th:href="@{|/tienda/tienda2/?page=${prev}|}"> Anterior</a>
-                    <!-- "@{|" + "${ruta}" + "/"-->
+                    <a class="page-link" th:href="@{|${ruta}/?page=${prev}|}"> Anterior</a>
+                    <!-- @{|/tienda/tienda2/?page=${page}|}-->
                 </li>
                 <li class="page-item" th:each="page : ${pages}" th:if="${current == page ? '!active' : ''}">
-                    <a class="page-link" th:href="@{|/tienda/tienda2/?page=${page}|}" th:text="${page}"></a>
+                    <a class="page-link" th:href="@{|${ruta}/?page=${page}|}" th:text="${page}"></a>
                 </li>
                 <li class="page-item" th:if="${current != last}">
-                    <a class="page-link" th:href="@{|/tienda/tienda2/?page=${next}|}"> Posterior</a>
+                    <a class="page-link" th:href="@{|${ruta}/?page=${next}|}"> Posterior</a>
                 </li>
             </ul>
         </nav>

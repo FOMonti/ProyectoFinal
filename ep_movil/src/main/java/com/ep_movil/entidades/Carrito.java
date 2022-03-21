@@ -24,6 +24,8 @@ public class Carrito {
 
     //cantidad de cada item pedido
 
+    private Double precio;
+
     @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
@@ -38,6 +40,7 @@ public class Carrito {
     public Carrito(Usuario usuario) {
         this.items = new ArrayList<ItemCarrito>();
         this.usuario = usuario;
+        this.precio = 0.0;
     }
 
     public Carrito(Integer id, List<ItemCarrito> items, Usuario usuario) {
@@ -61,6 +64,12 @@ public class Carrito {
         this.items = items;
     }
 
+    public Double getPrecio() {
+        return precio;
+    }
 
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
 }
 
