@@ -112,7 +112,7 @@ public class ProductoController {
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxNombreZ_A(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXNombreDESC(params, model, 10);
-        model.addAttribute("ruta", "/tienda/OxNA");
+        model.addAttribute("ruta", "/admin/OxNA");
         return "tienda";
     }
 
@@ -120,7 +120,7 @@ public class ProductoController {
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxNombreA_Z(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXNombreASC(params, model, 10);
-        model.addAttribute("ruta", "/tienda/OxND");
+        model.addAttribute("ruta", "/admin/OxND");
         return "tienda";
     }
 
@@ -128,7 +128,7 @@ public class ProductoController {
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMenorPrecio(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXPrecioASC(params, model, 10);
-        model.addAttribute("ruta", "/tienda/Ox-P");
+        model.addAttribute("ruta", "/admin/Ox-P");
         return "tienda";
     }
 
@@ -136,7 +136,7 @@ public class ProductoController {
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMayorPrecio(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXPrecioDESC(params, model, 10);
-        model.addAttribute("ruta", "/tienda/Ox+P");
+        model.addAttribute("ruta", "/admin/Ox+P");
         return "tienda";
     }
 
