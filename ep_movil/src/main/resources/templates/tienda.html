@@ -40,10 +40,8 @@
                             <li><a href="/admin/OxNA">Alfabéticamente Z-A</a>
                         </ul>
                     </div>
-                    <a sec:authorize="hasRole('ROLE_ADMIN')"
-                        th:href="@{/admin/productos-form}">
-                        <button class="agregar-btn btn btn-outline-dark"
-                            aria-label="Basic outlined example">Agregar</button>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/productos-form}">
+                        <p class="agregar-btn btn btn-outline-dark" aria-label="Basic outlined example">Agregar</p>
                     </a>
 
                     </div>
