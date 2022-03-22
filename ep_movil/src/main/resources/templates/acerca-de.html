@@ -10,13 +10,13 @@
             rel="stylesheet"
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous" />
-        <link rel="stylesheet" href="/styles/style.css"/>
+        <link rel="stylesheet" href="/styles/style.css" />
         <link rel="stylesheet" href="/estilos/navbar.css">
         <link rel="stylesheet" href="/estilos/acerca-de.css" />
 
     </head>
 
-    <body>
+    <body class="bg-dark">
         <header th:replace="layout/navbar::navbar-l"></header>
 
         <div class="container">
@@ -39,7 +39,8 @@
                     </p>
                 </div>
             </div>
-            <img class="lateral-image" th:src="@{${'/images/aside-img-about.png'}}" alt="">
+            <img class="lateral-image"
+                th:src="@{${'/images/aside-img-about.png'}}" alt="">
             <div class="fila">
                 <h1 class="titulo">E-COMMERCE</h1>
                 <hr>
@@ -68,53 +69,121 @@
             </div>
         </div>
 
+        <div class="faqs">
+            <h1 class="titulo text-center">PREGUNTAS FRECUENTES</h1>
+            <hr>
+            <button class="accordion">QUÉ TIPO DE REPARACIONES HACEMOS?</button>
+            <div class="panel">
+                <p>Celulares, tablets y notebooks de las marcas más reconocidas
+                    del mercado.
+                    Dentro de los tipos de arreglos que hacemos se encuentran:
+                    reemplazos de pantalla, táctiles, lcd, problemas
+                    con botones de encendido, cámaras, reemplazo de botón de
+                    inicio, parlantes, micrófonos, conexiones wi-fi 3g
+                    y 4g, puertos de carga, cambio de baterías y mucho más.
+
+                    ¡Si tenés un problema, contactános, tenemos la solución!</p>
+            </div>
+
+            <button class="accordion">¿CÓMO FUNCIONA?</button>
+            <div class="panel">
+                <p>Coméntanos qué falla presenta tu dispositivo de forma online
+                    y te informaremos el costo
+                    y tiempo de reparación. En caso de que desconozcas el
+                    problema realizamos el diagnóstico sin cargo.
+                    <br />
+                    Dentro del plazo de reparación informado, nos contactaremos
+                    para la devolución de tu smartphone reparado.
+                </p>
+            </div>
+
+            <button class="accordion">¿QUÉ OCURRE SI NO SÉ CUÁL ES EL PROBLEMA
+                CON MI DISPOSITIVO?</button>
+            <div class="panel">
+                <p>Existen cientos de tipos de reparaciones, es probable que
+                    tengamos la solución al problema que estás
+                    experimentando. Sin embargo, si no sabes concretamente cual
+                    puede ser el problema, deja tu duda en manos de
+                    nuestros especialistas, que te dirán en minutos cuál es el
+                    problema.
+                    Por más información <a th:href="@{/repara}">contactanos</a></p>
+            </div>
+            <button class="accordion">NO VEO MI MARCA DE SMARTPHONE EN EL SITIO
+                WEB. ¿ME PUEDEN AYUDAR?</button>
+            <div class="panel">
+                <p>Con todos los nuevos modelos de smartphones, laptops o
+                    tablets que salen al mercado hacemos nuestro mejor
+                    esfuerzo para actualizar y agregar todas las opciones de
+                    reparación disponibles, pero a veces nos falta una.
+                    Si tienes una marca de teléfono que no figura en nuestro
+                    sitio web, envíanos un mensaje a través de nuestro
+                    formulario de "Contacto" y te responderemos con la opción
+                    disponible para tu solicitud específica.</p>
+            </div>
+            <button class="accordion">LAS PANTALLAS ¿SON ORIGINALES?</button>
+            <div class="panel">
+                <p>Muchas marcas como no comercializan repuestos originales, por
+                    ende encontrarlos en el país es una tarea
+                    imposible. Si garantizamos que trabajamos con la mejor
+                    calidad de repuestos que se pueden encontrar en el
+                    mercado. Es muy frecuente encontrar empresas que dicen
+                    ofrecer repuestos originales, ¡lo cual no es cierto!
+                </p>
+            </div>
+            <button class="accordion">¿CÓMO PAGO EL SERVICIO</button>
+            <div class="panel">
+                <p>Trabajamos con todos los medios de pago: efectivo, tarjeta de
+                    crédito, tarjeta de débito, Mercado Pago y
+                    MODO. También podes pagar en 6 cuotas sin interés.</p>
+            </div>
+            <button class="accordion">¿HAY ALGUNA GARANTÍA?</button>
+            <div class="panel">
+                <p>Sí, ofrecemos una garantía de 90 días para las reparaciones,
+                    con excepción de los equipos dañados por agua o
+                    con daños físicos posteriores a la reparación o manipulados
+                    por un tercero. Estamos aquí para garantizar la
+                    satisfacción de todos nuestros clientes pasados, presentes y
+                    futuros.</p>
+            </div>
+        </div>
+
         <div class="redes">
             <h3>¡SEGUINOS EN NUESTRAS REDES SOCIALES!</h3>
             <div>
                 <a href="">
-                    <img class="logo" th:src="@{${'/images/facebook-logo.png'}}" alt="facebook-img">
+                    <img class="logo" th:src="@{${'/images/facebook-logo.png'}}"
+                        alt="facebook-img">
                 </a>
                 <a href="">
-                    <img class="logo" th:src="@{${'/images/instagram-logo.png'}}" alt="instagram-img"
+                    <img class="logo"
+                        th:src="@{${'/images/instagram-logo.png'}}"
+                        alt="instagram-img"
                 </a>
                 <a href="">
-                    <img class="logo" th:src="@{${'/images/twitter-logo.png'}}" alt="twitter-img">
+                    <img class="logo" th:src="@{${'/images/twitter-logo.png'}}"
+                        alt="twitter-img">
                 </a>
             </div>
         </div>
 
-
-        <!-- <section>
-            <div class="w3-container w3-padding-64 w3-center" id="team">
-                <h2>Nuestros Founders</h2>
-                <p>Meet the team - our office rats:</p>
-    
-                <div class="w3-third w3-container ">
-                    <img src="img\Cris.jpg" alt="Boss" style="width:40%" class="w3-circle w3-hover-opacity">
-                    <h3>Cristian Zamora</h3>
-                    <p>Gerente General</p>
-                    <a href="https://www.linkedin.com/in/cristian-daniel-zamora-7b215839/">Linkedin</a>
-                </div>
-    
-                <div class="w3-third w3-container ">
-                    <img src="img\Juli.jpg" alt="Boss" style="width:40%" class="w3-circle w3-hover-opacity">
-                    <h3>Julian Chedrese</h3>
-                    <p>Gerente Produccion</p>
-                    <a href="#contact">Contacto</a>
-                </div>
-            </div>
-        </section> -->
         <h3 class="slogan">EP-MOVIL, tecnología en marcha...</h3>
 
+        <script>
+                var acc = document.getElementsByClassName("accordion");
+        var i;
 
-
-
-
-
-
-
-
-
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+        </script>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

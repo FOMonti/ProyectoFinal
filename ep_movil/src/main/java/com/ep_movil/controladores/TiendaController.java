@@ -121,7 +121,7 @@ public class TiendaController {
                 if (ic.getProducto().equals(producto)) {
                     Integer cant = ic.getCantidad() + cantidad;
                     if (cant > producto.getStock()) {
-                        //Agregar alerga, no hay stock
+                        //Agregar alerta, no hay stock
                         return "redirect:/tienda/tienda2";
                     } else {
                         ic.setCantidad(cant);
@@ -131,6 +131,9 @@ public class TiendaController {
                         return "redirect:/tienda/tienda2";
                     }
                 }
+            }
+            if(cantidad > producto.getStock()){
+                cantidad = producto.getStock();
             }
             ItemCarrito itemCarrito = new ItemCarrito(cantidad, producto, carrito);
             itemCarritoService.guardarItemCarrito(itemCarrito);

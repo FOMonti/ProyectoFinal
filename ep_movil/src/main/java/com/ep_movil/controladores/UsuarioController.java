@@ -63,11 +63,6 @@ public class UsuarioController {
     public String repara(Model model) {
         return "repara";
     }
-    
-//    @GetMapping("/perfil")
-//    public String perfil(Model model) {
-//        return "usuario-perfil";
-//    }
 
     @Autowired
     private IComentarioService comentarioService;

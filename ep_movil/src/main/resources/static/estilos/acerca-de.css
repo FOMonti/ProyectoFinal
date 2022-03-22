@@ -82,6 +82,17 @@ hr {
     color: var(--main-color);
 }
 
+.panel p a {
+    color: #209dc0;
+    text-decoration: none;
+    transition: 180ms;
+
+}
+
+.panel p a:hover {
+    color: #1e5e70;
+}
+
 .general span {
     font-weight: bold;
 }
@@ -121,4 +132,59 @@ hr {
     color: #FFF;
     padding: 60px;
     margin: 0;
+}
+
+
+
+
+.faqs {
+    width: 60%;
+    margin: 35px auto;
+}
+
+.faqs hr {
+    margin-bottom: 30px;
+}
+
+.accordion {
+    background-color: #eee;
+    color: rgb(41, 41, 41);
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.4s;
+}
+
+.accordion:hover {
+    background-color: #ccc;
+}
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+
+/* logo wp */
+.fab {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+    position: fixed;
+    top: 80%;
+    right: 10%;
+}
+
+.fab:hover {
+    opacity: 0.7;;
 }

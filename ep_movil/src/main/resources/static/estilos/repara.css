@@ -24,3 +24,7 @@ body {
 #detalle {
     resize: none;
 }
+
+.enviar {
+    margin-top: 20px;
+}
