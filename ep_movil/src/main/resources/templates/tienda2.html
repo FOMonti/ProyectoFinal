@@ -97,9 +97,10 @@
                             <input type="hidden" th:value="${producto.id}"
                                 name="idProducto" />
                         </div>
-
-                        <button type="submit" class="add-to-cart">Añadir a
+                        <button th:if="${producto.stock > 0}" type="submit" class="add-to-cart">Añadir a
                             carrito</button>
+                        <a th:if="${producto.stock == 0}" class="sin-stock">Sin stock</a>
+                        
                     </form>
                     <div class="admin-buttons">
                         <a class="modify" th:href="@{/tienda/modificar/} +
@@ -143,8 +144,9 @@
                 </nav>
             </div>
         </div>
+
         <a href="javascript:history.back()"> Volver Atrás</a>
-        <footer th:replace="layout/layout::footer"></footer>
+        <footer class="footer navbar-fixed-bottom" th:replace="layout/layout::footer"></footer>
     </body>
 </html>
 

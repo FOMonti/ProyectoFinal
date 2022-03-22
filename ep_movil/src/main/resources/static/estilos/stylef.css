@@ -132,6 +132,8 @@ html, body {
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    height: 140px;
+    max-height: 140px;
 }
 
 .datos:hover {
@@ -149,6 +151,24 @@ html, body {
     justify-self: center;
     margin-bottom: 20px;
     margin-top: 10px;
+}
+
+.sin-stock {
+    background-color: #949494;
+    color: #FFF;
+    border-radius: 4px;
+    text-decoration: none;
+    padding: 10px;
+    width: 50%;
+    text-align: center;
+    justify-self: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.sin-stock:hover {
+    color: #fff;
+    cursor: pointer;
 }
 
 .add-to-cart:hover {
@@ -325,19 +345,7 @@ html, body {
 
 
 
-.twitter-icon,
-.facebook-icon,
-.instagram-icon {
-    width: 45px;
-    filter: saturate(0) brightness(0.6);
-    transition: 200ms;
-}
 
-.twitter-icon:hover,
-.facebook-icon:hover,
-.instagram-icon:hover {
-    filter: saturate(0.8);
-}
 
 .banner-container {
     display: flex;
@@ -356,7 +364,6 @@ html, body {
 #categories2 {
     display: none;
 }
-
 
 
 

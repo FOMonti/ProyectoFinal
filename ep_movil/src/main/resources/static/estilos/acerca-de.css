@@ -83,11 +83,15 @@ hr {
     color: var(--main-color);
 }
 
+.panel p {
+    padding-top: 10px;
+}
+
 .panel p a {
     color: #209dc0;
     text-decoration: none;
     transition: 180ms;
-
+    
 }
 
 .panel p a:hover {
@@ -98,44 +102,11 @@ hr {
     font-weight: bold;
 }
 
-.redes {
-    margin-top: 50px;
-    color: #FFF;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.redes h3 {
-    margin-bottom: 35px;
-}
-
-.redes a {
-    text-decoration: none;
-}
-
-.logo {
-    width: 50px;
-    margin: 0 10px;
-}
-
-
 
 .lateral-image {
     /* margin-left: px; */
     width: 300px;
 }
-
-
-
-.slogan {
-    text-align: center;
-    color: #FFF;
-    padding: 60px;
-    margin: 0;
-}
-
-
 
 
 .faqs {

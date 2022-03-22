@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="/styles/style.css" />
         <link rel="stylesheet" href="/estilos/navbar.css">
         <link rel="stylesheet" href="/estilos/acerca-de.css" />
+        <link rel="stylesheet" href="/estilos/footer.css">
         <link rel="icon" type="favicon" href="/images/favicon-blanco.ico">
     </head>
 
@@ -168,26 +169,7 @@
             </div>
         </div>
 
-        <div class="redes">
-            <h3>¡SEGUINOS EN NUESTRAS REDES SOCIALES!</h3>
-            <div>
-                <a href="">
-                    <img class="logo" th:src="@{${'/images/facebook-logo.png'}}"
-                        alt="facebook-img">
-                </a>
-                <a href="">
-                    <img class="logo"
-                        th:src="@{${'/images/instagram-logo.png'}}"
-                        alt="instagram-img"
-                </a>
-                <a href="">
-                    <img class="logo" th:src="@{${'/images/twitter-logo.png'}}"
-                        alt="twitter-img">
-                </a>
-            </div>
-        </div>
-
-        <h3 class="slogan">EP-MOVIL, tecnología en marcha...</h3>
+        <footer class="footer navbar-fixed-bottom" th:replace="layout/layout::footer"></footer>
 
         <script>
                 var acc = document.getElementsByClassName("accordion");
