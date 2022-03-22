@@ -4,9 +4,10 @@
     --main-color: #0cbaeb;
 }
 body {
-    background-image: url(../images/epmovil-fondo-repara.jpg);
+    /* background-image: url(../images/epmovil-fondo-repara.jpg);
     background-size: 100%;
-    background-position: top;
+    background-position: top; */
+    background-color: rgb(245, 245, 245);
 }
 
 .container {

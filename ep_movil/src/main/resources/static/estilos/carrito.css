@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
 
 
-html {
+html, body {
     background-color: rgb(245, 245, 245);
 }
 
@@ -43,6 +43,9 @@ html {
     justify-content: center;
     align-items: center;
     height: 180px;
+}
+
+.tarjeta-total2 {
     background-color: #e0e0e0;
 }
 
@@ -90,6 +93,7 @@ html {
     display: flex;
     align-items: center;
     height: 250px;
+    box-shadow: 0px 0px 6px 0px rgb(216, 216, 216);
 }
 
 .tarjeta-carrito h4 {
