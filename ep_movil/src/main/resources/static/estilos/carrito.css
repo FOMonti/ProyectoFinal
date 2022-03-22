@@ -144,6 +144,16 @@ html, body {
 }
 
 .imagen-producto {
-    width: 75%;
+    width: auto;
+    height: auto;
+    max-height: 200px;
+    max-width: 200px;
     margin-left: 20px;
+    text-align: center;
+}
+
+.contenedor-imagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -67,3 +67,11 @@
     display: flex;
     align-items: center;
 }
+
+.user-link {
+    color: #fff;
+}
+
+.user-link:hover {
+    color: #fff;
+}
