@@ -14,6 +14,6 @@ public interface IComentarioDao extends JpaRepository<Comentario, Integer> {
     @Query("SELECT c FROM Comentario c WHERE c.producto = ?1 ")
     public List<Comentario> listarComentarios(Producto producto);
 
-    @Query("SELECT c FROM Comentario c WHERE c.usuario = ?1")
+    @Query("SELECT c FROM Comentario c WHERE c.usuario = ?1 ORDER BY c.fechaDelComentario DESC")
     public List<Comentario> listarComentariosUsuario(Usuario usuario);
 }

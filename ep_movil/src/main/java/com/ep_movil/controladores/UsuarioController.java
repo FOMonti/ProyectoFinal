@@ -139,6 +139,8 @@ public class UsuarioController {
         Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
         if (!ou.isPresent()) return "redirect:/";
         Usuario usuario = ou.get();
+        List<Comentario> comentarios = comentarioService.listarComentariosUsuario(usuario);
+        model.addAttribute("comentarios", comentarios);
         model.addAttribute("usuario", usuario);
         return "usuarioo/perfil";
     }

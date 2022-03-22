@@ -132,6 +132,7 @@ public class TiendaController {
                     }
                 }
             }
+            //arreglar
             if(cantidad > producto.getStock()){
                 cantidad = producto.getStock();
             }
