@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
+
 :root {
     --main-color: #0cbaeb;
 }
@@ -15,6 +17,11 @@ body {
     
 }
 
+.container h1 {
+    font-family: 'Lato', sans-serif;
+    margin: 20px auto;
+}
+
 .repara-form {
     display: flex;
     flex-direction: column;
@@ -27,4 +34,8 @@ body {
 
 .enviar {
     margin-top: 20px;
+}
+
+.detalle-label {
+    font-size: 1.2rem;
 }

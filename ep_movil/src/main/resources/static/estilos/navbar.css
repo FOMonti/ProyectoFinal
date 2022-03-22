@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
+
+.contenedor-navbar {
+    font-family: 'Lato';
+}
+
 .navbar-brand {
     margin-left: 10px;
+    font-family: 'Lato';
 }
 
 .items-derecha {
