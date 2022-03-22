@@ -42,6 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/registrar", "/acceder", "/save", "/login", "/signin",
                         "/tienda/productos/**", "/tienda/tienda2/**", "/admin/detalle/**").permitAll()
                 .antMatchers("/css/**", "/js/**", "/images/*", "/styles/*", "/templates/*", "/estilos/**").permitAll()
+                .antMatchers("/tienda/productos/**","/admin/guardar", "/admin/modificar/**", "/admin/eliminar/**").hasRole("ADMIN") //autorizo solo al admin el poder editar, agregar o eliminar
+                
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginProcessingUrl("/signin").loginPage("/login").permitAll()

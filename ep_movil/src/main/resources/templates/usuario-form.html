@@ -11,21 +11,31 @@
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class=" col-4">
-                    <form th:action="@{/save}" th:object="${usuario}" method="post">
-                        <h1>Registro</h1>
-
+                    <form th:action="@{/save}" th:object="${usuario}" method="post" enctype="multipart/form-data">
+                        
+                        <h1 sec:authorize="isAuthenticated()">Modificar perfil</h1>
+                        
+                        <h1 sec:authorize="!isAuthenticated()">Registro</h1>
+                        
                         <input type="text" th:field="*{nombre}" class="form-control"
                                placeholder="Ingrese su nombre"/>
+                        <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"> Error en el nombre</div>
 
                         <br/>
 
-                        <input type="text" th:field="*{apellido}" class="form-control"
-                               placeholder="Ingrese su apellido"/>
+                        <input type="text" th:field="*{apellido}" class="form-control" placeholder="Ingrese su apellido"/>
 
+                        <br/>
+                        
+                        <b>Seleccione una foto para su perfil:</b>
+                        <input type="file" name="file" class="form-control"/>
+                        <t>(O puede hacerlo mas adelante!!)</t>
+                        <br/>
                         <br/>
 
                         <input type="text" th:field="*{email}" class="form-control" 
                                placeholder="Ingrese su email"/>
+                        <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> Error en el nombre</div>
 
                         <br/>
 

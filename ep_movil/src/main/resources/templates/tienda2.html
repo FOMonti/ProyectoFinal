@@ -77,11 +77,12 @@
             <!-- En caso de ser "role == admin" se mostraría el siguiente DIV -->
             <div class="admin-buttons">
                 <!-- <a class="add" href="#"><img th:src="@{${'/images/cart.png'}}" alt="Agregar al carrito"></a>  -->
+                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/productos-form}">
                 <a class="modify" th:href="@{/tienda/modificar/} + ${producto.id}"><img
-                        th:src="@{${'/images/edit.png'}}"
-                        alt="Modificar"></a>
+                        th:src="@{${'/images/edit.png'}}" alt="Modificar"/></a></a>
+                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/productos-form}">
                 <a class="delete" th:href="@{/tienda/eliminar(id=${producto.id})}"><img
-                        th:src="@{${'/images/delete.png'}}" alt="Eliminar"></a>
+                        th:src="@{${'/images/delete.png'}}" alt="Eliminar"/></a></a>
             </div>
         </div>
     </div>

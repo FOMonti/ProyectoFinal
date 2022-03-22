@@ -1,6 +1,7 @@
 package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Carrito;
+import com.ep_movil.entidades.Cliente;
 import com.ep_movil.entidades.Rol;
 import com.ep_movil.enums.RolNombre;
 import com.ep_movil.security.service.UsuarioService;
@@ -64,10 +65,10 @@ public class UsuarioController {
     }
 
     @PostMapping("/save") // en este método guardamos usuarios con el rol de User
-    public String saveUser(Usuario usuario, @Valid String username, Errors usernameError,@Valid String password, 
-            Errors passwordError, RedirectAttributes redirect) throws AddressException, MessagingException {
+    public String saveUser(@Valid Usuario usuario, Errors error, String username, String password,
+            RedirectAttributes redirect) throws AddressException, MessagingException {
 
-        if (usernameError.hasErrors() || passwordError.hasErrors()) {
+        if (error.hasErrors()) {
             return "usuario-form";
         }
 
@@ -93,7 +94,7 @@ public class UsuarioController {
         Properties props = System.getProperties();
         Session session = Session.getDefaultInstance(props);
         MimeMessage email = new MimeMessage(session);
-        
+
         try {
             email.setRecipients(Message.RecipientType.TO, usuario.getEmail());
         } catch (MessagingException ex) {
@@ -153,23 +154,4 @@ public class UsuarioController {
         return "/user/carrito";
     }
 
-//    @PostMapping("/signin")
-//    public String acceder(Usuario usuario, HttpSession session,
-//                          RedirectAttributes redirect
-//    ) {
-//
-//        Optional<Usuario> user = usuarioService.findByUsername(usuario.getUsername());
-//
-//        if (!user.isPresent()) {
-//            redirect.addFlashAttribute("accederFallido", "Credenciales erróneas. Revise el nombre de usuario y/o contraseña ingresados.");
-//            logger.info("AVISO: Se intentó ingresar con un usuario que no se encuentra registrado.");
-//            return "redirect:/login";
-//        }
-//
-//        session.setAttribute("idusuario", usuario.getId());
-//        log.info("usuario que hizo login: " + usuario.getUsername());
-//        redirect.addFlashAttribute("usuario", usuario);
-//
-//        return "redirect:/";
-//    }
 }

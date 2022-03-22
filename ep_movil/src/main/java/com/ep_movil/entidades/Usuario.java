@@ -1,6 +1,6 @@
-
 package com.ep_movil.entidades;
 
+import com.ep_movil.passwordConfig.ValidPassword;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
 
 //Usuario es la persona registrada en la pagina.
 @Entity
@@ -23,11 +24,12 @@ public class Usuario extends Cliente {
     private String username;
 
     @NotEmpty()
-    //@Size(min = 8, max=25)
-    //@Pattern(regexp="")//[a-zA-Z0-9]
-    //^(?=.*[0-9])(?=.*[az])(? =.*[AZ](? =.*[@#$%^&-+=()])(? =\\\\S+$).{8,25}$
+    @Length(max = 25, min = 5, message = "La contraseña debe tener de 5 a 25 caracteres")
+    @ValidPassword
     private String password;
 
+    private String imagen;
+    
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "usuario_rol",
             joinColumns = @JoinColumn(name = "usuario_id"),
@@ -41,13 +43,15 @@ public class Usuario extends Cliente {
     @OneToOne(cascade = CascadeType.ALL)
     private Carrito historialCarrito;//usuario compra === new carrito ===set
 
-    //saqué el atributo comentarios porque lo hereda del cliente.
-
     public Usuario() {
     }
 
-    public Usuario(Long id, String nombre, String apellido, String email, List<Comentario> comentario) {
+    public Usuario(String username, String password, String imagen, Carrito historialCarrito, Long id, String nombre, String apellido, String email) {
         super(id, nombre, apellido, email);
+        this.username = username;
+        this.password = password;
+        this.imagen = imagen;
+        this.historialCarrito = historialCarrito;
     }
 
     public String getUsername() {
@@ -66,6 +70,14 @@ public class Usuario extends Cliente {
         this.password = password;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     public Set<Rol> getRoles() {
         return roles;
     }
@@ -82,5 +94,6 @@ public class Usuario extends Cliente {
         this.historialCarrito = historialCarrito;
     }
 
-
+    
+    
 }

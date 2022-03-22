@@ -151,4 +151,12 @@ public class ProductoServiceImpl implements IProductoService {
         model.addAttribute("last", totalPage);
         return model;
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Producto> filtrarNombre(String nombre) {
+
+        return productoDao.findByNombre(nombre);
+
+    }
 }

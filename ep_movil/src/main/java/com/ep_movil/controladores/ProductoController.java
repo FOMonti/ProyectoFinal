@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,13 +70,13 @@ public class ProductoController {
                 e.printStackTrace();
             }
         } else {
-            producto.setImagen("PorductoSinIMG.jpg");
+            producto.setImagen("ProductoSinIMG.jpg");
         }
 
         productoService.guardarProducto(producto);
         redirect.addFlashAttribute("productoGuardado", "Producto guardado con éxito!");
 //        redirect.addFlashAttribute("productoModificado", "Producto modificado con éxito!");
-        return "redirect:/";
+        return "redirect:/tienda/productos";
     }
 
     @GetMapping("/detalle/{id}")
@@ -134,4 +135,9 @@ public class ProductoController {
         return "tienda";
     }
 
+    @GetMapping("/filtrar")
+    public String productosBarraBusqueda(@RequestParam String nombre, RedirectAttributes redirect, @ModelAttribute("producto") Producto producto){
+        redirect.addFlashAttribute("list", productoService.filtrarNombre(nombre));
+        return "redirect:/tienda/productos";
+    }
 }

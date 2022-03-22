@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface IProductoService {
 
@@ -27,7 +28,6 @@ public interface IProductoService {
 
     int actualPage(@RequestParam Map<String, Object> params);
 
-
     Model actualizarVista(int page, Page<Producto> pageProducto, Model model);
 
     Model paginacionSinOrden(@RequestParam Map<String, Object> params, Model model, int cantElements);
@@ -39,4 +39,8 @@ public interface IProductoService {
     Model paginacionXNombreASC(@RequestParam Map<String, Object> params, Model model, int cantElements);
 
     Model paginacionXNombreDESC(@RequestParam Map<String, Object> params, Model model, int cantElements);
+    
+    List<Producto> filtrarNombre(String nombre);
+    
+//    Model filtroNombre(String nombre);
 }
