@@ -52,6 +52,12 @@
                         <div class="btn-group" role="group" aria-label="Basic
                             outlined example">
                             <div class="items-derecha">
+                                <a class="nav-link active" th:href="@{/perfil}">
+                                    <button class="btn btn-outline-light">
+                                        <b th:inline="text">
+                                            [[${#httpServletRequest.remoteUser}]]! </b>
+                                    </button>
+                                </a>
                                 <a th:href="@{/carrito/productosCarrito}" class="cart">
                                     <button id="cart-button" type="button" class="btn btn-light position-relative">
                                         <img class="cart-logo"
