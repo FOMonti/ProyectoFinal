@@ -153,7 +153,7 @@ hr {
     cursor: pointer;
     padding: 18px;
     width: 100%;
-    border: none;
+    border: 1px solid rgb(26, 26, 26);
     text-align: left;
     outline: none;
     font-size: 15px;
@@ -162,13 +162,14 @@ hr {
 }
 
 .accordion:hover {
-    background-color: #ccc;
+    background-color: rgb(0, 0, 0);
 }
 
 .panel {
     padding: 0 18px;
     display: none;
-    background-color: white;
+    color: #FFF;
+    background-color: rgb(29, 29, 29);
     overflow: hidden;
 }
 
@@ -188,4 +189,12 @@ hr {
 
 .fab:hover {
     opacity: 0.7;;
+}
+
+#first-faq {
+    border-radius: 10px 10px 0 0;
+}
+
+#last-faq {
+    border-radius: 0 0 10px 10px;
 }

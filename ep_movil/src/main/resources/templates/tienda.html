@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="/estilos/navbar.css">
         <link rel="stylesheet" href="/estilos/footer.css">
         <link rel="stylesheet" href="/estilos/dashboard.css">
+        <link rel="icon" type="favicon" href="/images/favicon-blanco.ico">
     </head>
     <body>
         <header th:replace="layout/navbar::navbar-l"></header>
@@ -40,7 +41,7 @@
                             <li><a href="/admin/OxNA">Alfabéticamente Z-A</a>
                         </ul>
                     </div>
-                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/productos-form}">
+                    <a class="agregar-btn2" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/productos-form}">
                         <p class="agregar-btn btn btn-outline-dark" aria-label="Basic outlined example">Agregar</p>
                     </a>
 
