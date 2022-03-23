@@ -90,6 +90,7 @@ public class CarritoController {
             producto.setStock(producto.getStock() - ic.getCantidad());
             productoService.guardarProducto(producto);
         }
+        redirect.addFlashAttribute("compraExitosa", "Te fuiste robado perro");
         return "redirect:/carrito/productosCarrito";
     }
 }
