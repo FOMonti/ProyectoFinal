@@ -1,0 +1,75 @@
+.footer-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.redes {
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.redes h3 {
+    /* margin-bottom: 35px; */
+    font-size: 1rem;
+}
+
+.redes a {
+    text-decoration: none;
+}
+
+.logo {
+    width: 40px;
+    margin: 0 10px;
+}
+
+.slogan {
+    text-align: center;
+    color: #FFF;
+    margin: 0;
+}
+
+.contenedor-footer {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.categorias-navegacion {
+    width: 500px;
+    margin-left: 60px;
+}
+
+.categorias-navegacion a {
+    color: rgb(199, 199, 199);
+    text-decoration: none;
+}
+
+.categorias-navegacion ul {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+}
+
+.contenedor-footer .navbar-brand {
+    color: #fff;
+}
+
+.contenedor-footer .navbar-brand:hover {
+    color: #fff;
+}
+
+.copyrigth {
+    color:rgb(110, 110, 110);
+}

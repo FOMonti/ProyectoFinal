@@ -48,4 +48,8 @@ public class UsuarioService {
     public Usuario findById(Long id) {
         return usuarioDao.findById(id).orElse(null);
     }
+    
+   public Usuario findByUsername2(String username){
+       return usuarioDao.findByUsername(username).orElse(null);
+   }
 }

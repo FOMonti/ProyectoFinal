@@ -9,9 +9,9 @@ html, body {
 }
 
 .general {
-    display: flex !important;
-    padding: 30px 100px !important;
-    background-color: rgb(245, 245, 245) !important;
+    display: flex;
+    padding: 30px 100px;
+    background-color: rgb(245, 245, 245);
 }
 
 .aside{
@@ -79,6 +79,7 @@ html, body {
 
 .grid {
     width: 80%;
+    margin-top: 20px;
     margin-left: auto;
     display: grid;
     grid-template-columns: repeat(3, 3fr);
@@ -131,19 +132,12 @@ html, body {
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    height: 140px;
+    max-height: 140px;
 }
 
 .datos:hover {
     color: #000;
-}
-
-.cart-logo {
-    width: 6%;
-}
-
-.nav-item {
-    display: flex;
-    align-items: center;
 }
 
 .add-to-cart {
@@ -155,13 +149,46 @@ html, body {
     width: 50%;
     text-align: center;
     justify-self: center;
-    align-self: flex-end;
     margin-bottom: 20px;
     margin-top: 10px;
 }
 
+.sin-stock {
+    background-color: #949494;
+    color: #FFF;
+    border-radius: 4px;
+    text-decoration: none;
+    padding: 10px;
+    width: 50%;
+    text-align: center;
+    justify-self: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.sin-stock:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
 .add-to-cart:hover {
     color: #FFF;
+}
+
+.quantity {
+    text-align: center;
+    padding-left: 2px;
+    border-radius: 5px;
+    width: 40px;
+    border: 1px solid;
+}
+
+.quantity-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .admin-buttons {
@@ -217,6 +244,13 @@ html, body {
     color: #000;
 }
 
+/* 
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+ 
 
 
 
@@ -226,10 +260,7 @@ html, body {
 
 
 
-
-
-
-.dropbtn {
+/* .dropbtn {
     background-color: var(--main-color);
     color: #FFF;
     border-radius: 4px;
@@ -239,43 +270,62 @@ html, body {
     font-size: 16px;
     border: none;
     width: 70%;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
+  }
+  
+  .dropdown {
     position: relative;
     display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
+  }
+  
+  .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 70%;
     box-shadow: 0px 0px 5px 0px #b3b3b3;
     z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
+  }
+  
+  .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #135264;}
+*/
+
+
+.dropdown-toggle {
+    min-width: 200px;
+    background-color: var(--main-color);
+    margin: 4px 0;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-toggle:focus {
+    box-shadow: none;
+    background-color: var(--main-color);
+}
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #135264;}
+.dropdown-toggle:hover {
+    background-color: var(--main-color);
+}
 
 
 
+.dropdown-item {
+    width: 200px;
+}
+
+.dropdown-item:active {
+    color: inherit;
+    background-color: inherit;
+}
 
 
 
@@ -295,24 +345,25 @@ html, body {
 
 
 
-.twitter-icon,
-.facebook-icon,
-.instagram-icon {
-    width: 45px;
-    filter: saturate(0) brightness(0.6);
-    transition: 200ms;
+
+
+.banner-container {
+    display: flex;
+    background-color: rgb(245, 245, 245);
+    width: 100%;
 }
 
-.twitter-icon:hover,
-.facebook-icon:hover,
-.instagram-icon:hover {
-    filter: saturate(0.8);
+.banner-tienda {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
 
-
-
+#categories2 {
+    display: none;
+}
 
 
 
@@ -321,12 +372,82 @@ html, body {
 @media (max-width: 1250px) {
     .grid {
         grid-template-columns: repeat(2, 2fr);
+        gap: 30px;
+    }
+    .general {
+        display: flex;
+        flex-direction: column;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .imagen-producto {
+        width: 50%;
+    }
+
+    .aside {
+        margin: 0 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    
+    .dropdown {
+        width: 100%;
+        text-align: center;
+    }
+
+    .grid {
+        margin-left: 0;
+    }
+
+    .categories {
+        display: none;
+    }
+
+    #categories2 {
+        display: block;
     }
 }
 
 @media (max-width: 900px) {
+    .dropdown-toggle {
+        min-width: 300px;
+        min-height: 50px;
+        background-color: var(--main-color);
+        margin: 2px 0;
+    }
+
+    .dropdown-item {
+        width: 300px;
+    }
+
+    .producto {
+        grid-template-columns: minmax(400px, 400px);
+    }
+
+    .imagen-producto {
+        width: 45%;
+    }
+    
+    .general {
+        display: flex;
+        flex-direction: column;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
     .grid {
-        grid-template-columns: 100%;
+        margin-left: 0;;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
     }
 }
 

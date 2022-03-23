@@ -1,0 +1,55 @@
+.container-detalle-gral {
+
+}
+
+.detalle-card {
+    display: grid;
+    grid-template-columns: 200px auto;
+}
+
+.detalle-card ul {
+    width: 100%;
+}
+
+.container {
+    width: 70%;
+}
+
+.image-div {
+    display: flex;
+    align-items: center;
+    background-color: inherit;
+    width: 90%;
+    box-shadow: 0px 0px 4px 0px rgb(160, 160, 160);
+}
+
+.imagen-producto {
+    width: 95%;
+    align-self: center;
+    margin: auto;
+    text-align: center;
+}
+
+.comentarios-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comentarios-div {
+    width: 40%;
+}
+
+.back-and-comment {
+    display: flex;
+    width: 20%;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.back-and-comment a {
+    text-decoration: none;
+}

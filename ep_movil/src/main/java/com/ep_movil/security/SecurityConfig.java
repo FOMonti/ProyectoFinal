@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //aca le voy a estar pasando las rutas de acceso público
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/", "/registrar", "/acceder", "/save", "/login", "/signin",
-                        "/tienda/productos/**", "/tienda/tienda2/**", "/admin/detalle/**").permitAll()
+                        "/tienda/productos/**", "/tienda/tienda2/**", "/admin/detalle/**", "/about").permitAll()
                 .antMatchers("/css/**", "/js/**", "/images/*", "/styles/*", "/templates/*", "/estilos/**").permitAll()
                 .antMatchers("/tienda/productos/**","/admin/guardar", "/admin/modificar/**", "/admin/eliminar/**").hasRole("ADMIN") //autorizo solo al admin el poder editar, agregar o eliminar
                 

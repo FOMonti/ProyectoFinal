@@ -1,0 +1,171 @@
+:root {
+    --main-color: #0cbaeb;
+}
+
+body, html {
+    margin: 0;
+    background-color: #0b0b0b;
+}
+
+.username {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.username:hover {
+    color:rgb(49, 49, 49);
+}
+
+hr {
+    color: #FFF;
+    opacity: 0.3;
+    border: 1px solid;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fila {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: baseline;
+    padding: 20px;
+}
+
+.titulo {
+    font-family: 'Lato', 'sans serif';
+    color: var(--main-color);
+    font-size: 3rem;
+    font-weight: bolder;
+}
+
+.general {
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 1.3rem;
+    border-radius: 10px;
+}
+
+/* .general:hover {
+    background-color: rgb(17, 17, 20);
+    cursor: default;
+} */
+
+.general h1 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.general p {
+    text-align: justify;
+}
+
+.general a {
+    color: #96dff3;
+    text-decoration: none;
+    transition: 180ms;
+}
+
+.general a:hover {
+    color: var(--main-color);
+}
+
+.panel p {
+    padding-top: 10px;
+}
+
+.panel p a {
+    color: #209dc0;
+    text-decoration: none;
+    transition: 180ms;
+    
+}
+
+.panel p a:hover {
+    color: #1e5e70;
+}
+
+.general span {
+    font-weight: bold;
+}
+
+
+.lateral-image {
+    /* margin-left: px; */
+    width: 300px;
+}
+
+
+.faqs {
+    width: 60%;
+    margin: 35px auto;
+}
+
+.faqs hr {
+    margin-bottom: 30px;
+}
+
+.accordion {
+    background-color: #eee;
+    color: rgb(41, 41, 41);
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: 1px solid rgb(26, 26, 26);
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.4s;
+}
+
+.accordion:hover {
+    background-color: rgb(0, 0, 0);
+}
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    color: #FFF;
+    background-color: rgb(29, 29, 29);
+    overflow: hidden;
+}
+
+/* logo wp */
+.fab {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+    position: fixed;
+    top: 80%;
+    right: 10%;
+}
+
+.fab:hover {
+    opacity: 0.7;;
+}
+
+#first-faq {
+    border-radius: 10px 10px 0 0;
+}
+
+#last-faq {
+    border-radius: 0 0 10px 10px;
+}

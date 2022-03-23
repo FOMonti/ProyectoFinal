@@ -23,13 +23,13 @@ public class Usuario extends Cliente {
     @NotEmpty
     private String username;
 
+    private String imagen;
+
     @NotEmpty()
     @Length(max = 25, min = 5, message = "La contraseña debe tener de 5 a 25 caracteres")
     @ValidPassword
     private String password;
 
-    private String imagen;
-    
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "usuario_rol",
             joinColumns = @JoinColumn(name = "usuario_id"),
@@ -94,6 +94,4 @@ public class Usuario extends Cliente {
         this.historialCarrito = historialCarrito;
     }
 
-    
-    
 }

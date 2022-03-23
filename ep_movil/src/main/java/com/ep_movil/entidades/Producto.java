@@ -33,11 +33,6 @@ public class Producto {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "producto")
     private List<Comentario> comentarios;
 
-    //private Integer costo--> posible entidad?;
-    // Agregué esta entidad, porque creo que todos los productos pueden llegar a estar en un carrito. La diferencia
-    //va a estar es que el carrito concretado, pasa a ser venta y eso va a reflejarse en el stock. Pero, mientras haya
-    // stock, si hay 10 de x producto, pueden estar en 1000 carritos en simultaneo, de 1000 usuarios hasta que los
-    //primeros 10 decidan hacer la compra
 
     public Producto() {
     }
@@ -51,7 +46,6 @@ public class Producto {
         this.stock = stock;
         this.especificacion = especificacion;
         this.comentarios = comentarios;
-//        this.carrito = carrito;
     }
 
     public Integer getId() {
@@ -101,14 +95,6 @@ public class Producto {
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
     }
-
-//    public List<Carrito> getCarrito() {
-//        return carrito;
-//    }
-//
-//    public void setCarrito(List<Carrito> carrito) {
-//        this.carrito = carrito;
-//    }
 
     public String getEspecificacion() {
         return especificacion;
