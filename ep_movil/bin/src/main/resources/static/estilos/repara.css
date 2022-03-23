@@ -1,0 +1,16 @@
+:root {
+    --main-color: #0cbaeb;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.repara-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}

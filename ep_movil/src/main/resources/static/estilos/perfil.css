@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
+
+* {
+    text-align: center;
+}
+
+section {
+    margin: auto;
+    background-color: lightblue;
+    width: 1000px;
+    height: 350px;
+}
+
+
+.titulo-perfil {
+    font-family: 'Lato', 'sans serif';
+    font-size: 40px;
+    padding: 10px 0;
+    text-align: left;
+    margin-left: 70px;
+}
+
+
+
+.section-datos {
+    border: 3px solid rgb(56, 56, 56);
+    border-radius: 10px;
+}
+
+
+.image-div {
+    display: block;
+}
+
+.img-perfil {
+    border-radius: 10px;
+    width: 250px;
+    max-height: 300px;
+    margin-left: 70px;
+    border: 4px solid rgb(48, 48, 48);
+}
+
+.datos-general {
+    display: flex;
+    align-items: center;
+}
+
+.datos-usuario {
+    text-align: center;
+    padding-left: 40px;
+}
+
+.dato {
+    font-size: 20px;
+    text-align: left;
+    margin-left: 15px;
+    /* font-weight: bold; */
+}
+
+.dato-div {
+    display: flex;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.comentarios-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comentarios-div {
+    width: 40%;
+}

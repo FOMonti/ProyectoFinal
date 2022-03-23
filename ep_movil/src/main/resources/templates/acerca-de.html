@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+    xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <title>Conocenos - EP Móvil</title>
+        <meta charset="UTF-8" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous" />
+        <link rel="stylesheet" href="/styles/style.css" />
+        <link rel="stylesheet" href="/estilos/navbar.css">
+        <link rel="stylesheet" href="/estilos/acerca-de.css" />
+        <link rel="stylesheet" href="/estilos/footer.css">
+        <link rel="icon" type="favicon" href="/images/favicon-blanco.ico">
+    </head>
+
+    <body class="bg-dark">
+        <header th:replace="layout/navbar::navbar-l"></header>
+
+        <div class="container">
+            <div class="fila">
+                <h1 class="titulo">¿QUIÉNES SOMOS?</h1>
+                <hr>
+                <div class="general">
+                    <p>
+                        En Ep-Movil nos destacamos por brindar soluciones
+                        tecnológicas en cortos
+                        períodos de tiempo. Nuestra misión es resolver tu
+                        problemática en
+                        tiempo récord para que vuelvas a utilizar tu
+                        dispositivo
+                        nuevamente y continúes con tu tarea
+                        laboral o recreativa sin perder muchos días
+                        esperando
+                        un
+                        presupuesto/arreglo.
+                    </p>
+                </div>
+            </div>
+            <img class="lateral-image"
+                th:src="@{${'/images/aside-img-about.png'}}" alt="">
+            <div class="fila">
+                <h1 class="titulo">E-COMMERCE</h1>
+                <hr>
+                <div class="general">
+                    <p>
+                        Además contamos con una
+                        <!-- Redirige a TIENDA2 -->
+                        <!-- Redirige a TIENDA2 -->
+                        <!-- Redirige a TIENDA2 -->
+                        <a th:href="@{/tienda/tienda2}">tienda virtual</a>
+                        propia, donde podés visualizar todos los
+                        equipos
+                        multimarca que trabajamos y las facilidades de
+                        compra para poder
+                        hacerse con los mismos.
+                        No dudes en hacer tu consulta haciendo
+
+                        <!-- Redirige a REPARÁ -->
+                        <!-- Redirige a REPARÁ -->
+                        <!-- Redirige a REPARÁ -->
+                        <a th:href="@{repara}">click aquí</a>,
+                        y un asesor se contactará con vos brindándote
+                        una rápida respuesta.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faqs">
+            <h1 class="titulo text-center">PREGUNTAS FRECUENTES</h1>
+            <hr>
+            <div class="panel-general">
+
+                <button class="accordion bg-dark text-light" id="first-faq">¿QUÉ TIPO DE
+                    REPARACIONES HACEMOS?</button>
+                <div class="panel">
+                    <p>Celulares, tablets y notebooks de las marcas más
+                        reconocidas
+                        del mercado.
+                        Dentro de los tipos de arreglos que hacemos se
+                        encuentran:
+                        reemplazos de pantalla, táctiles, lcd, problemas
+                        con botones de encendido, cámaras, reemplazo de botón de
+                        inicio, parlantes, micrófonos, conexiones wi-fi 3g
+                        y 4g, puertos de carga, cambio de baterías y mucho más.
+                        ¡Si tenés un problema, contactános, tenemos la solución!</p>
+                </div>
+
+                <button class="accordion bg-dark text-light">¿CÓMO FUNCIONA?</button>
+                <div class="panel">
+                    <p>Coméntanos qué falla presenta tu dispositivo de forma
+                        online
+                        y te informaremos el costo
+                        y tiempo de reparación. En caso de que desconozcas el
+                        problema realizamos el diagnóstico sin cargo.
+                        <br />
+                        Dentro del plazo de reparación informado, nos
+                        contactaremos
+                        para la devolución de tu smartphone reparado.
+                    </p>
+                </div>
+
+                <button class="accordion bg-dark text-light">¿QUÉ OCURRE SI NO
+                    SÉ CUÁL ES EL PROBLEMA
+                    CON MI DISPOSITIVO?</button>
+                <div class="panel">
+                    <p>Existen cientos de tipos de reparaciones, es probable que
+                        tengamos la solución al problema que estás
+                        experimentando. Sin embargo, si no sabes concretamente
+                        cual
+                        puede ser el problema, deja tu duda en manos de
+                        nuestros especialistas, que te dirán en minutos cuál es
+                        el
+                        problema.
+                        Por más información <a th:href="@{/repara}">contactanos</a></p>
+                </div>
+                <button class="accordion bg-dark text-light">NO VEO MI MARCA DE
+                    SMARTPHONE EN EL SITIO
+                    WEB. ¿ME PUEDEN AYUDAR?</button>
+                <div class="panel">
+                    <p>Con todos los nuevos modelos de smartphones, laptops o
+                        tablets que salen al mercado hacemos nuestro mejor
+                        esfuerzo para actualizar y agregar todas las opciones de
+                        reparación disponibles, pero a veces nos falta una.
+                        Si tienes una marca de teléfono que no figura en nuestro
+                        sitio web, envíanos un mensaje a través de nuestro
+                        formulario de "Contacto" y te responderemos con la
+                        opción
+                        disponible para tu solicitud específica.</p>
+                </div>
+                <button class="accordion bg-dark text-light">LAS PANTALLAS ¿SON
+                    ORIGINALES?</button>
+                <div class="panel">
+                    <p>Muchas marcas como no comercializan repuestos originales,
+                        por
+                        ende encontrarlos en el país es una tarea
+                        imposible. Si garantizamos que trabajamos con la mejor
+                        calidad de repuestos que se pueden encontrar en el
+                        mercado. Es muy frecuente encontrar empresas que dicen
+                        ofrecer repuestos originales, ¡lo cual no es cierto!
+                    </p>
+                </div>
+                <button class="accordion bg-dark text-light">¿CÓMO PAGO EL
+                    SERVICIO?</button>
+                <div class="panel">
+                    <p>Trabajamos con todos los medios de pago: efectivo,
+                        tarjeta de
+                        crédito, tarjeta de débito, Mercado Pago y
+                        MODO. También podes pagar en 6 cuotas sin interés.</p>
+                </div>
+                <button class="accordion bg-dark text-light" id="last-faq">¿HAY ALGUNA
+                    GARANTÍA?</button>
+                <div class="panel">
+                    <p>Sí, ofrecemos una garantía de 90 días para las
+                        reparaciones,
+                        con excepción de los equipos dañados por agua o
+                        con daños físicos posteriores a la reparación o
+                        manipulados
+                        por un tercero. Estamos aquí para garantizar la
+                        satisfacción de todos nuestros clientes pasados,
+                        presentes y
+                        futuros.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="footer navbar-fixed-bottom" th:replace="layout/layout::footer"></footer>
+
+        <script>
+                var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+        </script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous">
+        </script>
+
+    </body>
+
+</html>

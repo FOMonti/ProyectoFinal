@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace="layout/layout::head">
+        <title>EP Móvil</title>
+        <meta charset="UTF-8" />
+    </head>
+
+    <body>
+        <header th:replace="layout/navbar::navbar-l"></header>
+        <!--Carrousel-->
+        <div id="carouselExampleIndicators" class="carousel slide"
+            data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <!-- Redirige a REPARÁ -->
+                    <!-- Redirige a REPARÁ -->
+                    <!-- Redirige a REPARÁ -->
+                    <a href="">
+                        <img
+                            th:src="@{${'/images/imagen-reparaciones-carrousel.jpg'}}"
+                            class="d-block w-100"
+                            alt="0" />
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <!-- Redirige a TIENDA -->
+                    <!-- Redirige a TIENDA -->
+                    <!-- Redirige a TIENDA -->
+                    <a th:href="@{/tienda/tienda2}">
+                        <img
+                            th:src="@{${'/images/imagen-tienda-carrousel-red.jpg'}}"
+                            class="d-block w-100" alt="1" />
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <!-- Redirige a  -->
+                    <a th:href="@{/about}">
+                        <img
+                            th:src="@{${'/images/imagen-nosotros-carrousel.jpg'}}"
+                            class="d-block w-100" alt="2" />
+                    </a>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!--Espacio-->
+        <hr class="featurette-divider" />
+        <!--Espacio-->
+        <!--ProductosMasVendidos-->
+        <div class="container">
+            <!-- Producto 1 2 3-->
+            <div class="row" style="text-align: center">
+                <div class="col-lg-4">
+                    <svg class="bd-placeholder-img rounded-circle" width="140"
+                        height="140" xmlns="http://www.w3.org/2000/svg"
+                        role="img" aria-label="Placeholder: 140x140"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect>
+                        <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+                    </svg>
+                    <h2>Producto 1</h2>
+                    <p> Descripcion</p>
+                    <p><a class="btn btn-secondary" href="#">Ver Detalles »</a></p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <svg class="bd-placeholder-img rounded-circle" width="140"
+                        height="140" xmlns="http://www.w3.org/2000/svg"
+                        role="img" aria-label="Placeholder: 140x140"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect>
+                        <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+                    </svg>
+                    <h2>Producto 2</h2>
+                    <p> Descripcion</p>
+                    <p><a class="btn btn-secondary" href="#">Ver Detalles »</a></p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <svg class="bd-placeholder-img rounded-circle" width="140"
+                        height="140" xmlns="http://www.w3.org/2000/svg"
+                        role="img" aria-label="Placeholder: 140x140"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect>
+                        <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+                    </svg>
+                    <h2>Producto 3</h2>
+                    <p> Descripcion</p>
+                    <p><a class="btn btn-secondary" href="#">Ver Detalles »</a></p>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+            <div class="b-example-divider"></div>
+            <!-- Producto 1 2 3-->
+            <!--ProductosMasVendidos-->
+            <!-- Publcidad -->
+
+            <hr class="featurette-divider" />
+
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading">Publicidad 1 <span
+                            class="text-muted">Slogan 1</span></h2>
+                    <p class="lead">Descripcion</p>
+                </div>
+                <div class="col-md-5">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg
+                        featurette-image img-fluid mx-auto" width="500"
+                        height="500" xmlns="http://www.w3.org/2000/svg"
+                        role="img" aria-label="Placeholder: 500x500"
+                        preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#eee"></rect>
+                        <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+                    </svg>
+
+                </div>
+            </div>
+
+            <hr class="featurette-divider" />
+
+            <div class="row featurette">
+                <div class="col-md-7 order-md-2">
+                    <h2 class="featurette-heading">Publicidad 2 <span
+                            class="text-muted">Slogan 2</span></h2>
+                    <p class="lead">Descripcion</p>
+                </div>
+                <div class="col-md-5 order-md-1">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg
+                        featurette-image img-fluid mx-auto" width="500"
+                        height="500" xmlns="http://www.w3.org/2000/svg"
+                        role="img" aria-label="Placeholder: 500x500"
+                        preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#eee"></rect>
+                        <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+                    </svg>
+
+                </div>
+            </div>
+
+            <hr class="featurette-divider" />
+
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading">Publicidad 3 <span
+                            class="text-muted">Slogan 3</span></h2>
+                    <p class="lead">Descripcion</p>
+                </div>
+                <div class="col-md-5">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg
+                        featurette-image img-fluid mx-auto" width="500"
+                        height="500" xmlns="http://www.w3.org/2000/svg"
+                        role="img" aria-label="Placeholder: 500x500"
+                        preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#eee"></rect>
+                        <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+                    </svg>
+
+                </div>
+            </div>
+
+            <hr class="featurette-divider" />
+
+            <!-- Publcidad -->
+            <!--Footer-->
+            <div class="container">
+                <footer class="d-flex flex-wrap justify-content-between
+                    align-items-center py-3 my-4 border-top">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <span class="text-muted">© 2022 EP-Movil</span>
+                    </div>
+
+                    <!-- <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3">
+                    <a href="https://twitter.com/epmovil_store" target="_blank">
+                        <img th:src="@{${'/iconos/twitter-logo.png'}}" alt="twitter-logo" class="twitter-icon">
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a href="https://facebook.com/epmovil_store" target="_blank">
+                        <img th:src="@{${'/iconos/facebook-logo.png'}}" alt="facebook-logo" class="facebook-icon">
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a href="https://instagram.com/epmovil_store" target="_blank">
+                        <img th:src="@{${'/iconos/instagram-logo.png'}}" alt="instagram-logo" class="instagram-icon">
+                    </a>
+                </li>
+            </ul> -->
+                </footer>
+            </div>
+            <!--Footer-->
+            <script
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                crossorigin="anonymous"></script>
+            <footer th:replace="layout/layout::footer"></footer>
+        </div>
+    </body>

@@ -1,11 +1,7 @@
 package com.ep_movil.controladores;
 
-import com.ep_movil.entidades.Carrito;
-import com.ep_movil.entidades.ItemCarrito;
-import com.ep_movil.entidades.Usuario;
-import com.ep_movil.servicios.ICarritoService;
-import com.ep_movil.servicios.IItemCarritoService;
-import com.ep_movil.servicios.UsuarioServiceImpl;
+import com.ep_movil.entidades.*;
+import com.ep_movil.servicios.*;
 import lombok.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.security.Principal;
-import java.util.Enumeration;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping({"/carrito"})
@@ -41,6 +34,12 @@ public class CarritoController {
     @Autowired
     private IItemCarritoService itemCarritoService;
 
+    @Autowired
+    private IVentaRealizadaService iVentaRealizadaService;
+
+    @Autowired
+    private IProductoService productoService;
+
     @GetMapping("/productosCarrito")
     public String toCarrito(@RequestParam Map<String, Object> params, Model model,
                             Principal principal) {
@@ -52,7 +51,7 @@ public class CarritoController {
         model.addAttribute("carrito", carrito);
         model.addAttribute("items", itemCarritoService.listarItemCarrito(carrito));
         model.addAttribute("usuario", usuario);
-        return "usuarioo/carrito2";
+        return "usuarioo/carrito";
     }
 
     @GetMapping("/quitarItem/{id}")
@@ -66,11 +65,32 @@ public class CarritoController {
         Usuario usuario = ou.get();
         Carrito carrito = usuario.getHistorialCarrito();
         ItemCarrito itemCarrito = itemCarritoService.getById(id);
+        carrito.setPrecio(carrito.getPrecio() - (itemCarrito.getProducto().getPrecio() * itemCarrito.getCantidad()));
+        carritoService.guardarCarrito(carrito);
         itemCarritoService.eliminarCliente(itemCarrito);
         redirect.addFlashAttribute("itemCarritoEliminado", "Producto quitado del carrito eliminado!");
         return "redirect:/carrito/productosCarrito";
     }
 
-
+    @GetMapping("/comprar")
+    public String comprar(RedirectAttributes redirect, Principal principal) {
+        Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
+        if (!ou.isPresent()) {
+            return "redirect:/";
+        }
+        Usuario usuario = ou.get();
+        Carrito carrito = usuario.getHistorialCarrito();
+        VentaRealizada ventaRealizada = new VentaRealizada(usuario, new Date(), carrito, carrito.getPrecio());
+        iVentaRealizadaService.guardarVentaRealizada(ventaRealizada);
+        usuario.setHistorialCarrito(new Carrito(usuario));
+        usuarioService.guardarUsuario(usuario);
+        List<ItemCarrito> items = itemCarritoService.listarItemCarrito(carrito);
+        for (ItemCarrito ic : items) {
+            Producto producto = ic.getProducto();
+            producto.setStock(producto.getStock() - ic.getCantidad());
+            productoService.guardarProducto(producto);
+        }
+        return "redirect:/carrito/productosCarrito";
+    }
 }
 

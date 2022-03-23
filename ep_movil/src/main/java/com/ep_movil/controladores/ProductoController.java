@@ -50,7 +50,7 @@ public class ProductoController {
 
     @PostMapping("/guardar")
     public String guardarProductos(@RequestParam(name = "file", required = false) MultipartFile imagen,
-                                   @Valid Producto producto, Errors error, RedirectAttributes redirect) { //RedirectAttributes redirect / Model model
+            @Valid Producto producto, Errors error, RedirectAttributes redirect) { //RedirectAttributes redirect / Model model
 
         if (error.hasErrors()) {
             return "admin/productoForm";
@@ -81,7 +81,7 @@ public class ProductoController {
 
     @GetMapping("/detalle/{id}")
     public String detalleProducto(@PathVariable("id") Integer id, Model model,
-                                  RedirectAttributes redirect) {
+            RedirectAttributes redirect) {
 
         Producto producto = productoService.buscarPorId(id);
         List<Comentario> comentarios = comentarioService.listarComentarios(producto);
@@ -111,6 +111,7 @@ public class ProductoController {
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxNombreZ_A(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXNombreDESC(params, model, 10);
+        model.addAttribute("ruta", "/admin/OxNA");
         return "tienda";
     }
 
@@ -118,6 +119,7 @@ public class ProductoController {
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxNombreA_Z(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXNombreASC(params, model, 10);
+        model.addAttribute("ruta", "/admin/OxND");
         return "tienda";
     }
 
@@ -125,6 +127,7 @@ public class ProductoController {
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMenorPrecio(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXPrecioASC(params, model, 10);
+        model.addAttribute("ruta", "/admin/Ox-P");
         return "tienda";
     }
 
@@ -132,12 +135,16 @@ public class ProductoController {
     //este metodo aplica paginacion y filtro/orden de la tienda (dashboard)
     public String ordenarxMayorPrecio(@RequestParam Map<String, Object> params, Model model) {
         model = productoService.paginacionXPrecioDESC(params, model, 10);
+        model.addAttribute("ruta", "/admin/Ox+P");
         return "tienda";
     }
 
     @GetMapping("/filtrar")
-    public String productosBarraBusqueda(@RequestParam String nombre, RedirectAttributes redirect, @ModelAttribute("producto") Producto producto){
-        redirect.addFlashAttribute("list", productoService.filtrarNombre(nombre));
-        return "redirect:/tienda/productos";
+    public String productosBarraBusqueda(@RequestParam Map<String, Object> params, Model model, @RequestParam(name = "filtro") String query) {
+        model = productoService.paginacionFiltrada(params, model, 5, query);
+        
+        model.addAttribute("ruta", "/admin/filtrar");
+
+        return "tienda";
     }
 }

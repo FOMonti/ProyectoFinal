@@ -1,4 +1,3 @@
-
 package com.ep_movil.servicios;
 
 import com.ep_movil.entidades.Producto;
@@ -36,8 +35,9 @@ public interface IProductoService {
     Model paginacionXNombreASC(@RequestParam Map<String, Object> params, Model model, int cantElements);
 
     Model paginacionXNombreDESC(@RequestParam Map<String, Object> params, Model model, int cantElements);
-    
-    List<Producto> filtrarNombre(String nombre);
-    
+
+//   List<Producto> filtrarNombre(String nombre);
+    Model paginacionFiltrada(@RequestParam Map<String, Object> params, Model model, int cantElements, String query);
+
 //    Model filtroNombre(String nombre);
 }

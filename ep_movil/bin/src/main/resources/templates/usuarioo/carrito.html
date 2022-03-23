@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.com.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/layout::head">
+
+    <title>Carrito</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<!--NavBar-->
+<header th:replace="layout/navbar::navbar-l"></header>
+<!--NavBar/-->
+<br/>
+<h1>Carrito</h1>
+<div th:each="producto: ${list} " class="row justify-content-center">
+    <div class="card mt-5 " style="max-width: 900px;">
+        <div class="row g">
+            <div class="col-md-4 align-content">
+                <img class="img-fluid"
+                     th:src="@{'/images/'+ ${producto.imagen}}"
+                     alt="producto imagen"/>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${producto.nombre}"></h4>
+                    <div class="d-flex flex-row-reverse bd-highlight">
+                        <h3 class="card-text p-2 bd-highlight" th:text="'$'  + ${producto.precio}"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="container">-->
+<!--    <div class="d-flex flex-column bd-highlight mb-3k ">&lt;!&ndash;mb-3&ndash;&gt;-->
+<!--        <div class="card" th:each="producto: ${list}">-->
+<!--            <div class="d-inline-block">-->
+<!--                <div class="col-md-4">-->
+<!--                    <img class="img-fluid rounded-start"-->
+<!--                         th:src="@{'/images/'+ ${producto.imagen}}"-->
+<!--                         alt="producto imagen" style="max-width: 25%"/>-->
+<!--                </div>-->
+<!--                <div class="col-md-8">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="card-title" th:text="${producto.nombre}"></h5>-->
+<!--                        <h6 class="card-text" th:text="${producto.precio}"></h6>-->
+<!--                        <p class="card-text" th:text="${producto.especificacion}"></p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--Footer-->
+<footer th:replace="layout/layout::footer"></footer>
+<!--Footer/-->
+</body>
+</html>

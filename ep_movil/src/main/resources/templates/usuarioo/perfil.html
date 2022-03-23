@@ -1,0 +1,94 @@
+
+<!DOCTYPE html><html xmlns:th="https://thymeleaf.com.org"
+    xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Perfil - EP Móvil</title>
+        <meta charset="UTF-8" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous" />
+        <link rel="stylesheet" href="/styles/style.css" />
+        <link rel="stylesheet" href="/estilos/stylef.css" />
+        <link rel="stylesheet" href="/estilos/navbar.css"/>
+        <link rel="stylesheet" href="/estilos/perfil.css"/>
+        <link rel="icon" type="favicon" href="/images/favicon-blanco.ico"/>
+    </head>
+
+    <body class="bg-dark">
+        <header th:replace="layout/navbar::navbar-l"></header>
+        <br/>
+        <section class="section-datos">
+            <h1 class="titulo-perfil">MI PERFIL</h1>
+            <div class="datos-general">
+                <div class="image-div">
+                    <img class="img-perfil" th:src="@{${'/images/unknow.jpg'}}"
+                        alt="Imagen de perfil"/>
+                </div>
+                <div class="datos-usuario">
+                    <div class="dato-div">
+                        <p class="dato"><b>Nombre: </b></p>
+                        <p class="dato" th:text="${usuario.nombre}"></p>
+                    </div>
+                    <div class="dato-div">
+                        <p class="dato"><b>Apellido: </b></p>
+                        <p class="dato" th:text="${usuario.apellido}"></p>
+                    </div>
+                    <div class="dato-div">
+                        <p class="dato"><b>Email: </b></p>
+                        <p class="dato" th:text="${usuario.email}"></p>
+                    </div>
+                    <div class="dato-div">
+                        <p class="dato"><b>Username: </b></p>
+                        <p class="dato" th:text="${usuario.username}"></p>
+                    </div>
+                    <div class="dato-div">
+                        <!-- Dirige a EDITAR USER -->
+                        <!-- Dirige a EDITAR USER -->
+                        <!-- Dirige a EDITAR USER -->
+                        <!-- Dirige a EDITAR USER -->
+                        <a href="/editarPerfil">
+                            <button class="dato btn btn-dark">Editar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br/>
+        <br/>
+        <div class="card text-center">
+            <div class="card-header">
+                <ul class="buttons nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="true"
+                            th:href="@{/comentarios}">Comentarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/productos}">Productos
+                            Comprados</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="comentarios-container" th:if="${comentarios != null and
+                !comentarios.empty}">
+                <div class="comentarios-div card-body" th:each="comentario :
+                    ${comentarios}">
+                    <div class="card bg-light">
+                        <div class="card-header bg-dark text-white text-center
+                            text-uppercase">
+                            <h5 th:text="${comentario.producto.nombre}"></h5>
+                        </div>
+                        <div class="card-body">
+                            <p th:text="${comentario.texto}"></p>
+                            <p th:text="${comentario.fechaDelComentario}"></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

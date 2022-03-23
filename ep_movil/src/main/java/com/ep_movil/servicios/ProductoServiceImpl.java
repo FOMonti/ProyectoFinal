@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -154,9 +155,14 @@ public class ProductoServiceImpl implements IProductoService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Producto> filtrarNombre(String nombre) {
+    public Model paginacionFiltrada(Map<String, Object> params, Model model, int cantElements, String query) {
+        int page = actualPage(params);
 
-        return productoDao.findByNombre(nombre);
+        PageRequest pageRequest = PageRequest.of(page, cantElements);
 
+        Page<Producto> pageProducto = productoDao.findByNombre(query, pageRequest);
+
+        return actualizarVista(page, pageProducto, model);
     }
+
 }
