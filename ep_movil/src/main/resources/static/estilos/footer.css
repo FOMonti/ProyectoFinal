@@ -73,3 +73,14 @@
 .copyrigth {
     color:rgb(110, 110, 110);
 }
+
+.img-circular {
+    border-radius: 70px;
+    width: 140px;
+    max-height: 140px;
+    transition:150ms;
+}
+
+.img-circular:hover{
+    box-shadow: 0 0 10px #b3b3b3;
+}
