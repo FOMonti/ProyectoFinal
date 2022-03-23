@@ -39,7 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //aca le voy a estar pasando las rutas de acceso público
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/", "/registrar", "/acceder", "/save", "/login", "/signin", "/tienda/tienda2", "/tienda/tienda2/*", "/admin/detalle/**", "/about", "/repara", "/tienda/OxNA/*", "/tienda/OxND/*", "/tienda/Ox-P/*", "/tienda/Ox+P/*", "/tienda/OxNA", "/tienda/OxND", "/tienda/Ox-P", "/tienda/Ox+P").permitAll()
+                .antMatchers("/", "/registrar", "/acceder", "/save", "/login", "/signin", "/tienda/tienda2", "/tienda/tienda2/*", "/tienda/detalle/*", "/about",
+                        "/repara", "/tienda/OxNA/*", "/tienda/OxND/*", "/tienda/Ox-P/*", "/tienda/Ox+P/*", "/tienda/OxNA", "/tienda/OxND", "/tienda/Ox-P", "/tienda/Ox+P").permitAll()
                 .antMatchers("/css/**", "/js/**", "/images/*", "/styles/*", "/templates/*", "/estilos/**").permitAll()
                 .antMatchers("/tienda/productos/**", "/admin/guardar", "/admin/modificar/**", "/admin/eliminar/**").hasRole("ADMIN") //autorizo solo al admin el poder editar, agregar o eliminar
 

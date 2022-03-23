@@ -117,19 +117,20 @@
     <!-- Producto 1 2 3-->
     <!--ProductosMasVendidos-->
     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/publicidad/publicidadForum}">
+        <hr class="featurette-divider-dark"/>
         <button class="btn btn-outline-dark" aria-label="Basic outlined example">Agregar Publicidad</button>
     </a>
     <hr class="featurette-divider"/>
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading" th:text="${publicidad.marca}">
-                <span class="text-muted" th:text="${publicidad.slogan}">Slogan 1</span></h2>
-            <p class="lead" th:text="${publicidad.descripcion}">Descripcion</p>
+            <h2 class="featurette-heading" th:text="${publicidad1.marca}">
+                <span class="text-muted" th:text="${publicidad1.slogan}">Slogan 1</span></h2>
+            <p class="lead" th:text="${publicidad1.descripcion}">Descripcion</p>
         </div>
         <div class="col-md-5">
             <img width="500" height="500" th:src="@{'/images/'+
-                                     ${publicidad.imagen}}" alt="publicidad imagen"/>
+                                     ${publicidad1.imagen}}" alt="publicidad imagen"/>
 
         </div>
     </div>
@@ -138,15 +139,13 @@
 
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">Publicidad 2 <span class="text-muted">Slogan 2</span></h2>
-            <p class="lead">Descripcion</p>
+            <h2 class="featurette-heading" th:text="${publicidad2.marca}">
+                <span class="text-muted" th:text="${publicidad2.slogan}">Slogan 1</span></h2>
+            <p class="lead" th:text="${publicidad2.descripcion}">Descripcion</p>
         </div>
-        <div class="col-md-5 order-md-1">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                 height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-                 preserveAspectRatio="xMidYMid slice" focusable="false" th:src="@{'/images/'+
-                                     ${publicidad.imagen}}"><title>Placeholder</title>
-            </svg>
+        <div class="col-md-5">
+            <img width="500" height="500" th:src="@{'/images/'+
+                                     ${publicidad2.imagen}}" alt="publicidad imagen"/>
 
         </div>
     </div>
@@ -155,13 +154,13 @@
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading" th:text="${publicidad2.marca}">
-                <span class="text-muted" th:text="${publicidad2.slogan}">Slogan 1</span></h2>
-            <p class="lead" th:text="${publicidad2.descripcion}">Descripcion</p>
+            <h2 class="featurette-heading" th:text="${publicidad3.marca}">
+                <span class="text-muted" th:text="${publicidad3.slogan}">Slogan 1</span></h2>
+            <p class="lead" th:text="${publicidad3.descripcion}">Descripcion</p>
         </div>
         <div class="col-md-5">
             <img width="500" height="500" th:src="@{'/images/'+
-                                     ${publicidad2.imagen}}"/>
+                                     ${publicidad3.imagen}}"/>
 
         </div>
     </div>

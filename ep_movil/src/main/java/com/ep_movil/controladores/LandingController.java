@@ -29,9 +29,9 @@ public class LandingController {
     @GetMapping("/")
     public String alalanding(Model model) {
         List<Publicidad> publicidades = publicidadService.listarPublicidades();
-        model.addAttribute("publicidad", publicidades.get(0));
+        model.addAttribute("publicidad1", publicidades.get(0));
         model.addAttribute("publicidad2", publicidades.get(1));
-        //model.addAttribute("publicidad1", publicidades.get(2));
+        model.addAttribute("publicidad3", publicidades.get(2));
         List<Producto> productos = productoService.listarProductos();
         model.addAttribute("producto1", productos.get(40));
         model.addAttribute("producto2", productos.get(1));

@@ -1,11 +1,9 @@
 package com.ep_movil.controladores;
 
-import com.ep_movil.entidades.Carrito;
-import com.ep_movil.entidades.ItemCarrito;
-import com.ep_movil.entidades.Producto;
-import com.ep_movil.entidades.Usuario;
+import com.ep_movil.entidades.*;
 import com.ep_movil.security.service.UsuarioService;
 import com.ep_movil.servicios.ICarritoService;
+import com.ep_movil.servicios.IComentarioService;
 import com.ep_movil.servicios.IProductoService;
 import com.ep_movil.servicios.ItemCarritoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +36,10 @@ public class TiendaController {
 
     @Autowired
     private ICarritoService carritoService;
+
+    @Autowired
+    private IComentarioService comentarioService;
+
 
     @GetMapping("/productos")
     public String dashboard(@RequestParam Map<String, Object> params, Model model) {
@@ -101,9 +103,10 @@ public class TiendaController {
     public String detalleProducto(@PathVariable("id") Integer id, Producto producto, Model model,
                                   RedirectAttributes redirect) {
         producto = productoService.buscarPorId(id);
-
+        List<Comentario> comentarios = comentarioService.listarComentarios(producto);
         model.addAttribute("titulo", "Detalle del producto: " + producto.getNombre());
         model.addAttribute("producto", producto);
+        model.addAttribute("comentarios", comentarios);
         return "admin/detalleProducto";
     }
 
@@ -133,7 +136,7 @@ public class TiendaController {
                 }
             }
             //arreglar
-            if(cantidad > producto.getStock()){
+            if (cantidad > producto.getStock()) {
                 cantidad = producto.getStock();
             }
             ItemCarrito itemCarrito = new ItemCarrito(cantidad, producto, carrito);

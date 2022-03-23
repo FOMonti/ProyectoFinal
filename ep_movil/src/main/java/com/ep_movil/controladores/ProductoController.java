@@ -5,6 +5,7 @@ import com.ep_movil.entidades.Comentario;
 import com.ep_movil.entidades.Producto;
 import com.ep_movil.servicios.IComentarioService;
 import com.ep_movil.servicios.IProductoService;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,7 +35,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/admin")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class ProductoController {
 
     @Autowired
@@ -50,7 +51,7 @@ public class ProductoController {
 
     @PostMapping("/guardar")
     public String guardarProductos(@RequestParam(name = "file", required = false) MultipartFile imagen,
-            @Valid Producto producto, Errors error, RedirectAttributes redirect) { //RedirectAttributes redirect / Model model
+                                   @Valid Producto producto, Errors error, RedirectAttributes redirect) { //RedirectAttributes redirect / Model model
 
         if (error.hasErrors()) {
             return "admin/productoForm";
@@ -81,7 +82,7 @@ public class ProductoController {
 
     @GetMapping("/detalle/{id}")
     public String detalleProducto(@PathVariable("id") Integer id, Model model,
-            RedirectAttributes redirect) {
+                                  RedirectAttributes redirect) {
 
         Producto producto = productoService.buscarPorId(id);
         List<Comentario> comentarios = comentarioService.listarComentarios(producto);
@@ -142,7 +143,7 @@ public class ProductoController {
     @GetMapping("/filtrar")
     public String productosBarraBusqueda(@RequestParam Map<String, Object> params, Model model, @RequestParam(name = "filtro") String query) {
         model = productoService.paginacionFiltrada(params, model, 5, query);
-        
+
         model.addAttribute("ruta", "/admin/filtrar");
 
         return "tienda";
