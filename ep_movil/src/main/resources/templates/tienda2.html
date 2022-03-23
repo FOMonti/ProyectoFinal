@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="https://thymeleaf.com.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Tienda - EP Móvil</title>
     <meta charset="UTF-8"/>
@@ -90,7 +91,7 @@
             <form class="quantity-form"
                   th:action="@{/tienda/agregarACarrito}" method="post">
                 <div>
-                    <label for="quantity" >Cantidad</label>
+                    <label for="quantity">Cantidad</label>
                     <input class="quantity" type="number" value="1"
                            name="cantidad" min="1"
                            max="${producto.stock}">
@@ -103,7 +104,7 @@
                 <a th:if="${producto.stock == 0}" class="sin-stock">Sin stock</a>
 
             </form>
-            <div class="admin-buttons">
+            <div class="admin-buttons" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a class="modify" th:href="@{/tienda/modificar/} +
                             ${producto.id}"><img
                         th:src="@{${'/images/edit.png'}}"
