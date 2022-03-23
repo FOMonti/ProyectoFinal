@@ -21,7 +21,6 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpSession;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,12 +79,12 @@ public class UsuarioController {
         usuario.setPassword(passwordEncoder.encode(password));
 
         Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
-        //Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
+        Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
 
         Set<Rol> roles = new HashSet<Rol>();
 
         roles.add(rolUser);
-        //roles.add(rolAdmin); //complemento para crear admin
+        roles.add(rolAdmin); //complemento para crear admin
 
         usuario.setRoles(roles);
 
@@ -149,24 +148,5 @@ public class UsuarioController {
         model.addAttribute("usuario", usuario);
         return "usuarioo/perfil";
     }
-//    @PostMapping("/signin")
-//    public String acceder(Usuario usuario, HttpSession session,
-//                          RedirectAttributes redirect
-//    ) {
-//
-//        Optional<Usuario> user = usuarioService.findByUsername(usuario.getUsername());
-//
-//        if (!user.isPresent()) {
-//            redirect.addFlashAttribute("accederFallido", "Credenciales erróneas. Revise el nombre de usuario y/o contraseña ingresados.");
-//            logger.info("AVISO: Se intentó ingresar con un usuario que no se encuentra registrado.");
-//            return "redirect:/login";
-//        }
-//
-//        session.setAttribute("idusuario", usuario.getId());
-//        log.info("usuario que hizo login: " + usuario.getUsername());
-//        redirect.addFlashAttribute("usuario", usuario);
-//
-//        return "redirect:/";
-//    }
 
 }

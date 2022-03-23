@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://thymeleaf.com.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout/layout::head">
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<header th:replace="layout/navbar::navbar-l"></header>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class=" col-4">
+            <form th:action="@{/publicidad/save}" th:object="${publicidad}" method="post" enctype="multipart/form-data">
+
+                <h1>Publicidad</h1>
+                <br/>
+                <br/>
+
+                <div>
+                    <input type="text" th:field="*{marca}" class="form-control"
+                           placeholder="Ingrese la marca"/>
+                </div>
+                <div>
+                    <input type="text" th:field="*{slogan}" class="form-control"
+                           placeholder="Ingrese el slogan"/>
+                </div>
+
+                <textarea th:field="*{descripcion}" class="form-control mb-2" rows="15"></textarea>
+                <br/>
+                <input type="file" name="file" class="form-control"/>
+                <br/>
+                <div>
+                    <button type="submit" class="form-control btn btn-secondary">Guardar producto</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>
