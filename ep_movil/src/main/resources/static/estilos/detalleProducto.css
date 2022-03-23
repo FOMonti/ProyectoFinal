@@ -43,7 +43,7 @@
 
 .back-and-comment {
     display: flex;
-    width: 20%;
+    width: 50%;
     justify-content: space-around;
     margin-left: auto;
     margin-right: auto;
@@ -52,4 +52,8 @@
 
 .back-and-comment a {
     text-decoration: none;
+}
+
+.quantity {
+    display: none;
 }
