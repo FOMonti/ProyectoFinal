@@ -118,7 +118,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <nav aria-label="Pagination">
@@ -144,8 +144,11 @@
                 </nav>
             </div>
         </div>
-
-        <a href="javascript:history.back()"> Volver Atrás</a>
+        <div class="text-center mb-3">
+            <a href="javascript:history.back()">
+                <button class="btn btn-danger">Volver</button>
+            </a>
+        </div>
         <footer class="footer navbar-fixed-bottom" th:replace="layout/layout::footer"></footer>
     </body>
 </html>
