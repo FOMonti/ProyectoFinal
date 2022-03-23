@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://thymeleaf.com.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace="layout/layout::head">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:replace="layout/navbar::navbar-l"></header>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class=" col-4">
+                    <form th:action="@{/admin/guardar}" th:object="${producto}" method="post" enctype="multipart/form-data">
+
+                        <h1>PRODUCTO</h1>
+
+                        <input type="hidden" name="id" th:field="*{id}"/>
+
+                        <input type="text" th:field="*{nombre}" class="form-control" placeholder="Ingrese nombre"/>
+                        <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"> Error en el nombre</div>
+                        <br/>
+
+                        <input type="file" name="file" class="form-control"/>
+                        <br/>
+
+                        <input type="number" step="any" th:field="*{precio}" class="form-control" 
+                               placeholder="Ingrese precio"/>
+                        <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"> Error en el precio</div>
+                        <br/>
+
+                        <input type="number" th:field="*{stock}" class="form-control" placeholder="Ingrese stock"/>
+                        <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"> Error en el nombre</div>
+                        <br/>
+
+                        <div>
+                            <input type="text" th:field="*{especificacion}" class="form-control"
+                                   placeholder="Ingrese la especificación"/>
+                        </div>
+                        <br/>
+
+                        <div>
+                            <button type="submit" class="form-control btn btn-secondary">Guardar producto</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="layout/layout::footer"></footer>
+    </body>
+</html>

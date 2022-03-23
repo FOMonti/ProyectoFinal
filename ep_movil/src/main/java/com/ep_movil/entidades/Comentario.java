@@ -1,7 +1,7 @@
-
 package com.ep_movil.entidades;
 
 import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -80,6 +80,5 @@ public class Comentario {
     public void setFechaDelComentario(Date fechaDelComentario) {
         this.fechaDelComentario = fechaDelComentario;
     }
-
 
 }

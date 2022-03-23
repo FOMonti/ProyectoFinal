@@ -1,0 +1,101 @@
+:root {
+    --main-color: #0cbaeb;
+}
+
+body, html {
+    margin: 0;
+    background-color: #0b0b0b;
+}
+
+.username {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.username:hover {
+    color:rgb(49, 49, 49);
+}
+
+hr {
+    color: #FFF;
+    opacity: 0.3;
+    border: 1px solid;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fila {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: baseline;
+    padding: 20px;
+}
+
+.titulo {
+    color: var(--main-color);
+    font-size: 3rem;
+    font-weight: bolder;
+}
+
+.general {
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 1.3rem;
+    border-radius: 10px;
+}
+
+/* .general:hover {
+    background-color: rgb(17, 17, 20);
+    cursor: default;
+} */
+
+.general h1 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.general p {
+    text-align: justify;
+}
+
+.general a {
+    color: #96dff3;
+    text-decoration: none;
+    transition: 180ms;
+}
+
+.general a:hover {
+    color: var(--main-color);
+}
+
+.general span {
+    font-weight: bold;
+}
+
+
+.lateral-image {
+    /* margin-left: px; */
+    width: 400px;
+}
+
+
+
+.slogan {
+    text-align: center;
+    color: #FFF;
+    padding: 60px;
+}

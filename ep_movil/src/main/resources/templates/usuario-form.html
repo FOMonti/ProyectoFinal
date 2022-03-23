@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 
 <html xmlns:th="https://thymeleaf.com.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
     <head th:replace="layout/layout::head">
         <title>TODO supply a title</title>
         <meta charset="UTF-8"/>
@@ -11,21 +13,33 @@
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class=" col-4">
-                    <form th:action="@{/save}" th:object="${usuario}" method="post">
-                        <h1>Registro</h1>
+                    <form th:action="@{/save}" th:object="${usuario}" method="post" enctype="multipart/form-data">
 
+                        <h1 sec:authorize="isAuthenticated()">Modificar perfil</h1>
+
+                        <h1 sec:authorize="!isAuthenticated()">Registro</h1>
+
+                        <input type="hidden" name="id" th:field="*{id}"/>
+                        
                         <input type="text" th:field="*{nombre}" class="form-control"
                                placeholder="Ingrese su nombre"/>
+                        <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"> Error en el nombre</div>
 
                         <br/>
 
-                        <input type="text" th:field="*{apellido}" class="form-control"
-                               placeholder="Ingrese su apellido"/>
+                        <input type="text" th:field="*{apellido}" class="form-control" placeholder="Ingrese su apellido"/>
 
+                        <br/>
+
+                        <b>Seleccione una foto para su perfil:</b>
+                        <input type="file" name="file" class="form-control"/>
+                        <t>(O puede hacerlo mas adelante!!)</t>
+                        <br/>
                         <br/>
 
                         <input type="text" th:field="*{email}" class="form-control" 
                                placeholder="Ingrese su email"/>
+                        <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> Error en el nombre</div>
 
                         <br/>
 
@@ -34,20 +48,29 @@
                         <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> Error en el nombre</div>
                         <br/>
 
-                        <input type="password" th:field="*{password}" class="form-control"
-                               placeholder="Ingrese una contraseña"/>
-                        <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> Error en el nombre</div>
+
+                        <div sec:authorize="isAuthenticated()">
+                            <input type="hidden" th:field="*{password}" name="password"/>
+                            <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> Error en el nombre</div>
+                        </div>
+                       
+                        
+                        <div sec:authorize="!isAuthenticated()">
+                            <input type="password" th:field="*{password}" class="form-control" placeholder="Ingrese una contraseña"/>
+                            <div class="alert alert-danger text-center" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> Error en el nombre</div>
+                        </div>
+
                         <br/>
 
-                        <button type="submit" class="form-control btn btn-secondary">Registrar</button>
+                        <button sec:authorize="!isAuthenticated()" type="submit" class="form-control btn btn-secondary">Registrar</button>
+                        <button sec:authorize="isAuthenticated()" type="submit" class="form-control btn btn-secondary">Guardar cambios</button>
                         <br/>
                         <br/>
-                        <div>¿Ya tenes una cuenta? <a th:href="@{/login}"> Ingresa acá</a></div>
+                        <div sec:authorize="!isAuthenticated()">¿Ya tenes una cuenta? <a th:href="@{/login}"> Ingresa acá</a></div>
                         <!--                <div class="alert alert-success text-center" th:if="${mensaje}" th:text="${mensaje}"></div>-->
                     </form>
                 </div>
             </div>
         </div>
-        <footer th:replace="layout/layout::footer"></footer>
     </body>
 </html>

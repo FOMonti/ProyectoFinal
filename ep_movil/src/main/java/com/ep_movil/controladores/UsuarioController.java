@@ -1,6 +1,7 @@
 package com.ep_movil.controladores;
 
 import com.ep_movil.entidades.Carrito;
+
 import com.ep_movil.entidades.Comentario;
 import com.ep_movil.entidades.Rol;
 import com.ep_movil.enums.RolNombre;
@@ -8,13 +9,21 @@ import com.ep_movil.security.service.UsuarioService;
 import com.ep_movil.servicios.IComentarioService;
 import com.ep_movil.servicios.RolService;
 
-import java.security.Principal;
-import java.util.*;
 import javax.validation.Valid;
 
 import com.ep_movil.entidades.Usuario;
 import com.ep_movil.servicios.IProductoService;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.Principal;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.Set;
 import java.util.logging.Level;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -33,7 +42,9 @@ import org.springframework.validation.Errors;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -58,6 +69,11 @@ public class UsuarioController {
     @Autowired
     private JavaMailSender mailSender;
 
+    @GetMapping("/repara")
+    public String repara(Model model) {
+        return "repara";
+    }
+
     @Autowired
     private IComentarioService comentarioService;
 
@@ -68,10 +84,10 @@ public class UsuarioController {
     }
 
     @PostMapping("/save") // en este método guardamos usuarios con el rol de User
-    public String saveUser(Usuario usuario, @Valid String username, Errors usernameError,
-                           @Valid String password, Errors passwordError, RedirectAttributes redirect) throws AddressException, MessagingException {
+    public String saveUser(@Valid Usuario usuario, Errors error, String username, String password,
+                           RedirectAttributes redirect, @RequestParam(name = "file", required = false) MultipartFile imagen) throws AddressException, MessagingException {
 
-        if (usernameError.hasErrors() || passwordError.hasErrors()) {
+        if (error.hasErrors()) {
             return "usuario-form";
         }
 
@@ -79,12 +95,11 @@ public class UsuarioController {
         usuario.setPassword(passwordEncoder.encode(password));
 
         Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
-        Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
-
+//        Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();//con este metodo mas el add admin, creo un admin
         Set<Rol> roles = new HashSet<Rol>();
 
         roles.add(rolUser);
-        roles.add(rolAdmin); //complemento para crear admin
+//        roles.add(rolAdmin); //complemento para crear admin
 
         usuario.setRoles(roles);
 
@@ -92,7 +107,22 @@ public class UsuarioController {
 
         usuario.setHistorialCarrito(historialCarrito);
 
-        usuario.setImagen("usuarioSinIMG.jpg");
+        if (!imagen.isEmpty()) {
+            Path directorioImagenes = Paths.get("src//main//resources//static/images");/*ruta relativa*/
+            String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+
+            try {
+                byte[] bytes = imagen.getBytes();
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+                Files.write(rutaCompleta, bytes);
+                usuario.setImagen(imagen.getOriginalFilename());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            usuario.setImagen("unknown.jpg");
+        }
 
         usuarioService.guardarUsuario(usuario);
 
@@ -109,12 +139,11 @@ public class UsuarioController {
         try {
             email.setText("Hola " + usuario.getNombre() + "! \nEP-Movil te da la bienvenida!! "
                     + "\n A partir de ahora podrás disfrutar de la totalidad de nuestra tienda on-line, mantenerte"
-                    + " actualizado de nuestros productos y acceder a los beneficios que tenemos para vos!!"
+                    + " actualizado def nuestros productos y acceder a los beneficios que tenemos para vos!!"
                     + "\nNo olvides seguirnos en nuestras redes!! \nGracias por elegirnos!! \nTe saluda, el equipo de EP-Movil");
         } catch (MessagingException ex) {
             java.util.logging.Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //email.setFileName("/bannerprueba.jpg");
 
         mailSender.send(email);
 
@@ -128,20 +157,44 @@ public class UsuarioController {
         return "usuario-login";
     }
 
-    @GetMapping("/perfil")
-    public String toPerfil(Model model, Principal principal, RedirectAttributes redirectAttributes) {
-        Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
-        if (!ou.isPresent()) return "redirect:/";
-        Usuario usuario = ou.get();
+//    @PostMapping("/signin")
+//    public String acceder(Usuario usuario, HttpSession session, RedirectAttributes redirect) {
+//
+//        Optional<Usuario> user = usuarioService.findByUsername(usuario.getUsername());
+//
+//        if (!user.isPresent()) {
+//            redirect.addFlashAttribute("accederFallido", "Credenciales erróneas. Revise el nombre de usuario y/o contraseña ingresados.");
+//            logger.info("AVISO: Se intentó ingresar con un usuario que no se encuentra registrado.");
+//            return "redirect:/login";
+//        }
+//
+//        session.setAttribute("idusuario", user.get().getId());
+//        log.info("usuario que hizo login: " + usuario.getUsername());
+//        redirect.addFlashAttribute("usuario", usuario);
+//
+//        return "redirect:/";
+//    }
+
+    @GetMapping("/carrito")
+    public String toCarrito(Model model, Usuario usuario) {
+        /*  Si el usuario no esta logeado...?
+ if (usuario.equals(null)) {
+     return "redirect:/";
+ }
+         */
+        model.addAttribute("list", productoService.listarProductos());
+        model.addAttribute("titulo", "Carrito");
         model.addAttribute("usuario", usuario);
-        return "usuarioo/perfil";
+        return "/user/carrito";
     }
 
     @GetMapping("/comentarios")
     public String verComentarios(Model model, Principal principal) {
         //redirectAttributes.getAttribute()
         Optional<Usuario> ou = usuarioService.findByUsername(principal.getName());
-        if (!ou.isPresent()) return "redirect:/";
+        if (!ou.isPresent()) {
+            return "redirect:/";
+        }
         Usuario usuario = ou.get();
         List<Comentario> comentarios = comentarioService.listarComentariosUsuario(usuario);
         model.addAttribute("comentarios", comentarios);

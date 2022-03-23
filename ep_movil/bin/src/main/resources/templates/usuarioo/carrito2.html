@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="layout/layout::head">
+    <title>Tienda</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<header th:replace="layout/navbar::navbar-l"></header>
+<h1>Carrito</h1>
+<div th:each="item: ${items} " class="row justify-content-center">
+    <div class="card mt-5 " style="max-width: 900px;">
+        <div class="row g">
+            <div class="col-md-4 align-content">
+                <img class="img-fluid"
+                     th:src="@{'/images/'+ ${item.producto.imagen}}"
+                     alt="producto imagen"/>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${item.producto.nombre}"></h4>
+                    <div class="d-flex flex-row-reverse bd-highlight">
+                        <h3 class="card-text p-2 bd-highlight" th:text="'$'  + ${item.producto.precio}"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Footer-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>

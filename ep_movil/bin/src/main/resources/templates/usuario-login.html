@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.com.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout/layout::head">
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<header th:replace="layout/navbar::navbar-l"></header>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class=" col-4">
+            <h1>Iniciar Sesion</h1>
+            <form th:action="@{/signin}" method="post">
+
+                <div class="alert alert-success text-center" th:if="${usuarioRegistrado != null}"
+                     th:text="${usuarioRegistrado}"></div>
+                <div class="alert alert-danger text-center" th:if="${param.error}">Credenciales incorrectas. Revise el
+                    usuario y/o contraseña ingresados
+                </div>
+
+                <div class="alert alert-danger text-center" th:if="${accederFallido != null}"
+                     th:text="${accederFallido}">Credenciales fallidas en el acceder
+                </div>
+                <div>
+                    <input class="form-control text-center" autocomplete="off" type="text" name="username"
+                           placeholder="Usuario"/>
+                </div>
+                <br/>
+                <div>
+                    <input class="form-control text-center" autocomplete="off" type="password" name="password"
+                           placeholder="Contraseña"/>
+                </div>
+                <br/>
+                <div>
+                    <button type="submit" class="form-control btn btn-secondary">Iniciar Sesión</button>
+                </div>
+                <br/>
+                <div>¿Todavía no tenes una cuenta? <a th:href="@{/registrar}">Registrate acá</a></div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>
