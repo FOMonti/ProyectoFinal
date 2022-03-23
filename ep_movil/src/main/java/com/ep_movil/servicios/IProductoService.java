@@ -3,14 +3,11 @@ package com.ep_movil.servicios;
 
 import com.ep_movil.entidades.Producto;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public interface IProductoService {
 
