@@ -52,7 +52,7 @@
                   th:action="@{/tienda/agregarACarrito}" method="post">
                 <div>
                     <input class="quantity" type="number" value="1"
-                           name="cantidad" min="1"
+                           name="cantidad" min="1">
                            max="${producto.stock}">
                     <input class="quantity" type="hidden" th:value="1">
                     <input type="hidden" th:value="${producto.id}"
